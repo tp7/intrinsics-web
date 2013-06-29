@@ -1,0 +1,219 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_addsub_ps / addsubps -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128' name='_mm_addsub_ps'>
+	<CPUID>SSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Alternatively add and subtract packed single-precision (32-bit) floating-point elements in "a" to/from packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF (j is even) 
+		dst[i+31:i] := a[i+31:i] - b[i+31:i]
+	ELSE
+		dst[i+31:i] := a[i+31:i] + b[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='addsubps'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_addsub_pd / addsubpd -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128d' name='_mm_addsub_pd'>
+	<CPUID>SSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Alternatively add and subtract packed double-precision (64-bit) floating-point elements in "a" to/from packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF (j is even) 
+		dst[i+63:i] := a[i+63:i] - b[i+63:i]
+	ELSE
+		dst[i+63:i] := a[i+63:i] + b[i+63:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='addsubpd'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadd_pd / haddpd -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128d' name='_mm_hadd_pd'>
+	<CPUID>SSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Horizontally add adjacent pairs of double-precision (64-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[63:0] := a[127:64] + a[63:0]
+dst[127:64] := b[127:64] + b[63:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='haddpd'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadd_ps / haddps -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128' name='_mm_hadd_ps'>
+	<CPUID>SSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Horizontally add adjacent pairs of single-precision (32-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32] + a[31:0]
+dst[63:32] := a[127:96] + a[95:64]
+dst[95:64] := b[63:32] + b[31:0]
+dst[127:96] := b[127:96] + b[95:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='haddps'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsub_pd / haddps -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128d' name='_mm_hsub_pd'>
+	<CPUID>SSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Horizontally subtract adjacent pairs of double-precision (64-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[63:0] := a[127:64] - a[63:0]
+dst[127:64] := b[127:64] - b[63:0]
+	</description>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsub_ps / hsubps -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128' name='_mm_hsub_ps'>
+	<CPUID>SSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Horizontally add adjacent pairs of single-precision (32-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32] - a[31:0]
+dst[63:32] := a[127:96] - a[95:64]
+dst[95:64] := b[63:32] - b[31:0]
+dst[127:96] := b[127:96] - b[95:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='hsubps'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_lddqu_si128 / lddqu -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128i' name='_mm_lddqu_si128'>
+	<CPUID>SSE3</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128i const*'/>
+	<description>Load 128-bits of integer data from unaligned memory into "dst". This intrinsic may perform better than "_mm_loadu_si128" when the data crosses a cache line boundary.</description>
+	<description code='true'>
+dst[127:0] := MEM[mem_addr+127:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='lddqu'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_monitor / monitor -->
+<intrinsic tech='SSE3' rettype='void' name='_mm_monitor'>
+	<CPUID>SSE3</CPUID>
+	<category>General Support</category>
+	<parameter varname='p' type='void const*'/>
+	<parameter varname='extensions' type='unsigned'/>
+	<parameter varname='hints' type='unsigned'/>
+	<description>Arm address monitoring hardware using the address specified in "p". A store to an address within the specified address range triggers the monitoring hardware. Specify optional extensions in "extensions", and optional hints in "hints".</description>
+	<mnemonic base='monitor'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_movedup_pd / movddup -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128d' name='_mm_movedup_pd'>
+	<CPUID>SSE3</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Duplicate the low double-precision (64-bit) floating-point element from "a", and store the results in "dst".
+	</description>
+	<description code='true'>
+tmp[63:0] := a[63:0]
+tmp[127:64] := a[63:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movddup'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loaddup_pd / movddup -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128d' name='_mm_loaddup_pd'>
+	<CPUID>SSE3</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double const*'/>
+	<description>Load a double-precision (64-bit) floating-point element from memory into both elements of "dst".
+	</description>
+	<description code='true'>
+tmp[63:0] := MEM[mem_addr+63:mem_addr]
+tmp[127:64] := MEM[mem_addr+63:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movddup'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_movehdup_ps / movshdup -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128' name='_mm_movehdup_ps'>
+	<CPUID>SSE3</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Duplicate the high single-precision (32-bit) floating-point element from "a", and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[31:0] := a[63:32] 
+dst[63:32] := a[63:32] 
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movshdup'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_moveldup_ps / movsldup -->
+<intrinsic tech='SSE3' vexEq='TRUE' rettype='__m128' name='_mm_moveldup_ps'>
+	<CPUID>SSE3</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Duplicate the low single-precision (32-bit) floating-point element from "a", and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[31:0] := a[31:0] 
+dst[63:32] := a[31:0] 
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movsldup'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mwait / mwait -->
+<intrinsic tech='SSE3' rettype='void' name='_mm_mwait'>
+	<CPUID>SSE3</CPUID>
+	<category>General Support</category>
+	<parameter varname='extensions' type='unsigned'/>
+	<parameter varname='hints' type='unsigned'/>
+	<description>Hint to the processor that it can enter an implementation-dependent-optimized state while waiting for an event or store operation to the address range specified by MONITOR.</description>
+	<mnemonic base='mwait'/>
+  	<header>pmmintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

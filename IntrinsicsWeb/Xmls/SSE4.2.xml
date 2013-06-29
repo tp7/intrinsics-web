@@ -1,0 +1,1553 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_cmpistrm / pcmpistrm -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128i' name='_mm_cmpistrm'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and store the generated mask in "dst".
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF a[m+size-1:m] == 0
+			aInvalid := 1
+		FI
+		IF b[n+size-1:n] == 0
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+bInvalid := 0
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF b[n+size-1:n] == 0
+				bInvalid := 1
+			FI
+			IF bInvalid // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+IF imm[6] // byte / word mask
+	FOR i := 0 to UpperBound
+		j := i*size
+		IF IntRes2[i]
+			dst[j+size-1:j] := (imm[0] ? 0xFF : 0xFFFF)
+		ELSE
+			dst[j+size-1:j] := 0
+		FI
+	ENDFOR
+ELSE // bit mask
+	dst[UpperBound:0] := IntRes[UpperBound:0]
+	dst[127:UpperBound+1] := 0
+FI
+	</description>
+	<mnemonic base='pcmpistrm'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpistri / pcmpistri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistri'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and store the generated index in "dst".
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF a[m+size-1:m] == 0
+			aInvalid := 1
+		FI
+		IF b[n+size-1:n] == 0
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+bInvalid := 0
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF b[n+size-1:n] == 0
+				bInvalid := 1
+			FI
+			IF bInvalid // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+IF imm[6] // most significant bit
+	tmp := UpperBound
+	dst := tmp
+	DO WHILE ((tmp &gt;= 0) AND a[tmp] = 0)
+		tmp := tmp - 1
+		dst := tmp
+	OD
+ELSE // least significant bit
+	tmp := 0
+	dst := tmp
+	DO WHILE ((tmp &lt;= UpperBound) AND a[tmp] = 0)
+		tmp := tmp + 1
+		dst := tmp
+	OD
+FI
+	</description>
+	<mnemonic base='pcmpistri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpistrz / pcmpistri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistrz'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if any character in "b" was null, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+bInvalid := 0
+FOR j := 0 to UpperBound
+	n := j*size
+	IF b[n+size-1:n] == 0
+		bInvalid := 1
+	FI
+ENDFOR
+
+dst := bInvalid
+	</description>
+	<mnemonic base='pcmpistri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpistrc / pcmpistri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistrc'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if the resulting mask was non-zero, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF a[m+size-1:m] == 0
+			aInvalid := 1
+		FI
+		IF b[n+size-1:n] == 0
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+bInvalid := 0
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF b[n+size-1:n] == 0
+				bInvalid := 1
+			FI
+			IF bInvalid // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+dst := (IntRes2 != 0)
+	</description>
+	<mnemonic base='pcmpistri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpistrs / pcmpistri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistrs'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if any character in "a" was null, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+aInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	IF b[m+size-1:m] == 0
+		aInvalid := 1
+	FI
+ENDFOR
+
+dst := aInvalid
+	</description>
+	<mnemonic base='pcmpistri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpistro / pcmpistri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistro'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns bit 0 of the resulting bit mask.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF a[m+size-1:m] == 0
+			aInvalid := 1
+		FI
+		IF b[n+size-1:n] == 0
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+bInvalid := 0
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF b[n+size-1:n] == 0
+				bInvalid := 1
+			FI
+			IF bInvalid // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+dst := IntRes2[0]
+	</description>
+	<mnemonic base='pcmpistri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpistra / pcmpistri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistra'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if "b" did not contain a null character and the resulting mask was zero, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF a[m+size-1:m] == 0
+			aInvalid := 1
+		FI
+		IF b[n+size-1:n] == 0
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+bInvalid := 0
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF b[n+size-1:n] == 0
+				bInvalid := 1
+			FI
+			IF bInvalid // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+dst := (IntRes2 == 0) AND bInvalid
+	</description>
+	<mnemonic base='pcmpistri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestrm / pcmpestrm -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128i' name='_mm_cmpestrm'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and store the generated mask in "dst".
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF i == la
+			aInvalid := 1
+		FI
+		IF j == lb
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF i &gt;= lb // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+IF imm[6] // byte / word mask
+	FOR i := 0 to UpperBound
+		j := i*size
+		IF IntRes2[i]
+			dst[j+size-1:j] := (imm[0] ? 0xFF : 0xFFFF)
+		ELSE
+			dst[j+size-1:j] := 0
+		FI
+	ENDFOR
+ELSE // bit mask
+	dst[UpperBound:0] := IntRes[UpperBound:0]
+	dst[127:UpperBound+1] := 0
+FI
+	</description>
+	<mnemonic base='pcmpestrm'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestri / pcmpestri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestri'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and store the generated index in "dst".
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF i == la
+			aInvalid := 1
+		FI
+		IF j == lb
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF i &gt;= lb // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+IF imm[6] // most significant bit
+	tmp := UpperBound
+	dst := tmp
+	DO WHILE ((tmp &gt;= 0) AND a[tmp] = 0)
+		tmp := tmp - 1
+		dst := tmp
+	OD
+ELSE // least significant bit
+	tmp := 0
+	dst := tmp
+	DO WHILE ((tmp &lt;= UpperBound) AND a[tmp] = 0)
+		tmp := tmp + 1
+		dst := tmp
+	OD
+FI
+	</description>
+	<mnemonic base='pcmpestri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestrz / pcmpestri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestrz'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>	
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if any character in "b" was null, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+dst := (lb &lt;= UpperBound)
+	</description>
+	<mnemonic base='pcmpestri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestrc / pcmpestri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestrc'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if the resulting mask was non-zero, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF i == la
+			aInvalid := 1
+		FI
+		IF j == lb
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF i &gt;= lb // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+dst := (IntRes2 != 0)
+	</description>
+	<mnemonic base='pcmpestri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestrs / pcmpestri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestrs'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if any character in "a" was null, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+dst := (la &lt;= UpperBound)
+	</description>
+	<mnemonic base='pcmpestri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestro / pcmpestri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestro'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns bit 0 of the resulting bit mask.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF i == la
+			aInvalid := 1
+		FI
+		IF j == lb
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF i &gt;= lb // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+dst := IntRes2[0
+	</description>
+	<mnemonic base='pcmpestri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpestra / pcmpestri -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestra'>
+	<CPUID>SSE4.2</CPUID>
+	<category>String Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='la' type='int'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='lb' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if "b" did not contain a null character and the resulting mask was zero, and 0 otherwise.
+	[strcmp_note]
+	</description>
+	<description code='true'>
+size := (imm[0] ? 16 : 8) // 8 or 16-bit characters
+UpperBound := (128 / size) - 1
+
+// compare all characters
+aInvalid := 0
+bInvalid := 0
+FOR i := 0 to UpperBound
+	m := i*size
+	FOR j := 0 to UpperBound
+		n := j*size
+		BoolRes[i][j] := (a[m+size-1:m] == b[n+size-1:n])
+		
+		// invalidate characters after EOS
+		IF i == la
+			aInvalid := 1
+		FI
+		IF j == lb
+			bInvalid := 1
+		FI
+		
+		// override comparisons for invalid characters
+		CASE (imm[3:2]) OF
+			0:  // equal any
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			1:  // ranges
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				FI
+			2:  // equal each
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 0
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+			3:  // equal ordered
+				IF (!aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 0
+				ELSE IF (aInvalid &amp;&amp; !bInvalid)
+					BoolRes[i][j] := 1
+				ELSE If (aInvalid &amp;&amp; bInvalid)
+					BoolRes[i][j] := 1
+				FI
+		ESAC
+	ENDFOR
+ENDFOR
+
+// aggregate results
+CASE (imm[3:2]) OF
+	0:  // equal any
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound
+				IntRes1[i] := IntRes1[i] OR BoolRes[i][j]
+			ENDFOR
+		ENDFOR
+	1:  // ranges
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			FOR j := 0 to UpperBound, j += 2
+				IntRes1[i] := IntRes1[i] OR (BoolRes[i][j] AND BoolRes[i][j+1])
+			ENDFOR
+		ENDFOR
+	2:  // equal each
+		IntRes1 := 0
+		FOR i := 0 to UpperBound
+			IntRes1[i] := BoolRes[i][i]
+		ENDFOR
+	3:  // equal ordered
+		IntRes1 := (imm[0] ? 0xFF : 0xFFFF)
+		FOR i := 0 to UpperBound
+			k := i
+			FOR j := 0 to UpperBound-i
+				IntRes1[i] := IntRes1[i] AND BoolRes[k][j]
+				k++
+			ENDFOR
+		ENDFOR
+ESAC
+
+// optionally negate results
+FOR i := 0 to UpperBound
+	IF imm[4]
+		IF imm[5] // only negate valid
+			IF i &gt;= lb // invalid, don't negate
+				IntRes2[i] := IntRes1[i]
+			ELSE // valid, negate
+				IntRes2[i] := -1 XOR IntRes1[i]
+			FI
+		ELSE // negate all
+			IntRes2[i] := -1 XOR IntRes1[i]
+		FI
+	ELSE // don't negate
+		IntRes2[i] := IntRes1[i]
+	FI
+ENDFOR
+
+// output
+dst := (IntRes2 == 0) AND (lb &gt; UpperBound)
+	</description>
+	<mnemonic base='pcmpestri'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpgt_epi64 / pcmpgtq -->
+<intrinsic tech='SSE4.2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpgt_epi64'>
+	<CPUID>SSE4.2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed 64-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := ( a[i+63:i] &gt; b[i+63:i] ) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpgtq'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_crc32_u8 / crc32 -->
+<intrinsic tech='SSE4.2' rettype='unsigned int' name='_mm_crc32_u8'>
+	<CPUID>SSE4.2</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='crc' type='unsigned int'/>
+	<parameter varname='v' type='unsigned char'/>
+	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 8-bit integer "v", and stores the result in "dst".</description>			
+	<description code='true'>
+tmp1[7:0] := v[0:7] // bit reflection
+tmp2[31:0] := crc[0:31] // bit reflection
+tmp3[39:0] := tmp1[7:0] &lt;&lt; 32 
+tmp4[39:0] := tmp2[31:0] &lt;&lt; 8
+tmp5[39:0] := tmp3[39:0] XOR tmp4[39:0]
+tmp6[31:0] := tmp5[39:0] MOD2 0x11EDC6F41
+dst[31:0] := tmp6[0:31] // bit reflection
+	</description>
+	<mnemonic base='crc32'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_crc32_u16 / crc32 -->
+<intrinsic tech='SSE4.2' rettype='unsigned int' name='_mm_crc32_u16'>
+	<CPUID>SSE4.2</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='crc' type='unsigned int'/>
+	<parameter varname='v' type='unsigned short v'/>
+	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 16-bit integer "v", and stores the result in "dst".</description>
+	<description code='true'>
+tmp1[15:0] := v[0:15] // bit reflection
+tmp2[31:0] := crc[0:31] // bit reflection
+tmp3[47:0] := tmp1[15:0] &lt;&lt; 32
+tmp4[47:0] := tmp2[31:0] &lt;&lt; 16
+tmp5[47:0] := tmp3[47:0] XOR tmp4[47:0]
+tmp6[31:0] := tmp5[47:0] MOD2 0x11EDC6F41
+dst[31:0] := tmp6[0:31] // bit reflection
+	</description>
+	<mnemonic base='crc32'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_crc32_u32 / crc32 -->
+<intrinsic tech='SSE4.2' rettype='unsigned int' name='_mm_crc32_u32'>
+	<CPUID>SSE4.2</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='crc' type='unsigned int'/>
+	<parameter varname='v' type='unsigned int v'/>
+	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 32-bit integer "v", and stores the result in "dst".</description>
+	<description code='true'>
+tmp1[31:0] := v[0:31] // bit reflection
+tmp2[31:0] := crc[0:31] // bit reflection
+tmp3[63:0] := tmp1[31:0] &lt;&lt; 32
+tmp4[63:0] := tmp2[31:0] &lt;&lt; 32
+tmp5[63:0] := tmp3[63:0] XOR tmp4[63:0]
+tmp6[31:0] := tmp5[63:0] MOD2 0x11EDC6F41
+dst[31:0] := tmp6[0:31] // bit reflection
+	</description>
+	<mnemonic base='crc32'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_crc32_u64 / crc32 -->
+<intrinsic tech='SSE4.2' rettype='unsigned __int64' name='_mm_crc32_u64'>
+	<CPUID>SSE4.2</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='crc' type='unsigned __int64'/>
+	<parameter varname='v' type='unsigned __int64'/>
+	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 64-bit integer "v", and stores the result in "dst".</description>
+	<description code='true'>
+tmp1[63:0] := v[0:63] // bit reflection
+tmp2[31:0] := crc[0:31] // bit reflection
+tmp3[95:0] := tmp1[31:0] &lt;&lt; 32
+tmp4[95:0] := tmp2[63:0] &lt;&lt; 64
+tmp5[95:0] := tmp3[95:0] XOR tmp4[95:0]
+tmp6[31:0] := tmp5[95:0] MOD2 0x11EDC6F41
+dst[31:0] := tmp6[0:31] // bit reflection
+	</description>
+	<mnemonic base='crc32'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

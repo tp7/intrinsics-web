@@ -1,0 +1,745 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_fmadd_pd / vfmadd231pd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fmadd_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", add the intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := (a[i+63:i] * b[i+63:i]) + c[i+63:i]
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmadd132pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmadd213pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmadd231pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmadd_pd / vfmadd231pd -->
+<intrinsic tech='FMA' rettype='__m256d' name='_mm256_fmadd_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='c' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", add the intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := (a[i+63:i] * b[i+63:i]) + c[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmadd132pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmadd213pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmadd231pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmadd_ps / vfmadd231ps -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fmadd_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+		<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", add the intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := (a[i+31:i] * b[i+31:i]) + c[i+31:i]
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmadd132ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmadd213ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmadd231ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmadd_ps / vfmadd231ps -->
+<intrinsic tech='FMA' rettype='__m256' name='_mm256_fmadd_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='c' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", add the intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := (a[i+31:i] * b[i+31:i]) + c[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmadd132ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmadd213ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmadd231ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmadd_sd / vfmadd231sd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fmadd_sd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply the lower double-precision (64-bit) floating-point elements in "a" and "b", and add the intermediate result to the lower element in "c". Store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".
+	</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] * b[63:0]) + c[63:0]
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmadd132sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfmadd213sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfmadd231sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmadd_ss / vfmadd231ss -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fmadd_ss'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply the lower single-precision (32-bit) floating-point elements in "a" and "b", and add the intermediate result to the lower element in "c". Store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".
+	</description>
+	<description code='true'>
+dst[31:0] := (a[31:0] * b[31:0]) + c[31:0]
+dst[127:32] := a[127:32]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmadd132ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmadd213ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmadd231ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmaddsub_pd / vfmaddsub231pd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fmaddsub_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", alternatively add and subtract packed elements in "c" to/from the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF (j is even) 
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) - c[i+63:i]
+	ELSE
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) + c[i+63:i]
+	FI
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmaddsub132pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmaddsub213pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmaddsub231pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmaddsub_pd / vfmaddsub231pd -->
+<intrinsic tech='FMA' rettype='__m256d' name='_mm256_fmaddsub_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='c' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", alternatively add and subtract packed elements in "c" to/from the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF (j is even) 
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) - c[i+63:i]
+	ELSE
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) + c[i+63:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmaddsub132pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmaddsub213pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmaddsub231pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmaddsub_ps / vfmaddsub231ps -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fmaddsub_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", alternatively add and subtract packed elements in "c" to/from the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF (j is even) 
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) - c[i+31:i]
+	ELSE
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) + c[i+31:i]
+	FI
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmaddsub132ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmaddsub213ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmaddsub231ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmaddsub_ps / vfmaddsub231ps -->
+<intrinsic tech='FMA' rettype='__m256' name='_mm256_fmaddsub_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='c' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", alternatively add and subtract packed elements in "c" to/from the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF (j is even) 
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) - c[i+31:i]
+	ELSE
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) + c[i+31:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmaddsub132ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmaddsub213ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmaddsub231ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmsub_pd / vfmsub231pd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fmsub_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the intermediate result, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := (a[i+63:i] * b[i+63:i]) - c[i+63:i]
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmsub132pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsub213pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsub231pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmsub_pd / vfmsub231pd -->
+<intrinsic tech='FMA' rettype='__m256d' name='_mm256_fmsub_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='c' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the intermediate result, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := (a[i+63:i] * b[i+63:i]) - c[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmsub132pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsub213pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsub231pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmsub_ps / vfmsub231ps -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fmsub_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := (a[i+31:i] * b[i+31:i]) - c[i+31:i]
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmsub132ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsub213ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsub231ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmsub_ps / vfmsub231ps -->
+<intrinsic tech='FMA' rettype='__m256' name='_mm256_fmsub_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='c' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := (a[i+31:i] * b[i+31:i]) - c[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmsub132ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsub213ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsub231ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmsub_sd / vfmsub231sd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fmsub_sd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply the lower double-precision (64-bit) floating-point elements in "a" and "b", and subtract the lower element in "c" from the intermediate result. Store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] * b[63:0]) - c[63:0]
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmsub132sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfmsub213sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfmsub231sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmsub_ss / vfmsub231sd -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fmsub_ss'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply the lower single-precision (32-bit) floating-point elements in "a" and "b", and subtract the lower element in "c" from the intermediate result. Store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := (a[31:0] * b[31:0]) - c[31:0]
+dst[127:32] := a[127:32]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmsub132sd' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmsub213sd' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmsub231sd' parameters='xmm0, xmm1, xmm2/m32' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmsubadd_pd / vfmsubadd231pd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fmsubadd_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", alternatively subtract and add packed elements in "c" from/to the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF (j is even) 
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) - c[i+63:i]
+	ELSE
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) + c[i+63:i]
+	FI
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmsubadd132pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsubadd213pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsubadd231pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmsubadd_pd / vfmsubadd231pd -->
+<intrinsic tech='FMA' rettype='__m256d' name='_mm256_fmsubadd_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='c' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", alternatively subtract and add packed elements in "c" from/to the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF (j is even) 
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) - c[i+63:i]
+	ELSE
+		dst[i+63:i] := (a[i+63:i] * b[i+63:i]) + c[i+63:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmsubadd132pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsubadd213pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsubadd231pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fmsubadd_ps / vfmsubadd231ps -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fmsubadd_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", alternatively subtract and add packed elements in "c" from/to the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF (j is even) 
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) - c[i+31:i]
+	ELSE
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) + c[i+31:i]
+	FI
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfmsubadd132ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsubadd213ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfmsubadd231ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fmsubadd_ps / vfmsubadd231ps -->
+<intrinsic tech='FMA' rettype='__m256' name='_mm256_fmsubadd_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='c' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", alternatively subtract and add packed elements in "c" from/to the intermediate result, and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF (j is even) 
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) - c[i+31:i]
+	ELSE
+		dst[i+31:i] := (a[i+31:i] * b[i+31:i]) + c[i+31:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfmsubadd132ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsubadd213ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfmsubadd231ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmadd_pd / vfnmadd231pd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fnmadd_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", add the negated intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := -(a[i+63:i] * b[i+63:i]) + c[i+63:i]
+ENDFOR	
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmadd132pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmadd213pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmadd231pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fnmadd_pd / vfnmadd231pd -->
+<intrinsic tech='FMA' rettype='__m256d' name='_mm256_fnmadd_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='c' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", add the negated intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := -(a[i+63:i] * b[i+63:i]) + c[i+63:i]
+ENDFOR	
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfnmadd132pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmadd213pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmadd231pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmadd_ps / vfnmadd231ps -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fnmadd_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", add the negated intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	a[i+31:i] := -(a[i+31:i] * b[i+31:i]) + c[i+31:i]
+ENDFOR	
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmadd132ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmadd213ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmadd231ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fnmadd_ps / vfnmadd231ps -->
+<intrinsic tech='FMA' rettype='__m256' name='_mm256_fnmadd_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='c' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", add the negated intermediate result to packed elements in "c", and store the results in "dst". 
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	a[i+31:i] := -(a[i+31:i] * b[i+31:i]) + c[i+31:i]
+ENDFOR	
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfnmadd132ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmadd213ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmadd231ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmadd_sd / vfnmadd231sd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fnmadd_sd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply the lower double-precision (64-bit) floating-point elements in "a" and "b", and add the negated intermediate result to the lower element in "c". Store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := -(a[63:0] * b[63:0]) + c[63:0]
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmadd132sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfnmadd213sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfnmadd231sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmadd_ss / vfnmadd231ss -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fnmadd_ss'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply the lower single-precision (32-bit) floating-point elements in "a" and "b", and add the negated intermediate result to the lower element in "c". Store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := -(a[31:0] * b[31:0]) + c[31:0]
+dst[127:32] := a[127:32]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmadd132ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfnmadd213ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfnmadd231ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmsub_pd / vfnmsub231pd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fnmsub_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the negated intermediate result, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := -(a[i+63:i] * b[i+63:i]) - c[i+63:i]
+ENDFOR	
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmsub132pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmsub213pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmsub231pd' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fnmsub_pd / vfnmsub231pd -->
+<intrinsic tech='FMA' rettype='__m256d' name='_mm256_fnmsub_pd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='c' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the negated intermediate result, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := -(a[i+63:i] * b[i+63:i]) - c[i+63:i]
+ENDFOR	
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfnmsub132pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmsub213pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmsub231pd' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmsub_ps / vfnmsub231ps -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fnmsub_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the negated intermediate result, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := -(a[i+31:i] * b[i+31:i]) - c[i+31:i]
+ENDFOR	
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmsub132ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmsub213ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<mnemonic base='vfnmsub231ps' parameters='xmm0, xmm1, xmm2/m128' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_fnmsub_ps / vfnmsub231ps -->
+<intrinsic tech='FMA' rettype='__m256' name='_mm256_fnmsub_ps'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='c' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", subtract packed elements in "c" from the negated intermediate result, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := -(a[i+31:i] * b[i+31:i]) - c[i+31:i]
+ENDFOR	
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vfnmsub132ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmsub213ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<mnemonic base='vfnmsub231ps' parameters='ymm0, ymm1, ymm2/m256' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmsub_sd / vfnmsub231sd -->
+<intrinsic tech='FMA' rettype='__m128d' name='_mm_fnmsub_sd'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='c' type='__m128d'/>
+	<description>Multiply the lower double-precision (64-bit) floating-point elements in "a" and "b", and subtract the lower element in "c" from the negated intermediate result. Store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := -(a[63:0] * b[63:0]) - c[63:0]
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmsub132sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfnmsub213sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<mnemonic base='vfnmsub231sd' parameters='xmm0, xmm1, xmm2/m64' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_fnmsub_ss / vfnmsub231ss -->
+<intrinsic tech='FMA' rettype='__m128' name='_mm_fnmsub_ss'>
+	<CPUID>FMA</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='c' type='__m128'/>
+	<description>Multiply the lower single-precision (32-bit) floating-point elements in "a" and "b", and subtract the lower element in "c" from the negated intermediate result. Store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := -(a[31:0] * b[31:0]) - c[31:0]
+dst[127:32] := a[127:32]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vfnmsub132ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfnmsub213ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfnmsub231ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

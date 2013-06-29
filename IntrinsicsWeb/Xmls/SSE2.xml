@@ -1,0 +1,3947 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_pause / pause -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_pause'>
+	<CPUID>SSE2</CPUID>
+	<category>General Support</category>
+	<description>Provide a hint to the processor that the code sequence is a spin-wait loop. This can help improve the performance and power consumption of spin-wait loops.</description>
+	<mnemonic base='pause'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_clflush / clflush -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_clflush'>
+	<CPUID>SSE2</CPUID>
+	<category>General Support</category>
+	<parameter varname='p' type='void const*'/>
+	<description>Invalidate and flush the cache line that contains "p" from all levels of the cache hierarchy.</description>
+	<mnemonic base='clflush'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_lfence / lfence -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_lfence'>
+	<CPUID>SSE2</CPUID>
+	<category>General Support</category>
+	<description>Perform a serializing operation on all load-from-memory instructions that were issued prior to this instruction. Guarantees that every load instruction that precedes, in program order, is globally visible before any load instruction which follows the fence in program order.</description>
+	<mnemonic base='lfence'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mfence / mfence -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_mfence'>
+	<CPUID>SSE2</CPUID>
+	<category>General Support</category>
+	<description>Perform a serializing operation on all load-from-memory and store-to-memory instructions that were issued prior to this instruction. Guarantees that every memory access that precedes, in program order, the memory fence instruction is globally visible before any memory instruction which follows the fence in program order.</description>
+	<mnemonic base='mfence'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_epi8 / paddb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_add_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed 8-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := a[i+7:i] + b[i+7:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_epi16 / paddw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_add_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed 16-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := a[i+15:i] + b[i+15:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_epi32 / paddd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_add_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed 32-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := a[i+31:i] + b[i+31:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_si64 / paddq -->
+<intrinsic tech='SSE2' rettype='__m64' name='_mm_add_si64'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add 64-bit integers "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0] + b[63:0]
+	</description>
+	<mnemonic parameters='mm, mm' base='paddq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_epi64 / paddq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_add_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed 64-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] + b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_adds_epi8 / paddsb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_adds_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed 8-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := Saturate_To_Int8( a[i+7:i] + b[i+7:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddsb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_adds_epi16 / paddsw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_adds_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed 16-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := Saturate_To_Int16( a[i+15:i] + b[i+15:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddsw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_adds_epu8 / paddusb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_adds_epu8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed unsigned 8-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := Saturate_To_UnsignedInt8( a[i+7:i] + b[i+7:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddusb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_adds_epu16 / paddusw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_adds_epu16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Add packed unsigned 16-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := Saturate_To_UnsignedInt16( a[i+15:i] + b[i+15:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='paddusw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_avg_epu8 / pavgb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_avg_epu8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Average packed unsigned 8-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := (a[i+7:i] + b[i+7:i] + 1) &gt;&gt; 1
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pavgb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_avg_epu16 / pavgw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_avg_epu16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := (a[i+15:i] + b[i+15:i] + 1) &gt;&gt; 1
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pavgw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_madd_epi16 / pmaddwd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_madd_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+   <description>Multiply packed 16-bit integers in "a" and "b", producing intermediate 32-bit integers. Horizontally add adjacent pairs of intermediate 32-bit integers, and pack the saturated results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	st[i+31:i] := Saturate_To_Int32( a[i+31:i+16]*b[i+31:i+16] + a[i+15:i]*b[i+15:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmaddwd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_epi16 / pmaxsw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_max_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 16-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF a[i+15:i] &gt; b[i+15:i]
+		dst[i+15:i] := a[i+15:i]
+	ELSE
+		dst[i+15:i] := b[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmaxsw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_epu8 / pmaxub -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_max_epu8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF a[i+7:i] &gt; b[i+7:i]
+		dst[i+7:i] := a[i+7:i]
+	ELSE
+		dst[i+7:i] := b[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmaxub'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_epi16 / pminsw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_min_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 16-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF a[i+15:i] &lt; b[i+15:i]
+		dst[i+15:i] := a[i+15:i]
+	ELSE
+		dst[i+15:i] := b[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pminsw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_epu8 / pminub -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_min_epu8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF a[i+7:i] &lt; b[i+7:i]
+		dst[i+7:i] := a[i+7:i]
+	ELSE
+		dst[i+7:i] := b[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pminub'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mulhi_epi16 / pmulhw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_mulhi_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply the packed 16-bit integers in "a" and "b", producing intermediate 32-bit integers, and store the high 16 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	tmp[31:0] := a[i+15:i] * b[i+15:i]
+	dst[i+15:i] := tmp[31:16]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmulhw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mulhi_epu16 / pmulhuw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_mulhi_epu16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply the packed unsigned 16-bit integers in "a" and "b", producing intermediate 32-bit integers, and store the high 16 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	tmp[31:0] := a[i+15:i] * b[i+15:i]
+	dst[i+15:i] := tmp[31:16]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmulhuw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mullo_epi16 / pmullw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_mullo_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply the packed 16-bit integers in "a" and "b", producing intermediate 32-bit integers, and store the low 16 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	tmp[31:0] := a[i+15:i] * b[i+15:i]
+	dst[i+15:i] := tmp[15:0]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmullw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mul_su32 / pmuludq -->
+<intrinsic tech='SSE2' rettype='__m64' name='_mm_mul_su32'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Multiply the low unsigned 32-bit integers from "a" and "b", and store the unsigned 64-bit result in "dst". </description>
+	<description code='true'>
+dst[63:0] := a[31:0] * b[31:0]
+	</description>
+	<mnemonic parameters='mm, mm' base='pmuludq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mul_epu32 / pmuludq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_mul_epu32'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply the low unsigned 32-bit integers from each packed 64-bit element in "a" and "b", and store the unsigned 64-bit results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+31:i] * b[i+31:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmuludq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sad_epu8 / psadbw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sad_epu8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the absolute differences of packed unsigned 8-bit integers in "a" and "b", then horizontally sum each consecutive 8 differences to produce four unsigned 16-bit integers, and pack these unsigned 16-bit integers in the low 16 bits of 64-bit elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	tmp[i+7:i] := ABS(a[i+7:i] - b[i+7:i])
+ENDFOR
+FOR j := 0 to 1
+	i := j*64
+	dst[i+15:i] := tmp[i+7:i] + tmp[i+15:i+8] + tmp[i+23:i+16] + tmp[i+31:i+24] 
+				 + tmp[i+39:i+32] + tmp[i+47:i+40] + tmp[i+55:i+48] + tmp[i+63:i+56]
+	dst[i+63:i+16] := 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psadbw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_epi8 / psubb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sub_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := a[i+7:i] - b[i+7:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_epi16 / psubb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sub_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := a[i+15:i] - b[i+15:i]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_epi32 / psubd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sub_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed 32-bit integers in "b" from packed 32-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := a[i+31:i] - b[i+31:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_si64 / psubq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m64' name='_mm_sub_si64'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract 64-bit integer "b" from 64-bit integer "a", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0] - b[63:0]
+	</description>
+	<mnemonic parameters='mm, mm' base='psubq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_epi64 / psubq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sub_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed 64-bit integers in "b" from packed 64-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] - b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_subs_epi8 / psubsb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_subs_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := Saturate_To_Int8(a[i+7:i] - b[i+7:i])	
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubsb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_subs_epi16 / psubsw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_subs_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := Saturate_To_Int16(a[i+15:i] - b[i+15:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubsw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_subs_epu8 / psubusb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_subs_epu8'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed unsigned 8-bit integers in "b" from packed unsigned 8-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := Saturate_To_UnsignedInt8(a[i+7:i] - b[i+7:i])	
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubusb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_subs_epu16 / psubusw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_subs_epu16'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Subtract packed unsigned 16-bit integers in "b" from packed unsigned 16-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := Saturate_To_UnsignedInt16(a[i+15:i] - b[i+15:i])	
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psubusw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_slli_si128 / pslldq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_slli_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift "a" left by "imm" bytes while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+dst[127:0] := a[127:0] &lt;&lt; (imm*8)
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pslldq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_bslli_si128 / pslldq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_bslli_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift "a" left by "imm" bytes while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+dst[127:0] := a[127:0] &lt;&lt; (imm*8)
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pslldq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_bsrli_si128 / psrldq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_bsrli_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift "a" right by "imm" bytes while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+dst[127:0] := a[127:0] &gt;&gt; (imm*8)
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrldq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_slli_epi16 / psllw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_slli_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 16-bit integers in "a" left by "imm" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF imm &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &lt;&lt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psllw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sll_epi16 / psllw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sll_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 16-bit integers in "a" left by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF count[63:0] &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &lt;&lt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psllw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_slli_epi32 / pslld -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_slli_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 32-bit integers in "a" left by "imm" while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF imm &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &lt;&lt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pslld'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sll_epi32 / pslld -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sll_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 32-bit integers in "a" left by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF count[63:0] &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &lt;&lt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pslld'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_slli_epi64 / psllq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_slli_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 64-bit integers in "a" left by "imm" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF imm &gt; 63
+		dst[i+63:i] := 0
+	ELSE
+		dst[i+63:i] := ZeroExtend(a[i+63:i] &lt;&lt; imm)
+	FI
+ENDFOR
+	</description>	
+	<mnemonic parameters='xmm, xmm' base='psllq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sll_epi64 / psllq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sll_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 64-bit integers in "a" left by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF count[63:0] &gt; 63
+		dst[i+63:i] := 0
+	ELSE
+		dst[i+63:i] := ZeroExtend(a[i+63:i] &lt;&lt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psllq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srai_epi16 / psraw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srai_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 16-bit integers in "a" right by "imm" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF imm &gt; 15
+		dst[i+15:i] := SignBit
+	ELSE
+		dst[i+15:i] := SignExtend(a[i+15:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psraw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sra_epi16 / psraw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sra_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 16-bit integers in "a" right by "count" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF count[63:0] &gt; 15
+		dst[i+15:i] := SignBit
+	ELSE
+		dst[i+15:i] := SignExtend(a[i+15:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psraw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srai_epi32 / psrad -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srai_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 32-bit integers in "a" right by "imm" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF imm &gt; 31
+		dst[i+31:i] := SignBit
+	ELSE
+		dst[i+31:i] := SignExtend(a[i+31:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrad'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sra_epi32 / psrad -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_sra_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 32-bit integers in "a" right by "count" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF count[63:0] &gt; 31
+		dst[i+31:i] := SignBit
+	ELSE
+		dst[i+31:i] := SignExtend(a[i+31:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrad'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srli_si128 / psrldq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srli_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift "a" right by "imm" bytes while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+dst[127:0] := a[127:0] &gt;&gt; (imm*8)
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrldq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srli_epi16 / psrlw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srli_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 16-bit integers in "a" right by "imm" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF imm &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrlw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srl_epi16 / psrlw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srl_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 16-bit integers in "a" right by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF count[63:0] &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrlw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srli_epi32 / psrld -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srli_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 32-bit integers in "a" right by "imm" while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF imm &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrld'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srl_epi32 / psrld -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srl_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 32-bit integers in "a" right by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF count[63:0] &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrld'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srli_epi64 / psrlq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srli_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 64-bit integers in "a" right by "imm" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF imm &gt; 63
+		dst[i+63:i] := 0
+	ELSE
+		dst[i+63:i] := ZeroExtend(a[i+63:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>	
+	<mnemonic parameters='xmm, xmm' base='psrlq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_srl_epi64 / psrlq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_srl_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='count' type='__m128i'/>
+	<description>Shift packed 64-bit integers in "a" right by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF count[63:0] &gt; 63
+		dst[i+63:i] := 0
+	ELSE
+		dst[i+63:i] := ZeroExtend(a[i+63:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psrlq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_and_si128 / pand -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_and_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise AND of 128 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[127:0] := (a[127:0] AND b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pand'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_andnot_si128 / pandn -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_andnot_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise AND NOT of 128 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[127:0] := ((NOT a[127:0]) AND b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pandn'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_or_si128 / por -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_or_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise OR of 128 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[127:0] := (a[127:0] OR b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='por'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_xor_si128 / pxor -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_xor_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise OR of 128 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[127:0] := (a[127:0] XOR b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pxor'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpeq_epi8 / pcmpeqb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpeq_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 8-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+  i := j*8
+  dst[i+7:i] := ( a[i+7:i] == b[i+7:i] ) ? 0xFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpeqb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpeq_epi16 / pcmpeqw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpeq_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 16-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+  i := j*16
+  dst[i+15:i] := ( a[i+15:i] == b[i+15:i] ) ? 0xFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpeqw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpeq_epi32 / pcmpeqd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpeq_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 32-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+  i := j*32
+  dst[i+31:i] := ( a[i+31:i] == b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpeqd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpgt_epi8 / pcmpgtb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpgt_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 8-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+  i := j*8
+  dst[i+7:i] := ( a[i+7:i] &gt; b[i+7:i] ) ? 0xFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpgtb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpgt_epi16 / pcmpgtw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpgt_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 16-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+  i := j*16
+  dst[i+15:i] := ( a[i+15:i] &gt; b[i+15:i] ) ? 0xFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpgtw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpgt_epi32 / pcmpgtd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpgt_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 32-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+  i := j*32
+  dst[i+31:i] := ( a[i+31:i] &gt; b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpgtd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmplt_epi8 / pcmpgtb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmplt_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 8-bit integers in "a" and "b" for less-than, and store the results in "dst". Note: This intrinsic emits the pcmpgtb instruction with the order of the operands switched.</description>
+	<description code='true'>
+FOR j := 0 to 15
+  i := j*8
+  dst[i+7:i] := ( a[i+7:i] &lt; b[i+7:i] ) ? 0xFF : 0
+ENDFOR
+	</description>
+
+	<mnemonic parameters='xmm, xmm' base='pcmpgtb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmplt_epi16 / pcmpgtw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmplt_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 16-bit integers in "a" and "b" for less-than, and store the results in "dst". Note: This intrinsic emits the pcmpgtw instruction with the order of the operands switched.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := ( a[i+15:i] &lt; b[i+15:i] ) ? 0xFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpgtw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmplt_epi32 / pcmpgtd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cmplt_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 32-bit integers in "a" and "b" for less-than, and store the results in "dst". Note: This intrinsic emits the pcmpgtd instruction with the order of the operands switched.</description>
+	<description code='true'>
+FOR j := 0 to 3
+  i := j*32
+  dst[i+31:i] := ( a[i+31:i] &lt; b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pcmpgtd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi32_pd / cvtdq2pd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cvtepi32_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Convert packed 32-bit integers in "a" to packed double-precision (64-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	m := j*64
+	dst[m+63:m] := Convert_Int32_To_FP64(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtdq2pd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsi32_sd / cvtsi2sd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cvtsi32_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='int'/>
+	<description>Convert the 32-bit integer "b" to a double-precision (64-bit) floating-point element, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst". </description>
+	<description code='true'>
+dst[63:0] := Convert_Int32_To_FP64(b[31:0])
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtsi2sd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsi64_sd / cvtsi2sd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cvtsi64_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__int64'/>
+	<description>Convert the 64-bit integer "b" to a double-precision (64-bit) floating-point element, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst". </description>
+	<description code='true'>
+dst[63:0] := Convert_Int64_To_FP64(b[63:0])
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtsi2sd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi32_ps / cvtdq2ps -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128' name='_mm_cvtepi32_ps'>
+  	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Convert packed 32-bit integers in "a" to packed single-precision (32-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := Convert_Int32_To_FP32(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtdq2ps'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtpi32_pd / cvtpi2pd -->
+<intrinsic tech='SSE2' rettype='__m128d' name='_mm_cvtpi32_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Convert packed 32-bit integers in "a" to packed double-precision (64-bit) floating-point elements, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	m := j*64
+	dst[m+63:m] := Convert_Int32_To_FP64(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, mm' base='cvtpi2pd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsi32_si128 / movd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cvtsi32_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='int'/>
+	<description>Copy 32-bit integer "a" to the lower elements of "dst", and zero the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := a[31:0]
+dst[127:32] := 0
+	</description>
+	<mnemonic parameters='xmm, r32' base='movd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsi64_si128 / movq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cvtsi64_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__int64'/>
+	<description>Copy 64-bit integer "a" to the lower element of "dst", and zero the upper element.</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[127:64] := 0
+	</description>
+	<mnemonic parameters='xmm, r64' base='movq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsi128_si32 / movd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cvtsi128_si32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Copy the lower 32-bit integer in "a" to "dst".</description>
+	<description code='true'>
+dst[31:0] := a[31:0]
+	</description>
+	<mnemonic parameters='r32, xmm' base='movd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsi128_si64 / movq -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__int64' name='_mm_cvtsi128_si64'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Copy the lower 64-bit integer in "a" to "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+	</description>
+	<mnemonic parameters='r64, xmm' base='movq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_epi64 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e1' type='__m64'/>
+	<parameter varname='e0' type='__m64'/>
+	<description>Set packed 64-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[63:0] := e1
+dst[127:64] := e0
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_epi64x / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set_epi64x'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e1' type='__int64'/>
+	<parameter varname='e0' type='__int64'/>
+	<description>Set packed 64-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[63:0] := e1
+dst[127:64] := e0
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_epi32 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e3' type='int'/>
+	<parameter varname='e2' type='int'/>
+	<parameter varname='e1' type='int'/>
+	<parameter varname='e0' type='int'/>
+	<description>Set packed 32-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[31:0] := e3
+dst[63:32] := e2
+dst[95:64] := e1
+dst[127:96] := e0
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_epi16 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e7' type='short'/>
+	<parameter varname='e6' type='short'/>
+	<parameter varname='e5' type='short'/>
+	<parameter varname='e4' type='short'/>
+	<parameter varname='e3' type='short'/>
+	<parameter varname='e2' type='short'/>
+	<parameter varname='e1' type='short'/>
+	<parameter varname='e0' type='short'/>
+	<description>Set packed 16-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[15:0] := e7
+dst[31:16] := e6
+dst[47:32] := e5
+dst[63:48] := e4
+dst[79:64] := e3
+dst[95:80] := e2
+dst[111:96] := e1
+dst[127:112] := e0
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_epi8 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e15' type='char'/>
+	<parameter varname='e14' type='char'/>
+	<parameter varname='e13' type='char'/>
+	<parameter varname='e12' type='char'/>
+	<parameter varname='e11' type='char'/>
+	<parameter varname='e10' type='char'/>
+	<parameter varname='e9' type='char'/>
+	<parameter varname='e8' type='char'/>
+	<parameter varname='e7' type='char'/>
+	<parameter varname='e6' type='char'/>
+	<parameter varname='e5' type='char'/>
+	<parameter varname='e4' type='char'/>
+	<parameter varname='e3' type='char'/>
+	<parameter varname='e2' type='char'/>
+	<parameter varname='e1' type='char'/>
+	<parameter varname='e0' type='char'/>
+	<description>Set packed 8-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[7:0] := e15
+dst[15:8] := e14
+dst[23:16] := e13
+dst[31:24] := e12
+dst[39:32] := e11
+dst[47:40] := e10
+dst[55:48] := e9
+dst[63:56] := e8
+dst[71:64] := e7
+dst[79:72] := e6
+dst[87:80] := e5
+dst[95:88] := e4
+dst[103:96] := e3
+dst[111:104] := e2
+dst[119:112] := e1
+dst[127:120] := e0
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set1_epi64 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set1_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Broadcast 64-bit integer "a" to all elements of "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[63:0]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set1_epi64x / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set1_epi64x'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='__int64'/>
+	<description>Broadcast 64-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastq".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[63:0]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set1_epi32 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set1_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='int'/>
+	<description>Broadcast 32-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastd".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := a[31:0]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set1_epi16 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set1_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='short'/>
+	<description>Broadcast 16-bit integer "a" to all all elements of "dst". This intrinsic may generate "vpbroadcastw".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := a[15:0]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set1_epi8 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_set1_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='char'/>
+	<description>Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate "vpbroadcastb".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := a[7:0]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setr_epi64 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_setr_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e1' type='__m64'/>
+	<parameter varname='e0' type='__m64'/>
+	<description>Set packed 64-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[63:0] := e0
+dst[127:64] := e1
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setr_epi32 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_setr_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+   <parameter varname='e3' type='int'/>
+	<parameter varname='e2' type='int'/>
+	<parameter varname='e1' type='int'/>
+	<parameter varname='e0' type='int'/>
+	<description>Set packed 32-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[31:0] := e0
+dst[63:32] := e1
+dst[95:64] := e2
+dst[127:96] := e3
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setr_epi16 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_setr_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e7' type='short'/>
+	<parameter varname='e6' type='short'/>
+	<parameter varname='e5' type='short'/>
+	<parameter varname='e4' type='short'/>
+	<parameter varname='e3' type='short'/>
+	<parameter varname='e2' type='short'/>
+	<parameter varname='e1' type='short'/>
+	<parameter varname='e0' type='short'/>
+	<description>Set packed 16-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[15:0] := e0
+dst[31:16] := e1
+dst[47:32] := e2
+dst[63:48] := e3
+dst[79:64] := e4
+dst[95:80] := e5
+dst[111:96] := e6
+dst[127:112] := e7
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setr_epi8 / movq -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128i' name='_mm_setr_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e15' type='char'/>
+	<parameter varname='e14' type='char'/>
+	<parameter varname='e13' type='char'/>
+	<parameter varname='e12' type='char'/>
+	<parameter varname='e11' type='char'/>
+	<parameter varname='e10' type='char'/>
+	<parameter varname='e9' type='char'/>
+	<parameter varname='e8' type='char'/>
+	<parameter varname='e7' type='char'/>
+	<parameter varname='e6' type='char'/>
+	<parameter varname='e5' type='char'/>
+	<parameter varname='e4' type='char'/>
+	<parameter varname='e3' type='char'/>
+	<parameter varname='e2' type='char'/>
+	<parameter varname='e1' type='char'/>
+	<parameter varname='e0' type='char'/>
+	<description>Set packed 8-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[7:0] := e0
+dst[15:8] := e1
+dst[23:16] := e2
+dst[31:24] := e3
+dst[39:32] := e4
+dst[47:40] := e5
+dst[55:48] := e6
+dst[63:56] := e7
+dst[71:64] := e8
+dst[79:72] := e9
+dst[87:80] := e10
+dst[95:88] := e11
+dst[103:96] := e12
+dst[111:104] := e13
+dst[119:112] := e14
+dst[127:120] := e15
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setzero_si128 / pxor -->
+<intrinsic tech='SSE2' rettype='__m128i' name='_mm_setzero_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<description>Return vector of type __m128i with all elements set to zero.</description>
+	<description code='true'>
+dst[MAX:0] := 0
+	</description>
+	<mnemonic base='pxor'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loadl_epi64 / movq -->
+<intrinsic tech='SSE2' rettype='__m128i' name='_mm_loadl_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128i const*'/>
+	<description>Load 64-bit integer from memory into the first element of "dst".</description>
+	<description code='true'>
+dst[63:0] := MEM[mem_addr+63:mem_addr]
+dst[MAX:64] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_load_si128 / movdqa -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_load_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<description>Load 128-bits of integer data from memory into "dst". 
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[127:0] := MEM[mem_addr+127:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movdqa'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loadu_si128 / movdqu -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_loadu_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<description>Load 128-bits of integer data from memory into "dst".
+	"mem_addr" does not need to be aligned on any particular boundary.
+	</description>
+	<description code='true'>
+dst[127:0] := MEM[mem_addr+127:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movdqu'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maskmoveu_si128 / maskmovdqu -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_maskmoveu_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='mask' type='__m128i'/>
+	<parameter varname='mem_addr' type='char*'/>
+	<description>Conditionally store 8-bit integer elements from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element). "mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF mask[i+7]
+		MEM[mem_addr+i+7:mem_addr+i] := a[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='maskmovdqu'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_store_si128 / movdqa -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_store_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<parameter varname='a' type='__m128i'/>
+	<description>Store 128-bits of integer data from "a" into memory. 
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+127:mem_addr] := a[127:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movdqa'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_storeu_si128 / movdqu -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_storeu_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<parameter varname='a' type='__m128i'/>
+	<description>Store 128-bits of integer data from "a" into memory.
+	"mem_addr" does not need to be aligned on any particular boundary.
+	</description>
+	<description code='true'>
+MEM[mem_addr+127:mem_addr] := a[127:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movdqu'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_storel_epi64 / movq -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_storel_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<parameter varname='a' type='__m128i'/>
+	<description>Store 64-bit integer from the first element of "a" into memory.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[63:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_stream_si128 / movntdq -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_stream_si128'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<parameter varname='a' type='__m128i'/>
+	<description>Store 128-bits of integer data from "a" into memory using a non-temporal memory hint. 
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+127:mem_addr] := a[127:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movntdq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_stream_si32 / movnti -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_stream_si32'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='int*'/>
+	<parameter varname='a' type='int'/>
+	<description>Store 32-bit integer "a" into memory using a non-temporal hint to minimize cache pollution. If the cache line containing address "mem_addr" is already in the cache, the cache will be updated.</description>
+	<description code='true'>
+MEM[mem_addr+31:mem_addr] := a[31:0]
+	</description>
+	<mnemonic base='movnti'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_stream_si64 / movnti -->
+<intrinsic tech='SSE2' rettype='void' name='_mm_stream_si64'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__int64*'/>
+	<parameter varname='a' type='__int64'/>
+	<description>Store 64-bit integer "a" into memory using a non-temporal hint to minimize cache pollution. If the cache line containing address "mem_addr" is already in the cache, the cache will be updated.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[63:0]
+	</description>
+	<mnemonic base='movnti'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_movepi64_pi64 / movdq2q -->
+<intrinsic tech='SSE2' rettype='__m64' name='_mm_movepi64_pi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Copy the lower 64-bit integer in "a" to "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+	</description>
+	<mnemonic parameters='mm, xmm' base='movdq2q'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_movpi64_epi64 / movq2dq -->
+<intrinsic tech='SSE2' rettype='__m128i' name='_mm_movpi64_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Copy the 64-bit integer "a" to the lower element of "dst", and zero the upper element.</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[127:64] := 0
+	</description>
+	<mnemonic parameters='xmm, mm' base='movq2dq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_move_epi64 / movq -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128i' name='_mm_move_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Copy the lower 64-bit integer in "a" to the lower element of "dst", and zero the upper element.</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[127:64] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_packs_epi16 / packsswb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_packs_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Convert packed 16-bit integers from "a" and "b" to packed 8-bit integers using signed saturation, and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[7:0] := Saturate_Int16_To_Int8 (a[15:0])
+dst[15:8] := Saturate_Int16_To_Int8 (a[31:16])
+dst[23:16] := Saturate_Int16_To_Int8 (a[47:32])
+dst[31:24] := Saturate_Int16_To_Int8 (a[63:48])
+dst[39:32] := Saturate_Int16_To_Int8 (a[79:64])
+dst[47:40] := Saturate_Int16_To_Int8 (a[95:80])
+dst[55:48] := Saturate_Int16_To_Int8 (a[111:96])
+dst[63:56] := Saturate_Int16_To_Int8 (a[127:112])
+dst[71:64] := Saturate_Int16_To_Int8 (b[15:0])
+dst[79:72] := Saturate_Int16_To_Int8 (b[31:16])
+dst[87:80] := Saturate_Int16_To_Int8 (b[47:32])
+dst[95:88] := Saturate_Int16_To_Int8 (b[63:48])
+dst[103:96] := Saturate_Int16_To_Int8 (b[79:64])
+dst[111:104] := Saturate_Int16_To_Int8 (b[95:80])
+dst[119:112] := Saturate_Int16_To_Int8 (b[111:96])
+dst[127:120] := Saturate_Int16_To_Int8 (b[127:112])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='packsswb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_packs_epi32 / packssdw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_packs_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Convert packed 32-bit integers from "a" and "b" to packed 16-bit integers using signed saturation, and store the results in "dst".</description>
+	<description code='true'>
+dst[15:0] := Saturate_Int32_To_Int16 (a[31:0])
+dst[31:16] := Saturate_Int32_To_Int16 (a[63:32])
+dst[47:32] := Saturate_Int32_To_Int16 (a[95:64])
+dst[63:48] := Saturate_Int32_To_Int16 (a[127:96])
+dst[79:64] := Saturate_Int32_To_Int16 (b[31:0])
+dst[95:80] := Saturate_Int32_To_Int16 (b[63:32])
+dst[111:96] := Saturate_Int32_To_Int16 (b[95:64])
+dst[127:112] := Saturate_Int32_To_Int16 (b[127:96])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='packssdw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_packus_epi16 / packuswb -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_packus_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Convert packed 16-bit integers from "a" and "b" to packed 8-bit integers using unsigned saturation, and store the results in "dst".</description>
+	<description code='true'>
+dst[7:0] := Saturate_Int16_To_UnsignedInt8 (a[15:0])
+dst[15:8] := Saturate_Int16_To_UnsignedInt8 (a[31:16])
+dst[23:16] := Saturate_Int16_To_UnsignedInt8 (a[47:32])
+dst[31:24] := Saturate_Int16_To_UnsignedInt8 (a[63:48])
+dst[39:32] := Saturate_Int16_To_UnsignedInt8 (a[79:64])
+dst[47:40] := Saturate_Int16_To_UnsignedInt8 (a[95:80])
+dst[55:48] := Saturate_Int16_To_UnsignedInt8 (a[111:96])
+dst[63:56] := Saturate_Int16_To_UnsignedInt8 (a[127:112])
+dst[71:64] := Saturate_Int16_To_UnsignedInt8 (b[15:0])
+dst[79:72] := Saturate_Int16_To_UnsignedInt8 (b[31:16])
+dst[87:80] := Saturate_Int16_To_UnsignedInt8 (b[47:32])
+dst[95:88] := Saturate_Int16_To_UnsignedInt8 (b[63:48])
+dst[103:96] := Saturate_Int16_To_UnsignedInt8 (b[79:64])
+dst[111:104] := Saturate_Int16_To_UnsignedInt8 (b[95:80])
+dst[119:112] := Saturate_Int16_To_UnsignedInt8 (b[111:96])
+dst[127:120] := Saturate_Int16_To_UnsignedInt8 (b[127:112])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='packuswb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_extract_epi16 / pextrw -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Extract a 16-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
+	<description code='true'>
+dst[15:0] := (a[127:0] &gt;&gt; (imm[2:0] * 16))[15:0]
+dst[31:16] := 0
+	</description>
+	<mnemonic parameters='r32, xmm' base='pextrw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_insert_epi16 / pinsrw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='i' type='int'/>
+	<parameter varname='imm' type='int'/>
+	<description>Copy "a" to "dst", and insert the 16-bit integer "i" into "dst" at the location specified by "imm". </description>
+	<description code='true'>
+dst[127:0] := a[127:0]
+sel := imm[2:0]*16
+dst[sel+15:sel] := i[15:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pinsrw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_movemask_epi8 / pmovmskb -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_movemask_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Create mask from the most significant bit of each 8-bit element in "a", and store the result in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[j] := a[i+7]
+ENDFOR
+dst[MAX:16] := 0
+	</description>
+	<mnemonic parameters='r32, xmm' base='pmovmskb'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_shuffle_epi32 / pshufd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_shuffle_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle 32-bit integers in "a" using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[31:0] := src[31:0]
+		1:	tmp[31:0] := src[63:32]
+		2:	tmp[31:0] := src[95:64]
+		3:	tmp[31:0] := src[127:96]
+	ESAC
+	RETURN tmp[31:0]
+}
+
+dst[31:0] := SELECT4(a[127:0], imm[1:0])
+dst[63:32] := SELECT4(a[127:0], imm[3:2])
+dst[95:64] := SELECT4(a[127:0], imm[5:4])
+dst[127:96] := SELECT4(a[127:0], imm[7:6])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pshufd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_shufflehi_epi16 / pshufhw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_shufflehi_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle 16-bit integers in the high 64 bits of "a" using the control in "imm". Store the results in the high 64 bits of "dst", with the low 64 bits being copied from from "a" to "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[79:64] := (a >> (imm[1:0] * 16))[79:64]
+dst[95:80] := (a >> (imm[3:2] * 16))[79:64]
+dst[111:96] := (a >> (imm[5:4] * 16))[79:64]
+dst[127:112] := (a >> (imm[7:6] * 16))[79:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pshufhw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_shufflelo_epi16 / pshuflw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_shufflelo_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle 16-bit integers in the low 64 bits of "a" using the control in "imm". Store the results in the low 64 bits of "dst", with the high 64 bits being copied from from "a" to "dst".</description>
+	<description code='true'>
+dst[15:0] := (a >> (imm[1:0] * 16))[15:0]
+dst[31:16] := (a >> (imm[3:2] * 16))[15:0]
+dst[47:32] := (a >> (imm[5:4] * 16))[15:0]
+dst[63:48] := (a >> (imm[7:6] * 16))[15:0]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pshuflw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpackhi_epi8 / punpckhbw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpackhi_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 8-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_BYTES(src1[127:0], src2[127:0]){
+	dst[7:0] := src1[71:64] 
+	dst[15:8] := src2[71:64] 
+	dst[23:16] := src1[79:72] 
+	dst[31:24] := src2[79:72] 
+	dst[39:32] := src1[87:80] 
+	dst[47:40] := src2[87:80] 
+	dst[55:48] := src1[95:88] 
+	dst[63:56] := src2[95:88] 
+	dst[71:64] := src1[103:96] 
+	dst[79:72] := src2[103:96] 
+	dst[87:80] := src1[111:104] 
+	dst[95:88] := src2[111:104] 
+	dst[103:96] := src1[119:112] 
+	dst[111:104] := src2[119:112] 
+	dst[119:112] := src1[127:120] 
+	dst[127:120] := src2[127:120] 
+	RETURN dst[127:0]
+}	
+	
+dst[127:0] := INTERLEAVE_HIGH_BYTES(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpckhbw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpackhi_epi16 / punpckhwd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpackhi_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 16-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_WORDS(src1[127:0], src2[127:0]){
+	dst[15:0] := src1[79:64]
+	dst[31:16] := src2[79:64] 
+	dst[47:32] := src1[95:80] 
+	dst[63:48] := src2[95:80] 
+	dst[79:64] := src1[111:96] 
+	dst[95:80] := src2[111:96] 
+	dst[111:96] := src1[127:112] 
+	dst[127:112] := src2[127:112] 
+	RETURN dst[127:0]
+}
+
+dst[127:0] := INTERLEAVE_HIGH_WORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpckhwd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpackhi_epi32 / punpckhdq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpackhi_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 32-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_DWORDS(src1[127:0], src2[127:0]){
+	dst[31:0] := src1[95:64] 
+	dst[63:32] := src2[95:64] 
+	dst[95:64] := src1[127:96] 
+	dst[127:96] := src2[127:96] 
+	RETURN dst[127:0]
+}	
+	
+dst[127:0] := INTERLEAVE_HIGH_DWORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpckhdq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpackhi_epi64 / punpckhqdq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpackhi_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 64-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_QWORDS(src1[127:0], src2[127:0]){
+	dst[63:0] := src1[127:64] 
+	dst[127:64] := src2[127:64] 
+	RETURN dst[127:0]
+}	
+	
+dst[127:0] := INTERLEAVE_HIGH_QWORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpckhqdq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpacklo_epi8 / punpcklbw -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpacklo_epi8'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 8-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_BYTES(src1[127:0], src2[127:0]){
+	dst[7:0] := src1[7:0] 
+	dst[15:8] := src2[7:0] 
+	dst[23:16] := src1[15:8] 
+	dst[31:24] := src2[15:8] 
+	dst[39:32] := src1[23:16] 
+	dst[47:40] := src2[23:16] 
+	dst[55:48] := src1[31:24] 
+	dst[63:56] := src2[31:24] 
+	dst[71:64] := src1[39:32]
+	dst[79:72] := src2[39:32] 
+	dst[87:80] := src1[47:40] 
+	dst[95:88] := src2[47:40] 
+	dst[103:96] := src1[55:48] 
+	dst[111:104] := src2[55:48] 
+	dst[119:112] := src1[63:56] 
+	dst[127:120] := src2[63:56] 
+	RETURN dst[127:0]
+}	
+
+dst[127:0] := INTERLEAVE_BYTES(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpcklbw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpacklo_epi16 / punpcklwd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpacklo_epi16'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 16-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_WORDS(src1[127:0], src2[127:0]){
+	dst[15:0] := src1[15:0] 
+	dst[31:16] := src2[15:0] 
+	dst[47:32] := src1[31:16] 
+	dst[63:48] := src2[31:16] 
+	dst[79:64] := src1[47:32] 
+	dst[95:80] := src2[47:32] 
+	dst[111:96] := src1[63:48] 
+	dst[127:112] := src2[63:48] 
+	RETURN dst[127:0]
+}	
+
+dst[127:0] := INTERLEAVE_WORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpcklwd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpacklo_epi32 / punpckldq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpacklo_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 32-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_DWORDS(src1[127:0], src2[127:0]){
+	dst[31:0] := src1[31:0] 
+	dst[63:32] := src2[31:0] 
+	dst[95:64] := src1[63:32] 
+	dst[127:96] := src2[63:32] 
+	RETURN dst[127:0]
+}	
+
+dst[127:0] := INTERLEAVE_DWORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpckldq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpacklo_epi64 / punpcklqdq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_unpacklo_epi64'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Unpack and interleave 64-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_QWORDS(src1[127:0], src2[127:0]){
+	dst[63:0] := src1[63:0] 
+	dst[127:64] := src2[63:0] 
+	RETURN dst[127:0]
+}
+
+dst[127:0] := INTERLEAVE_QWORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='punpcklqdq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_sd / addsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_add_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Add the lower double-precision (64-bit) floating-point element in "a" and "b", store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst". </description>
+	<description code='true'>
+dst[63:0] := a[63:0] + b[63:0]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='addsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_add_pd / addpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_add_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Add packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] + b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='addpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_div_sd / divsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_div_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>>Divide the lower double-precision (64-bit) floating-point element in "a" by the lower double-precision (64-bit) floating-point element in "b", store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst". </description>
+	<description code='true'>
+dst[63:0] := a[63:0] 0 b[63:0]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='divsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_div_pd / divpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_div_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Divide packed double-precision (64-bit) floating-point elements in "a" by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	dst[i+63:i] := a[i+63:i] / b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='divpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_sd / maxsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_max_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b", store the maximum value in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := MAX(a[63:0], b[63:0])
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='maxsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_pd / maxpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_max_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := MAX(a[i+63:i], b[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='maxpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_sd / minsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_min_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b", store the minimum value in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := MIN(a[63:0], b[63:0])
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='minsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_pd / minpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_min_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b", and store packed minimum values in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := MIN(a[i+63:i], b[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='minpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mul_sd / mulsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_mul_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Multiply the lower double-precision (64-bit) floating-point element in "a" and "b", store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0] * b[63:0]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='mulsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mul_pd / mulpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_mul_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] * b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='mulpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sqrt_sd / sqrtsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_sqrt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the square root of the lower double-precision (64-bit) floating-point element in "a", store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := SQRT(a[63:0])
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='sqrtsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sqrt_pd / sqrtpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_sqrt_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the square root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SQRT(a[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='sqrtpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_sd / subsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_sub_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Subtract the lower double-precision (64-bit) floating-point element in "b" from the lower double-precision (64-bit) floating-point element in "a", store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0] - b[63:0]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='subsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sub_pd / subpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_sub_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Subtract packed double-precision (64-bit) floating-point elements in "b" from packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] - b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='subpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_and_pd / andpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_and_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+   <description>Compute the bitwise AND of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := (a[i+63:i] AND b[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='andpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_andnot_pd / andnpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_andnot_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the bitwise AND NOT of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ((NOT a[i+63:i]) AND b[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='andnpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_or_pd / orpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_or_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the bitwise OR of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] BITWISE OR b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='orpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_xor_pd / xorpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_xor_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the bitwise XOR of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+63:i] XOR b[i+63:i]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='xorpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpeq_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpeq_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for equality, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] == b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmplt_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmplt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for less-than, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] &lt; b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmple_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmple_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for less-than-or-equal, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] &lt;= b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpgt_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpgt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for greater-than, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] &gt; b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpge_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpge_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for greater-than-or-equal, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] &gt;= b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpord_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpord_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" to see if neither is NaN, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] != NaN AND b[63:0] != NaN) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpunord_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpunord_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" to see if either is NaN, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] != NaN OR b[63:0] != NaN) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpneq_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpneq_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for not-equal, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] != b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpnlt_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpnlt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for not-less-than, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := !(a[63:0] &lt; b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpnle_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpnle_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for not-less-than-or-equal, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := !(a[63:0] &lt;= b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpngt_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpngt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for not-greater-than, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := !(a[63:0] &gt; b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpnge_sd / cmpsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpnge_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point elements in "a" and "b" for not-greater-than-or-equal, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := !(a[63:0] &gt;= b[63:0]) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmpsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpeq_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpeq_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] == b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmplt_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmplt_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for less-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] &lt; b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmple_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmple_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for less-than-or-equal, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] &lt;= b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpgt_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpgt_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] &gt; b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpge_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpge_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for greater-than-or-equal, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] &gt;= b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpord_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpord_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" to see if neither is NaN, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] != NaN AND b[i+63:i] != NaN) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpunord_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpunord_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" to see if either is NaN, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] != NaN OR b[i+63:i] != NaN) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	   <mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpneq_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpneq_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for not-equal, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := (a[i+63:i] != b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpnlt_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpnlt_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for not-less-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := !(a[i+63:i] &lt; b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpnle_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpnle_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for not-less-than-or-equal, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := !(a[i+63:i] &lt;= b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpngt_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpngt_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for not-greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := !(a[i+63:i] &gt; b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpnge_pd / cmppd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cmpnge_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" for not-greater-than-or-equal, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := !(a[i+63:i] &gt;= b[i+63:i]) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR	
+	</description>
+	<mnemonic parameters='xmm, xmm, imm8' base='cmppd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_comieq_sd / comisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_comieq_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for equality, and return the boolean result (0 or 1).</description>
+	<description code='true'>
+RETURN ( a[63:0] == b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='comisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_comilt_sd / comisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_comilt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for less-than, and return the boolean result (0 or 1).</description>
+	<description code='true'>
+RETURN ( a[63:0] &lt; b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='comisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_comile_sd / comisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_comile_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for less-than-or-equal, and return the boolean result (0 or 1).</description>
+	<description code='true'>
+RETURN ( a[63:0] &lt;= b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='comisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_comigt_sd / comisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_comigt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for greater-than, and return the boolean result (0 or 1).</description>
+	<description code='true'>
+RETURN ( a[63:0] &gt; b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='comisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_comige_sd / comisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_comige_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for greater-than-or-equal, and return the boolean result (0 or 1).</description>
+	<description code='true'>
+RETURN ( a[63:0] &gt;= b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='comisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_comineq_sd / comisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_comineq_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for not-equal, and return the boolean result (0 or 1).</description>
+	<description code='true'>
+RETURN ( a[63:0] != b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='comisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ucomieq_sd / ucomisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_ucomieq_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for equality, and return the boolean result (0 or 1). This instruction will not signal an exception for QNaNs.</description>
+	<description code='true'>
+RETURN ( a[63:0] == b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='ucomisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ucomilt_sd / ucomisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_ucomilt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for less-than, and return the boolean result (0 or 1). This instruction will not signal an exception for QNaNs.</description>
+	<description code='true'>
+RETURN ( a[63:0] &lt; b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='ucomisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ucomile_sd / ucomisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_ucomile_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for less-than-or-equal, and return the boolean result (0 or 1). This instruction will not signal an exception for QNaNs.</description>
+	<description code='true'>
+RETURN ( a[63:0] &lt;= b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='ucomisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ucomigt_sd / ucomisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_ucomigt_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+   <description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for greater-than, and return the boolean result (0 or 1). This instruction will not signal an exception for QNaNs.</description>
+	<description code='true'>
+RETURN ( a[63:0] &gt; b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='ucomisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ucomige_sd / ucomisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_ucomige_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for greater-than-or-equal, and return the boolean result (0 or 1). This instruction will not signal an exception for QNaNs.</description>
+	<description code='true'>
+RETURN ( a[63:0] &gt;= b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='ucomisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ucomineq_sd / ucomisd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_ucomineq_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" for not-equal, and return the boolean result (0 or 1). This instruction will not signal an exception for QNaNs.</description>
+	<description code='true'>
+RETURN ( a[63:0] != b[63:0] ) ? 1 : 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='ucomisd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtpd_ps / cvtpd2ps -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128' name='_mm_cvtpd_ps'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed single-precision (32-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_FP32(a[k+63:k])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtpd2ps'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtps_pd / cvtps2pd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cvtps_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed double-precision (64-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 32*j
+	dst[i+63:i] := Convert_FP32_To_FP64(a[k+31:k])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtps2pd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtpd_epi32 / cvtpd2dq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cvtpd_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_Int32(a[k+63:k])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtpd2dq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsd_si32 / cvtsd2si -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cvtsd_si32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert the lower double-precision (64-bit) floating-point element in "a" to a 32-bit integer, and store the result in "dst".</description>
+	<description code='true'>
+dst[31:0] := Convert_FP64_To_Int32(a[63:0])
+	</description>
+	<mnemonic parameters='r32, xmm' base='cvtsd2si'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsd_si64 / cvtsd2si -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__int64' name='_mm_cvtsd_si64'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert the lower double-precision (64-bit) floating-point element in "a" to a 64-bit integer, and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := Convert_FP64_To_Int64(a[63:0])
+	</description>
+	<mnemonic parameters='r64, xmm' base='cvtsd2si'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsd_ss / cvtsd2ss -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128' name='_mm_cvtsd_ss'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Convert the lower double-precision (64-bit) floating-point element in "b" to a single-precision (32-bit) floating-point element, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".
+	</description>
+	<description code='true'>
+dst[31:0] := Convert_FP64_To_FP32(b[63:0])
+dst[127:32] := a[127:31]
+dst[MAX:64] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtsd2ss'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtsd_f64 / movsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='double' name='_mm_cvtsd_f64'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Copy the lower double-precision (64-bit) floating-point element of "a" to "dst".</description>
+	<description code='true'>dst[63:0] := a[63:0]</description>
+	<mnemonic parameters='xmm, xmm' base='movsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtss_sd / cvtss2sd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_cvtss_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Convert the lower single-precision (32-bit) floating-point element in "b" to a double-precision (64-bit) floating-point element, store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".
+	</description>
+	<description code='true'>
+dst[63:0] := Convert_FP32_To_FP64(b[31:0])
+dst[127:64] := a[127:64]
+dst[MAX:64] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtss2sd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvttpd_epi32 / cvttpd2dq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cvttpd_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed 32-bit integers with truncation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_Int32_Truncate(a[k+63:k])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvttpd2dq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvttsd_si32 / cvttsd2si -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cvttsd_si32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert the lower double-precision (64-bit) floating-point element in "a" to a 32-bit integer with truncation, and store the result in "dst".</description>
+	<description code='true'>
+dst[31:0] := Convert_FP64_To_Int32_Truncate(a[63:0])
+	</description>
+	<mnemonic parameters='r32, xmm' base='cvttsd2si'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvttsd_si64 / cvttsd2si -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__int64' name='_mm_cvttsd_si64'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert the lower double-precision (64-bit) floating-point element in "a" to a 64-bit integer with truncation, and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := Convert_FP64_To_Int64_Truncate(a[63:0])
+	</description>
+	<mnemonic parameters='r64, xmm' base='cvttsd2si'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtps_epi32 / cvtps2dq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cvtps_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := Convert_FP32_To_Int32(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvtps2dq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvttps_epi32 / cvttps2dq -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128i' name='_mm_cvttps_epi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed 32-bit integers with truncation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := Convert_FP32_To_Int32_Truncate(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='cvttps2dq'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtpd_pi32 / cvtpd2pi -->
+<intrinsic tech='SSE2' rettype='__m64' name='_mm_cvtpd_pi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_Int32(a[k+63:k])
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, xmm' base='cvtpd2pi'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvttpd_pi32 / cvttpd2pi -->
+<intrinsic tech='SSE2' rettype='__m64' name='_mm_cvttpd_pi32'>
+	<CPUID>SSE2</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed 32-bit integers with truncation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_Int32_Truncate(a[k+63:k])
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, xmm' base='cvttpd2pi'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_sd / movsd -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128d' name='_mm_set_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='double'/>
+	<description>Copy double-precision (64-bit) floating-point element "a" to the lower element of "dst", and zero the upper element.</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[127:64] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set1_pd / movsd -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128d' name='_mm_set1_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='double'/>
+	<description>Broadcast double-precision (64-bit) floating-point value "a" to all elements of "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[63:0]
+ENDFOR
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_set_pd / movsd -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128d' name='_mm_set_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e1' type='double'/>
+	<parameter varname='e0' type='double'/>
+	<description>Set packed double-precision (64-bit) floating-point elements in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[63:0] := e1
+dst[127:64] := e0
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setr_pd / movsd -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128d' name='_mm_setr_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+	<parameter varname='e1' type='double'/>
+	<parameter varname='e0' type='double'/>
+	<description>Set packed double-precision (64-bit) floating-point elements in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[63:0] := e0
+dst[127:64] := e1
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_setzero_pd / xorpd -->
+<intrinsic tech='SSE2' rettype='__m128d' name='_mm_setzero_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Set</category>
+   <description>Return vector of type __m128d with all elements set to zero.</description>
+	<description code='true'>
+dst[MAX:0] := 0
+	</description>
+	<mnemonic base='xorpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_load_pd / movapd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_load_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load 128-bits (composed of 2 packed double-precision (64-bit) floating-point elements) from memory into "dst".
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[127:0] := MEM[mem_addr+127:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movapd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_load1_pd / movapd -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128d' name='_mm_load1_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load a double-precision (64-bit) floating-point element from memory into both elements of "dst".</description>
+	<description code='true'>
+dst[63:0] := MEM[mem_addr+63:mem_addr]
+dst[127:64] := MEM[mem_addr+63:mem_addr]
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loadr_pd / movapd -->
+<intrinsic tech='SSE2' sequence='true' rettype='__m128d' name='_mm_loadr_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load 2 double-precision (64-bit) floating-point elements from memory into "dst" in reverse order. mem_addr must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[63:0] := MEM[mem_addr+127:mem_addr+64]
+dst[127:64] := MEM[mem_addr+63:mem_addr]
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loadu_pd / movupd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_loadu_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load 128-bits (composed of 2 packed double-precision (64-bit) floating-point elements) from memory into "dst".
+	"mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+dst[127:0] := MEM[mem_addr+127:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movupd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_load_sd / movsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_load_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load a double-precision (64-bit) floating-point element from memory into the lower of "dst", and zero the upper element. "mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+dst[63:0] := MEM[mem_addr+63:mem_addr]
+dst[127:64] := 0
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loadh_pd / movhpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_loadh_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load a double-precision (64-bit) floating-point element from memory into the upper element of "dst", and copy the lower element from "a" to "dst". "mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[127:64] := MEM[mem_addr+63:mem_addr]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movhpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_loadl_pd / movlpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_loadl_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Load</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='mem_addr' type='double*'/>
+	<description>Load a double-precision (64-bit) floating-point element from memory into the lower element of "dst", and copy the upper element from "a" to "dst". "mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+dst[63:0] := MEM[mem_addr+63:mem_addr]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movlpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_stream_pd / movntpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_stream_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store 128-bits (composed of 2 packed double-precision (64-bit) floating-point elements) from "a" into memory using a non-temporal memory hint.
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+127:mem_addr] := a[127:0]
+	</description>
+	<mnemonic base='movntpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_store_sd / movsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_store_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store the lower double-precision (64-bit) floating-point element from "a" into memory. "mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[63:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_store1_pd / movsd -->
+<intrinsic tech='SSE2' sequence='true' rettype='void' name='_mm_store1_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store the lower double-precision (64-bit) floating-point element from "a" into 2 contiguous elements in memory. "mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[63:0]
+MEM[mem_addr+127:mem_addr+64] := a[63:0]
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_store_pd / movapd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_store_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store 128-bits (composed of 2 packed double-precision (64-bit) floating-point elements) from "a" into memory.
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+127:mem_addr] := a[127:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movapd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_storeu_pd / movupd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_storeu_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store 128-bits (composed of 2 packed double-precision (64-bit) floating-point elements) from "a" into memory.
+	"mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+MEM[mem_addr+127:mem_addr] := a[127:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movupd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_storer_pd / movupd -->
+<intrinsic tech='SSE2' sequence='true' rettype='void' name='_mm_storer_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store 2 double-precision (64-bit) floating-point elements from "a" into memory in reverse order.
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[127:64]
+MEM[mem_addr+127:mem_addr+64] := a[63:0]
+	</description>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_storeh_pd / movhpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_storeh_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store the upper double-precision (64-bit) floating-point element from "a" into memory.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[127:64]
+	</description>
+	<mnemonic base='movhpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_storel_pd / movlpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='void' name='_mm_storel_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double*'/>
+	<parameter varname='a' type='__m128d'/>
+   <description>Store the lower double-precision (64-bit) floating-point element from "a" into memory.</description>
+	<description code='true'>
+MEM[mem_addr+63:mem_addr] := a[63:0]
+	</description>
+	<mnemonic base='movlpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpackhi_pd / unpckhpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_unpackhi_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Unpack and interleave double-precision (64-bit) floating-point elements from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_QWORDS(src1[127:0], src2[127:0]){
+	dst[63:0] := src1[127:64] 
+	dst[127:64] := src2[127:64] 
+	RETURN dst[127:0]
+}	
+	
+dst[127:0] := INTERLEAVE_HIGH_QWORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='unpckhpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_unpacklo_pd / unpcklpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_unpacklo_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Unpack and interleave double-precision (64-bit) floating-point elements from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_QWORDS(src1[127:0], src2[127:0]){
+	dst[63:0] := src1[63:0] 
+	dst[127:64] := src2[63:0] 
+	RETURN dst[127:0]
+}
+
+dst[127:0] := INTERLEAVE_QWORDS(a[127:0], b[127:0])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='unpcklpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_movemask_pd / movmskpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_movemask_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Set each bit of mask "dst" based on the most significant bit of the corresponding packed double-precision (64-bit) floating-point element in "a".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF a[i+63]
+		dst[j] := 1
+	ELSE
+		dst[j] := 0
+	FI
+ENDFOR
+dst[MAX:2] := 0
+	</description>
+	<mnemonic parameters='r32, xmm' base='movmskpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_shuffle_pd / shufpd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_shuffle_pd'>
+	<CPUID>SSE2</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle double-precision (64-bit) floating-point elements using the control in "imm", and store the results in "dst". </description>
+	<description code='true'>
+dst[63:0] := (imm[0] == 0) ? a[63:0] : a[127:64]
+dst[127:64] := (imm[1] == 0) ? b[63:0] : b[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='shufpd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_move_sd / movsd -->
+<intrinsic tech='SSE2' vexEq='TRUE' rettype='__m128d' name='_mm_move_sd'>
+	<CPUID>SSE2</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Move the lower double-precision (64-bit) floating-point element from "b" to the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := b[63:0]
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='movsd'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_castpd_ps -->
+<intrinsic tech='SSE2' rettype='__m128' name='_mm_castpd_ps'>
+		<CPUID>SSE2</CPUID>
+		<category>Cast</category>
+		<parameter varname='a' type='__m128d'/>
+		<description>Cast vector of type __m128d to type __m128. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+		<mnemonic parameters='' base=''/>
+		<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_castpd_si128 -->
+<intrinsic tech='SSE2' rettype='__m128i' name='_mm_castpd_si128'>
+		<CPUID>SSE2</CPUID>
+		<category>Cast</category>
+		<parameter varname='a' type='__m128d'/>
+		<description>Cast vector of type __m128d to type __m128i. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+		<mnemonic parameters='' base=''/>
+		<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_castps_pd -->
+<intrinsic tech='SSE2' rettype='__m128d' name='_mm_castps_pd'>
+		<CPUID>SSE2</CPUID>
+		<category>Cast</category>
+		<parameter varname='a' type='__m128'/>
+		<description>Cast vector of type __m128 to type __m128d. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+		<mnemonic parameters='' base=''/>
+		<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_castps_si128 -->
+<intrinsic tech='SSE2' rettype='__m128i' name='_mm_castps_si128'>
+		<CPUID>SSE2</CPUID>
+		<category>Cast</category>
+		<parameter varname='a' type='__m128'/>
+		<description>Cast vector of type __m128 to type __m128i. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+		<mnemonic parameters='' base=''/>
+		<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_castsi128_pd -->
+<intrinsic tech='SSE2' rettype='__m128d' name='_mm_castsi128_pd'>
+		<CPUID>SSE2</CPUID>
+		<category>Cast</category>
+		<parameter varname='a' type='__m128i'/>
+		<description>Cast vector of type __m128i to type __m128d. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+		<mnemonic parameters='' base=''/>
+		<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_castsi128_ps -->
+<intrinsic tech='SSE2' rettype='__m128' name='_mm_castsi128_ps'>
+		<CPUID>SSE2</CPUID>
+		<category>Cast</category>
+		<parameter varname='a' type='__m128i'/>
+		<description>Cast vector of type __m128i to type __m128. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+		<mnemonic parameters='' base=''/>
+		<header>emmintrin.h</header>
+</intrinsic>
+
+  
+</intrinsic_list>

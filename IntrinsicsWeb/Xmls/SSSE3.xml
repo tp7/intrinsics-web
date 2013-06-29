@@ -1,0 +1,648 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_abs_pi8 / pabsb -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_abs_pi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := ABS(a[i+7:i])
+ENDFOR
+	</description>
+	<mnemonic base='pabsb'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_abs_epi8 / pabsb -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_abs_epi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	dst[i+7:i] := ABS(a[i+7:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pabsb'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_abs_pi16 / pabsw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_abs_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := ABS(a[i+15:i])
+ENDFOR
+	</description>
+	<mnemonic base='pabsw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_abs_epi16 / pabsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_abs_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := ABS(a[i+15:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pabsw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_abs_pi32 / pabsd -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_abs_pi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Compute the absolute value of packed 32-bit integers in "a", and store the unsigned results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	dst[i+31:i] := ABS(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic base='pabsd'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_abs_epi32 / pabsd -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_abs_epi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Compute the absolute value of packed 32-bit integers in "a", and store the unsigned results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ABS(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pabsd'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_shuffle_epi8 / pabsd -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_shuffle_epi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Shuffle packed 8-bit integers in "a" according to shuffle control mask in the corresponding 8-bit element of "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF b[i+7] == 1
+		dst[i+7:i] := 0
+	ELSE
+		index[3:0] := b[i+3:i]
+		dst[i+7:i] := a[index*8+7:index*8]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pshufb'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_shuffle_pi8 / pshufb -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_shuffle_pi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Shuffle packed 8-bit integers in "a" according to shuffle control mask in the corresponding 8-bit element of "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	IF b[i+7] == 1
+		dst[i+7:i] := 0
+	ELSE
+		index[2:0] := b[i+2:i]
+		dst[i+7:i] := a[index*8+7:index*8]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, mm' base='pshufb'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_alignr_epi8 / pshufb -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_alignr_epi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<parameter varname='count' type='int'/>
+	<description>Concatenate 16-byte blocks in "a" and "b" into a 32-byte temporary result, shift the result right by "count" bytes, and store the low 16 bytes in "dst". </description>
+	<description code='true'>
+tmp[255:0] := ((a[127:0] &lt;&lt; 128) OR b[127:0]) &gt;&gt; (count[7:0]*8)
+dst[127:0] := tmp[127:0]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='palignr'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_alignr_pi8 / palignr -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_alignr_pi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<parameter varname='count' type='int'/>
+	<description>Concatenate 8-byte blocks in "a" and "b" into a 16-byte temporary result, shift the result right by "count" bytes, and store the low 16 bytes in "dst". </description>
+	<description code='true'>
+tmp[127:0] := ((a[63:0] &lt;&lt; 64) OR b[63:0]) &gt;&gt; (count[7:0]*8)
+dst[63:0] := tmp[63:0]
+	</description>
+	   <mnemonic parameters='mm, mm' base='palignr'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadd_epi16 / palignr -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_hadd_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Horizontally add adjacent pairs of 16-bit integers in "a" and "b", and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0] := a[31:16] + a[15:0]
+dst[31:16] := a[63:48] + a[47:32]
+dst[47:32] := a[95:80] + a[79:64]
+dst[63:48] := a[127:112] + a[111:96]
+dst[79:64] := b[31:16] + b[15:0]
+dst[95:80] := b[63:48] + b[47:32]
+dst[111:96] := b[95:80] + b[79:64]
+dst[127:112] := b[127:112] + b[111:96]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='phaddw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadds_epi16 / palignr -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_hadds_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Horizontally add adjacent pairs of 16-bit integers in "a" and "b" using saturation, and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0]= Saturate_To_Int16(a[31:16] + a[15:0])
+dst[31:16] = Saturate_To_Int16(a[63:48] + a[47:32])
+dst[47:32] = Saturate_To_Int16(a[95:80] + a[79:64])
+dst[63:48] = Saturate_To_Int16(a[127:112] + a[111:96])
+dst[79:64] = Saturate_To_Int16(b[31:16] + b[15:0])
+dst[95:80] = Saturate_To_Int16(b[63:48] + b[47:32])
+dst[111:96] = Saturate_To_Int16(b[95:80] + b[79:64])
+dst[127:112] = Saturate_To_Int16(b[127:112] + b[111:96])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='phaddsw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadd_epi32 / palignr -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_hadd_epi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Horizontally add adjacent pairs of 32-bit integers in "a" and "b", and pack the signed 32-bit results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32] + a[31:0]
+dst[63:32] := a[127:96] + a[95:64]
+dst[95:64] := b[63:32] + b[31:0]
+dst[127:96] := b[127:96] + b[95:64]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='phaddd'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadd_pi16 / phaddw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_hadd_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Horizontally add adjacent pairs of 16-bit integers in "a" and "b", and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0] := a[31:16] + a[15:0]
+dst[31:16] := a[63:48] + a[47:32]
+dst[47:32] := b[31:16] + b[15:0]
+dst[63:48] := b[63:48] + b[47:32]
+	</description>
+	<mnemonic parameters='mm, mm' base='phaddw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadd_pi32 / phadd -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_hadd_pi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Horizontally add adjacent pairs of 32-bit integers in "a" and "b", and pack the signed 32-bit results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32] + a[31:0]
+dst[63:32] := b[63:32] + b[31:0]
+	</description>
+	<mnemonic parameters='mm, mm' base='phadd'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hadds_pi16 / phaddsw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_hadds_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Horizontally add adjacent pairs of 16-bit integers in "a" and "b" using saturation, and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0]= Saturate_To_Int16(a[31:16] + a[15:0])
+dst[31:16] = Saturate_To_Int16(a[63:48] + a[47:32])
+dst[47:32] = Saturate_To_Int16(b[31:16] + b[15:0])
+dst[63:48] = Saturate_To_Int16(b[63:48] + b[47:32])
+	</description>
+	<mnemonic parameters='mm, mm' base='phaddsw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsub_epi16 / phaddsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_hsub_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Horizontally subtract adjacent pairs of 16-bit integers in "a" and "b", and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0] := a[15:0] - a[31:16]
+dst[31:16] := a[47:32] - a[63:48]
+dst[47:32] := a[79:64] - a[95:80]
+dst[63:48] := a[111:96] - a[127:112]
+dst[79:64] := b[15:0] - b[31:16]
+dst[95:80] := b[47:32] - b[63:48]
+dst[111:96] := b[79:64] - b[95:80]
+dst[127:112] := b[111:96] - b[127:112]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='phsubw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsubs_epi16 / phaddsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_hsubs_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Horizontally subtract adjacent pairs of 16-bit integers in "a" and "b" using saturation, and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0]= Saturate_To_Int16(a[15:0] - a[31:16])
+dst[31:16] = Saturate_To_Int16(a[47:32] - a[63:48])
+dst[47:32] = Saturate_To_Int16(a[79:64] - a[95:80])
+dst[63:48] = Saturate_To_Int16(a[111:96] - a[127:112])
+dst[79:64] = Saturate_To_Int16(b[15:0] - b[31:16])
+dst[95:80] = Saturate_To_Int16(b[47:32] - b[63:48])
+dst[111:96] = Saturate_To_Int16(b[79:64] - b[95:80])
+dst[127:112] = Saturate_To_Int16(b[111:96] - b[127:112])
+	</description>
+	<mnemonic parameters='xmm, xmm' base='phsubsw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsub_epi32 / phaddsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_hsub_epi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Horizontally subtract adjacent pairs of 32-bit integers in "a" and "b", and pack the signed 32-bit results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[31:0] - a[63:32]
+dst[63:32] := a[95:64] - a[127:96]
+dst[95:64] := b[31:0] - b[63:32]
+dst[127:96] := b[95:64] - b[127:96]
+	</description>
+	<mnemonic parameters='xmm, xmm' base='phsubd'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsub_pi16 / phsubw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_hsub_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Horizontally subtract adjacent pairs of 16-bit integers in "a" and "b", and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0] := a[15:0] - a[31:16]
+dst[31:16] := a[47:32] - a[63:48]
+dst[47:32] := b[15:0] - b[31:16]
+dst[63:48] := b[47:32] - b[63:48]
+	</description>
+	<mnemonic parameters='mm, mm' base='phsubw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsub_pi32 / phsubd -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_hsub_pi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Horizontally subtract adjacent pairs of 32-bit integers in "a" and "b", and pack the signed 32-bit results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[31:0] - a[63:32]
+dst[63:32] := b[31:0] - b[63:32]
+	</description>
+	<mnemonic parameters='mm, mm' base='phsubd'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hsubs_pi16 / phsubsw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_hsubs_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Horizontally subtract adjacent pairs of 16-bit integers in "a" and "b" using saturation, and pack the signed 16-bit results in "dst".</description>
+	<description code='true'>
+dst[15:0]= Saturate_To_Int16(a[15:0] - a[31:16])
+dst[31:16] = Saturate_To_Int16(a[47:32] - a[63:48])
+dst[47:32] = Saturate_To_Int16(b[15:0] - b[31:16])
+dst[63:48] = Saturate_To_Int16(b[47:32] - b[63:48])
+	</description>
+	<mnemonic parameters='mm, mm' base='phsubsw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maddubs_epi16 / phsubsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_maddubs_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Vertically multiply each unsigned 8-bit integer from "a" with the corresponding signed 8-bit integer from "b", producing intermediate signed 16-bit integers. Horizontally add adjacent pairs of intermediate signed 16-bit integers, and pack the saturated results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	dst[i+15:i] := Saturate_To_Int16( a[i+15:i+8]*b[i+15:i+8] + a[i+7:i]*b[i+7:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmaddubsw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maddubs_pi16 / pmaddubsw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_maddubs_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Vertically multiply each unsigned 8-bit integer from "a" with the corresponding signed 8-bit integer from "b", producing intermediate signed 16-bit integers. Horizontally add adjacent pairs of intermediate signed 16-bit integers, and pack the saturated results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := Saturate_To_Int16( a[i+15:i+8]*b[i+15:i+8] + a[i+7:i]*b[i+7:i] )
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, mm' base='pmaddubsw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mulhrs_epi16 / pmaddubsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_mulhrs_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply packed 16-bit integers in "a" and "b", producing intermediate signed 32-bit integers. Truncate each intermediate integer to the 18 most significant bits, round by adding 1, and store bits [16:1] to "dst". </description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	tmp[31:0] := ((a[i+15:i] * b[i+15:i]) &gt;&gt; 14) + 1
+	dst[i+15:i] := tmp[16:1]
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='pmulhrsw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mulhrs_pi16 / pmulhrsw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_mulhrs_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Multiply packed 16-bit integers in "a" and "b", producing intermediate signed 32-bit integers. Truncate each intermediate integer to the 18 most significant bits, round by adding 1, and store bits [16:1] to "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	tmp[31:0] := ((a[i+15:i] * b[i+15:i]) &gt;&gt; 14) + 1
+	dst[i+15:i] := tmp[16:1]
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, mm' base='pmulhrsw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sign_epi8 / pmulhrsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_sign_epi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Negate packed 8-bit integers in "a" when the corresponding signed 8-bit integer in "b" is negative, and store the results in "dst". Element in "dst" are zeroed out when the corresponding element in "b" is zero.</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF b[i+7:i] &lt; 0
+		dst[i+7:i] := NEG(a[i+7:i])
+	ELSE IF b[i+7:i] = 0
+		dst[i+7:i] := 0
+	ELSE
+		dst[i+7:i] := a[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psignb'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sign_epi16 / pmulhrsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_sign_epi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Negate packed 16-bit integers in "a" when the corresponding signed 16-bit integer in "b" is negative, and store the results in "dst". Element in "dst" are zeroed out when the corresponding element in "b" is zero.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF b[i+15:i] &lt; 0
+		dst[i+15:i] := NEG(a[i+15:i])
+	ELSE IF b[i+15:i] = 0
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := a[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psignw'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sign_epi32 / pmulhrsw -->
+<intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_sign_epi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Negate packed 32-bit integers in "a" when the corresponding signed 32-bit integer in "b" is negative, and store the results in "dst". Element in "dst" are zeroed out when the corresponding element in "b" is zero.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF b[i+31:i] &lt; 0
+		dst[i+31:i] := NEG(a[i+31:i])
+	ELSE IF b[i+31:i] = 0
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := a[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm, xmm' base='psignd'>
+	</mnemonic>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sign_pi8 / psignb -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_sign_pi8'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Negate packed 8-bit integers in "a" when the corresponding signed 8-bit integer in "b" is negative, and store the results in "dst". Element in "dst" are zeroed out when the corresponding element in "b" is zero.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	IF b[i+7:i] &lt; 0
+		dst[i+7:i] := NEG(a[i+7:i])
+	ELSE IF b[i+7:i] = 0
+		dst[i+7:i] := 0
+	ELSE
+		dst[i+7:i] := a[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, mm' base='psignb'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sign_pi16 / psignw -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_sign_pi16'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Negate packed 16-bit integers in "a" when the corresponding signed 16-bit integer in "b" is negative, and store the results in "dst". Element in "dst" are zeroed out when the corresponding element in "b" is zero.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF b[i+15:i] &lt; 0
+		dst[i+15:i] := NEG(a[i+15:i])
+	ELSE IF b[i+15:i] = 0
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := a[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, mm' base='psignw'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sign_pi32 / psignd -->
+<intrinsic tech='SSSE3' rettype='__m64' name='_mm_sign_pi32'>
+	<CPUID>SSSE3</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Negate packed 32-bit integers in "a" when the corresponding signed 32-bit integer in "b" is negative, and store the results in "dst". Element in "dst" are zeroed out when the corresponding element in "b" is zero.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF b[i+31:i] &lt; 0
+		dst[i+31:i] := NEG(a[i+31:i])
+	ELSE IF b[i+31:i] = 0
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := a[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='mm, mm' base='psignd'/>
+  	<header>tmmintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

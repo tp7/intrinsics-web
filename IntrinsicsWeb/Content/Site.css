@@ -1,0 +1,107 @@
+﻿body {
+    margin: 15px;
+    font-family: sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.left-column {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+}
+
+    .left-column input[type=text] {
+        margin-bottom: 0;
+        width: 184px;
+        height: 30px;
+    }
+
+    .left-column i {
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+        .left-column i:hover {
+            color: #962323;
+        }
+
+    .left-column button {
+        margin-top: 10px;
+        padding-right: 0;
+        padding-left: 0;
+        width: 92px;
+    }
+
+.right-column {
+    margin-left: 250px;
+    min-width: 420px;
+}
+
+.text-gray {
+    color: #9f9f9f;
+}
+
+.type {
+    color: #1919cb;
+}
+
+.item {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+    .item h5 {
+        margin-top: 0;
+        margin-left: 5px;
+        padding-top: 5px;
+    }
+
+    .item .header {
+        padding: 2px 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: #F8F8F8;
+        font-family: Consolas, monospace;
+        cursor: pointer;
+    }
+
+        .item .header.collapsed {
+            border-radius: 5px;
+        }
+
+    .item p {
+        margin: 0 12px;
+    }
+
+    .item .body {
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background-color: #FCFCFC;
+    }
+
+    .item .instruction {
+        margin-right: 5px;
+    }
+
+    .item .code {
+        padding: 5px;
+        background-color: #F1F1F1;
+        white-space: pre-wrap;
+        font-family: Consolas, monospace;
+    }
+
+    .item .table {
+        margin-left: 5px;
+        width: 450px;
+        font-size: 11px;
+    }
+
+        .item .table td,
+        .item .table th {
+            padding: 0 3px;
+        }

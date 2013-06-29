@@ -1,0 +1,1287 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_blend_pd / blendpd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_blend_pd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Blend packed double-precision (64-bit) floating-point elements from "a" and "b" using control mask "imm", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF imm[j]
+		dst[i+63:i] := b[i+63:i]
+	ELSE
+		dst[i+63:i] := a[i+63:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='blendpd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_blend_ps / blendps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_blend_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Blend packed single-precision (32-bit) floating-point elements from "a" and "b" using control mask "imm", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF imm[j]
+		dst[i+31:i] := b[i+31:i]
+	ELSE
+		dst[i+31:i] := a[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='blendps'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_blendv_pd / blendvpd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_blendv_pd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='mask' type='__m128d'/>
+	<description>Blend packed double-precision (64-bit) floating-point elements from "a" and "b" using "mask", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF mask[i+63]
+		dst[i+63:i] := b[i+63:i]
+	ELSE
+		dst[i+63:i] := a[i+63:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, &amp;lt;xmm0&amp;gt;' base='blendvpd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_blendv_ps / blendvps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_blendv_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='mask' type='__m128'/>
+	<description>Blend packed single-precision (32-bit) floating-point elements from "a" and "b" using "mask", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF mask[i+31]
+		dst[i+31:i] := b[i+31:i]
+	ELSE
+		dst[i+31:i] := a[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, &amp;lt;xmm0&amp;gt;' base='blendvps'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_blendv_epi8 / pblendvb -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_blendv_epi8'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<parameter varname='mask' type='__m128i'/>
+	<description>Blend packed 8-bit integers from "a" and "b" using "mask", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF mask[i+7]
+		dst[i+7:i] := b[i+7:i]
+	ELSE
+		dst[i+7:i] := a[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, &amp;lt;xmm0&amp;gt;' base='pblendvb'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_blend_epi16 / pblendw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_blend_epi16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Blend packed 16-bit integers from "a" and "b" using control mask "imm", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF imm[j]
+		dst[i+15:i] := b[i+15:i]
+	ELSE
+		dst[i+15:i] := a[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128' base='pblendw'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_dp_pd / dppd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_dp_pd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Conditionally multiply the packed double-precision (64-bit) floating-point elements in "a" and "b" using the high 4 bits in "imm", sum the four products, and conditionally store the sum in "dst" using the low 4 bits of "imm".</description>
+	<description code='true'>
+DP(a[127:0], b[127:0], imm[7:0]) {
+	FOR j := 0 to 1
+		IF imm[4+j]
+			temp[i+63:i] := a[i+63:i] * b[i+63:i]
+		ELSE
+			temp[i+63:i] := 0
+		FI
+	ENDFOR
+
+	sum[63:0] := temp[127:64] + temp[63:0]
+
+	FOR j := 0 to 1
+		IF imm[j]
+			tmpdst[i+63:i] := temp[63:0]
+		ELSE
+			tmpdst[i+63:i] := 0
+		FI
+	ENDFOR
+	RETURN tmpdst[127:0]
+}
+
+dst[127:0] := DP(a[127:0], b[127:0], imm[7:0])
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='dppd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_dp_ps / dpps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_dp_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Conditionally multiply the packed single-precision (32-bit) floating-point elements in "a" and "b" using the high 4 bits in "imm", sum the four products, and conditionally store the sum in "dst" using the low 4 bits of "imm".</description>
+	<description code='true'>
+DP(a[127:0], b[127:0], imm[7:0]) {
+	FOR j := 0 to 3
+		IF imm[4+j]
+			temp[i+31:i] := a[i+31:i] * b[i+31:i]
+		ELSE
+			temp[i+31:i] := 0
+		FI
+	ENDFOR
+
+	sum[31:0] := temp[127:96] + temp[95:64] + temp[63:32] + temp[31:0]
+
+	FOR j := 0 to 3
+		IF imm[j]
+			tmpdst[i+31:i] := temp[31:0]
+		ELSE
+			tmpdst[i+31:i] := 0
+		FI
+	ENDFOR
+	RETURN tmpdst[127:0]
+}
+
+dst[127:0] := DP(a[127:0], b[127:0], imm[7:0])
+	</description>  
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='dpps'/>  
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_extract_ps / extractps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128' name='_mm_extract_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract a single-precision (32-bit) floating-point element from "a", selected with "imm", and store the result in the lower element of "dst".</description>
+	<description code='true'>
+dst[31:0] := (a[127:0] &gt;&gt; (imm[1:0] * 32))[31:0]
+dst[MAX:32] := 0
+	</description>
+	<mnemonic parameters='reg/m32, xmm2, imm8' base='extractps'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_extract_epi8 / pextrb -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi8'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract an 8-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
+	<description code='true'>
+dst[7:0] := (a[127:0] &gt;&gt; (imm[3:0] * 8))[7:0]
+dst[31:8] := 0
+	</description>
+	<mnemonic parameters='reg/m8, xmm2, imm8' base='pextrb'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_extract_epi32 / pextrd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract a 32-bit integer from "a", selected with "imm", and store the result in "dst".</description>
+	<description code='true'>
+dst[31:0] := (a[127:0] &gt;&gt; (imm[1:0] * 32))[31:0]
+	</description>
+	<mnemonic parameters='r32/m32, xmm2, imm8' base='pextrd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_extract_epi64 / pextrq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__int64' name='_mm_extract_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract a 64-bit integer from "a", selected with "imm", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[127:0] &gt;&gt; (imm[0] * 64))[63:0]
+	</description>
+	<mnemonic parameters='r32/m64, xmm2, imm8' base='pextrq'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_extract_epi16 / pextrw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract a 16-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
+	<description code='true'>
+dst[15:0] := (a[127:0] &gt;&gt; (imm[2:0] * 16))[15:0]
+dst[31:16] := 0
+	</description>
+	<mnemonic parameters='reg/m16, xmm2, imm8' base='pextrw'/>
+  	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_insert_ps / insertps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_insert_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='imm' type='const int'/>	
+	<description>Copy "a" to "tmp", then insert a single-precision (32-bit) floating-point element from "b" into "tmp" using the control in "imm".  Store "tmp" to "dst" using the zeromask in "imm" (elements are zeroed out when the corresponding bit is not set). </description>
+	<description code='true'>
+tmp2[127:0] := a[127:0]
+CASE (imm[7:6]) of
+	0: tmp1[31:0] := b[31:0]
+	1: tmp1[31:0] := b[63:32]
+	2: tmp1[31:0] := b[95:64]
+	3: tmp1[31:0] := b[127:96]
+ESAC
+CASE (imm[5:4]) of
+	0: tmp2[31:0] := tmp1[31:0]
+	1: tmp2[63:32] := tmp1[31:0]
+	2: tmp2[95:64] := tmp1[31:0]
+	3: tmp2[127:96] := tmp1[31:0]
+ESAC
+FOR j := 0 to 3
+	i := j*32
+	IF imm[j]
+		dst[i+31:i] := tmp[i+31:i]
+	ELSE
+		dst[i+31:i] := 0
+	FI
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m32, imm8' base='insertps'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_insert_epi8 / pinsrb -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi8'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='i' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Copy "a" to "dst", and insert the lower 8-bit integer from "i" into "dst" at the location specified by "imm". </description>
+	<description code='true'>
+dst[127:0] := a[127:0]
+sel := imm[3:0]*8
+dst[sel+7:sel] := i[7:0]
+	</description>
+	<mnemonic parameters='xmm1, r32/m8, imm8' base='pinsrb'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_insert_epi32 / pinsrd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='i' type='int'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Copy "a" to "dst", and insert the 32-bit integer "i" into "dst" at the location specified by "imm". </description>
+	<description code='true'>
+dst[127:0] := a[127:0]
+sel := imm[1:0]*32
+dst[sel+31:sel] := i[31:0]
+	</description>
+	<mnemonic parameters='xmm1, r32/m32, imm8' base='pinsrd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_insert_epi64 / pinsrq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='i' type='__int64'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Copy "a" to "dst", and insert the 64-bit integer "i" into "dst" at the location specified by "imm". </description>
+	<description code='true'>
+dst[127:0] := a[127:0]
+sel := imm[0]*64
+dst[sel+63:sel] := i[63:0]
+	</description>
+	<mnemonic parameters='xmm1, r64/m64, imm8' base='pinsrq'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_epi8 / pmaxsb -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epi8'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 8-bit integers in "a" and "b", and store packed maximum values in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF a[i+7:i] &gt; b[i+7:i]
+		dst[i+7:i] := a[i+7:i]
+	ELSE
+		dst[i+7:i] := b[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pmaxsb'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_epi32 / pmaxsd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 32-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF a[i+31:i] &gt; b[i+31:i]
+		dst[i+31:i] := a[i+31:i]
+	ELSE
+		dst[i+31:i] := b[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pmaxsd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_epu32 / pmaxud -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epu32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed unsigned 32-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF a[i+31:i] &gt; b[i+31:i]
+		dst[i+31:i] := a[i+31:i]
+	ELSE
+		dst[i+31:i] := b[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pmaxud'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_max_epu16 / pmaxuw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epu16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed unsigned 16-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF a[i+15:i] &gt; b[i+15:i]
+		dst[i+15:i] := a[i+15:i]
+	ELSE
+		dst[i+15:i] := b[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pmaxuw'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_epi8 / pminsb -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epi8'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 8-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*8
+	IF a[i+7:i] &lt; b[i+7:i]
+		dst[i+7:i] := a[i+7:i]
+	ELSE
+		dst[i+7:i] := b[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pminsb'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_epi32 / pminsd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 32-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF a[i+31:i] &lt; b[i+31:i]
+		dst[i+31:i] := a[i+31:i]
+	ELSE
+		dst[i+31:i] := b[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pminsd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_epu32 / pminud -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epu32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed unsigned 32-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF a[i+31:i] &lt; b[i+31:i]
+		dst[i+31:i] := a[i+31:i]
+	ELSE
+		dst[i+31:i] := b[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pminud'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_min_epu16 / pminuw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epu16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed unsigned 16-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*16
+	IF a[i+15:i] &lt; b[i+15:i]
+		dst[i+15:i] := a[i+15:i]
+	ELSE
+		dst[i+15:i] := b[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pminuw'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_packus_epi32 / packusdw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_packus_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Convert packed 32-bit integers from "a" and "b" to packed 16-bit integers using unsigned saturation, and store the results in "dst".</description>
+	<description code='true'>
+dst[15:0] := Saturate_Int32_To_UnsignedInt16 (a[31:0])
+dst[31:16] := Saturate_Int32_To_UnsignedInt16 (a[63:32])
+dst[47:32] := Saturate_Int32_To_UnsignedInt16 (a[95:64])
+dst[63:48] := Saturate_Int32_To_UnsignedInt16 (a[127:96])
+dst[79:64] := Saturate_Int32_To_UnsignedInt16 (b[31:0])
+dst[95:80] := Saturate_Int32_To_UnsignedInt16 (b[63:32])
+dst[111:96] := Saturate_Int32_To_UnsignedInt16 (b[95:64])
+dst[127:112] := Saturate_Int32_To_UnsignedInt16 (b[127:96])
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128' base='packusdw'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmpeq_epi64 / pcmpeqq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cmpeq_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compare packed 64-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*64
+  dst[i+63:i] := ( a[i+63:i] == b[i+63:i] ) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128' base='pcmpeqq'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi8_epi16 / pmovsxbw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepi8_epi16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+   <description>Sign extend packed 8-bit integers in "a" to packed 16-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	l := j*16
+	dst[l+15:l] := SignExtend(a[i+7:i])
+ENDFOR
+	</description>
+	<mnemonic base='pmovsxbw'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi8_epi32 / pmovsxbd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepi8_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Sign extend packed 8-bit integers in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 8*j
+	dst[i+31:i] := SignExtend(a[k+7:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovsxbd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi8_epi64 / pmovsxbq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepi8_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Sign extend packed 8-bit integers in the low 8 bytes of "a" to packed 64-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 8*j
+	dst[i+63:i] := SignExtend(a[k+7:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovsxbq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi16_epi32 / pmovsxwd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepi16_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Sign extend packed 16-bit integers in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 16*j
+	dst[i+31:i] := SignExtend(a[k+15:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovsxwd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi16_epi64 / pmovsxwq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepi16_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Sign extend packed 16-bit integers in "a" to packed 64-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 16*j
+	dst[i+63:i] := SignExtend(a[k+15:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovsxwq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepi32_epi64 / pmovsxdq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepi32_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Sign extend packed 32-bit integers in "a" to packed 64-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 32*j
+	dst[i+63:i] := SignExtend(a[k+31:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovsxdq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepu8_epi16 / pmovzxbw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepu8_epi16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Zero extend packed unsigned 8-bit integers in "a" to packed 16-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	l := j*16
+	dst[l+15:l] := ZeroExtend(a[i+7:i])
+ENDFOR
+	</description>
+	<mnemonic base='pmovzxbw'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepu8_epi32 / pmovzxbd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepu8_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Zero extend packed unsigned 8-bit integers in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 8*j
+	dst[i+31:i] := ZeroExtend(a[k+7:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovzxbd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepu8_epi64 / pmovzxbq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepu8_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Zero extend packed unsigned 8-bit integers in the low 8 byte sof "a" to packed 64-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 8*j
+	dst[i+63:i] := ZeroExtend(a[k+7:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovzxbq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepu16_epi32 / pmovzxwd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepu16_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Zero extend packed unsigned 16-bit integers in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 16*j
+	dst[i+31:i] := ZeroExtend(a[k+15:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovzxwd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepu16_epi64 / pmovzxwq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepu16_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Zero extend packed unsigned 16-bit integers in "a" to packed 64-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 16*j
+	dst[i+63:i] := ZeroExtend(a[k+15:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovzxwq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtepu32_epi64 / pmovzxdq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_cvtepu32_epi64'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Zero extend packed unsigned 32-bit integers in "a" to packed 64-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 64*j
+	k := 32*j
+	dst[i+63:i] := ZeroExtend(a[k+31:k])
+ENDFOR
+	</description>
+	<mnemonic base='pmovzxdq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mul_epi32 / pmuldq -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_mul_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply the low 32-bit integers from each packed 64-bit element in "a" and "b", and store the signed 64-bit results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := a[i+31:i] * b[i+31:i]
+ENDFOR
+	</description>
+	<mnemonic base='pmuldq'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mullo_epi32 / pmulld -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_mullo_epi32'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Multiply the packed 32-bit integers in "a" and "b", producing intermediate 64-bit integers, and store the low 32 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	tmp[63:0] := a[i+31:i] * b[i+31:i]
+	dst[i+31:i] := tmp[31:0]
+ENDFOR
+	</description>
+	<mnemonic base='pmulld'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testz_si128 / ptest -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_testz_si128'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise AND of 128 bits (representing integer data) in "a" and "b", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return the "ZF" value.</description>
+	<description code='true'>
+IF (a[127:0] AND b[127:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[127:0] AND NOT b[127:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='ptest'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testc_si128 / ptest -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_testc_si128'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise AND of 128 bits (representing integer data) in "a" and "b", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return the "CF" value.</description>
+	<description code='true'>
+IF (a[127:0] AND b[127:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[127:0] AND NOT b[127:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='ptest'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testnzc_si128 / ptest -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_testnzc_si128'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Compute the bitwise AND of 128 bits (representing integer data) in "a" and "b", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+IF (a[127:0] AND b[127:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[127:0] AND NOT b[127:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='ptest'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_test_all_zeros / ptest -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_test_all_zeros'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='mask' type='__m128i'/>
+	<description>Compute the bitwise AND of 128 bits (representing integer data) in "a" and "mask", and return 1 if the result is zero, otherwise return 0.</description>
+	<description code='true'>
+IF (a[127:0] AND mask[127:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='ptest'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_test_mix_ones_zeros / ptest -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_test_mix_ones_zeros'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='mask' type='__m128i'/>
+	 <description>Compute the bitwise AND of 128 bits (representing integer data) in "a" and "mask", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "mask", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+IF (a[127:0] AND mask[127:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[127:0] AND NOT mask[127:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='ptest'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_test_all_ones / pcmpeqd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' sequence='true' rettype='int' name='_mm_test_all_ones'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Compute the complement of "a" and 0xFFFFFFFF, and return 1 if the result is zero, otherwise return 0.</description>
+	<description code='true'>
+IF (a[127:0] AND NOT 0xFFFFFFFF == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='ptest'/>
+	<mnemonic base='pcmpeqd'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_round_pd / roundpd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_round_pd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='rounding' type='int'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" using the "rounding" parameter, and store the results as packed double-precision floating-point elements in "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ROUND(a[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundpd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_floor_pd / roundpd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_floor_pd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" down to an integer value, and store the results as packed double-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := FLOOR(a[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundpd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ceil_pd / roundpd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_ceil_pd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" up to an integer value, and store the results as packed double-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := CEIL(a[i+63:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundpd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_round_ps / roundps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_round_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='rounding' type='int'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" using the "rounding" parameter, and store the results as packed single-precision floating-point elements in "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ROUND(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundps'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_floor_ps / roundps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_floor_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" down to an integer value, and store the results as packed single-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := FLOOR(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundps'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ceil_ps / roundps -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_ceil_ps'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" up to an integer value, and store the results as packed single-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := CEIL(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundps'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_round_sd / roundsd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_round_sd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='rounding' type='int'/>
+	<description>Round the lower double-precision (64-bit) floating-point element in "b" using the "rounding" parameter, store the result as a double-precision floating-point element in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+dst[63:0] := ROUND(b[63:0])
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundsd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_floor_sd / roundsd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_floor_sd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Round the lower double-precision (64-bit) floating-point element in "b" down to an integer value, store the result as a double-precision floating-point element in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := FLOOR(b[63:0])
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundsd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ceil_sd / roundsd -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_ceil_sd'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Round the lower double-precision (64-bit) floating-point element in "b" up to an integer value, store the result as a double-precision floating-point element in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+dst[63:0] := CEIL(b[63:0])
+dst[127:64] := a[127:64]
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundsd'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_round_ss / roundss -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_round_ss'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='rounding' type='int'/>
+	<description>Round the lower single-precision (32-bit) floating-point element in "b" using the "rounding" parameter, store the result as a single-precision floating-point element in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+dst[31:0] := ROUND(b[31:0])
+dst[127:32] := a[127:32]
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundss'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_floor_ss / roundss -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_floor_ss'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Round the lower single-precision (32-bit) floating-point element in "b" down to an integer value, store the result as a single-precision floating-point element in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := FLOOR(b[31:0])
+dst[127:32] := a[127:32]
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundss'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_ceil_ss / roundss -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_ceil_ss'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Round the lower single-precision (32-bit) floating-point element in "b" up to an integer value, store the result as a single-precision floating-point element in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := CEIL(b[31:0])
+dst[127:32] := a[127:32]
+	</description>
+	<mnemonic parameters='xmm1, xmm2/m128, imm8' base='roundss'/>
+	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_minpos_epu16 / phminposuw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_minpos_epu16'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Application-Targeted</category>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Horizontally compute the minimum amongst the packed unsigned 16-bit integers in "a", store the minimum and index in "dst", and zero the remaining bits in "dst".</description>
+	<description code='true'>
+index[2:0] := 0
+min[15:0] := a[15:0]
+FOR j := 0 to 7
+	i := j*16
+	IF a[i+15:i] &lt; min[15:0]
+		index[2:0] := j
+		min[15:0] := a[i+15:i]
+	FI
+ENDFOR
+dst[15:0] := min[15:0]
+dst[18:16] := index[2:0]
+dst[127:19] := 0
+	</description>
+	<mnemonic base='phminposuw'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_mpsadbw_epu8 / mpsadbw -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_mpsadbw_epu8'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Arithmetic</category>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compute the sum of absolute differences (SADs) of quadruplets of unsigned 8-bit integers in "a" compared to those in "b", and store the 16-bit results in "dst".
+	Eight SADs are performed using one quadruplet from "b" and eight quadruplets from "a". One quadruplet is selected from "b" starting at on the offset specified in "imm". Eight quadruplets are formed from sequential 8-bit integers selected from "a" starting at the offset specified in "imm".</description>
+	<description code='true'>
+MPSADBW(a[127:0], b[127:0], imm[2:0]) {
+	a_offset := imm[2]*32
+	b_offset := imm[1:0]*32
+	FOR j := 0 to 7
+		i := j*8
+		k := a_offset+i
+		l := b_offset
+		tmp[i+15:i] := ABS(a[k+7:k] - b[l+7:l]) +
+					   ABS(a[k+15:k+8] - b[l+15:l+8]) +
+					   ABS(a[k+23:k+16] - b[l+23:l+16]) +
+					   ABS(a[k+31:k+24] - b[l+31:l+24])
+	ENDFOR
+	RETURN tmp[127:0]
+}
+
+dst[127:0] := MPSADBW(a[127:0], b[127:0], imm[2:0])
+	</description>
+	<mnemonic base='mpsadbw'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_stream_load_si128 / movntdqa -->
+<intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_stream_load_si128'>
+	<CPUID>SSE4.1</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128i*'/>
+	<description>Load 128-bits of integer data from memory into "dst" using a non-temporal memory hint.
+	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[127:0] := MEM[mem_addr+127:mem_addr]
+	</description>
+	<mnemonic base='movntdqa'/>
+  	<header>smmintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

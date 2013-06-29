@@ -1,0 +1,4037 @@
+
+<intrinsic_list>
+
+
+<!-- _mm256_add_pd / vaddpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_add_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Add packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[i+63:i] + b[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vaddpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_add_ps / vaddps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_add_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Add packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[i+31:i] + b[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vaddps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_addsub_pd / vaddsubpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_addsub_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Alternatively add and subtract packed double-precision (64-bit) floating-point elements in "a" to/from packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF (j is even) 
+		dst[i+63:i] := a[i+63:i] - b[i+63:i]
+	ELSE
+		dst[i+63:i] := a[i+63:i] + b[i+63:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vaddsubpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_addsub_ps / vaddsubps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_addsub_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Alternatively add and subtract packed single-precision (32-bit) floating-point elements in "a" to/from packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF (j is even) 
+		dst[i+31:i] := a[i+31:i] - b[i+31:i]
+	ELSE
+		dst[i+31:i] := a[i+31:i] + b[i+31:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vaddsubps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_and_pd / vandpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_and_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+		<description>Compute the bitwise AND of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := (a[i+63:i] AND b[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vandpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_and_ps / vandps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_and_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise AND of packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := (a[i+31:i] AND b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vandps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_andnot_pd / vandnpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_andnot_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the bitwise AND NOT of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ((NOT a[i+63:i]) AND b[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vandnpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_andnot_ps / vandnps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_andnot_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise AND NOT of packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ((NOT a[i+31:i]) AND b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vandnps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_blend_pd / vblendpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_blend_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Blend packed double-precision (64-bit) floating-point elements from "a" and "b" using control mask "imm", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF imm[j]
+		dst[i+63:i] := b[i+63:i]
+	ELSE
+		dst[i+63:i] := a[i+63:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vblendpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_blend_ps / vblendps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_blend_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Blend packed single-precision (32-bit) floating-point elements from "a" and "b" using control mask "imm", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF imm[j]
+		dst[i+31:i] := b[i+31:i]
+	ELSE
+		dst[i+31:i] := a[i+31:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vblendps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_blendv_pd / vblendvpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_blendv_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='mask' type='__m256d'/>
+	<description>Blend packed double-precision (64-bit) floating-point elements from "a" and "b" using "mask", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF mask[i+63]
+		dst[i+63:i] := b[i+63:i]
+	ELSE
+		dst[i+63:i] := a[i+63:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vblendvpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_blendv_ps / vblendvps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_blendv_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='mask' type='__m256'/>
+	<description>Blend packed single-precision (32-bit) floating-point elements from "a" and "b" using "mask", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF mask[i+31]
+		dst[i+31:i] := b[i+31:i]
+	ELSE
+		dst[i+31:i] := a[i+31:i]
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vblendvps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_div_pd / vdivpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_div_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Divide packed double-precision (64-bit) floating-point elements in "a" by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 64*j
+	dst[i+63:i] := a[i+63:i] / b[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vdivpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_div_ps / vdivps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_div_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Divide packed single-precision (32-bit) floating-point elements in "a" by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := a[i+31:i] / b[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vdivps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_dp_ps / vdpps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_dp_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='imm' type='const int'/>	
+	<description>Conditionally multiply the packed single-precision (32-bit) floating-point elements in "a" and "b" using the high 4 bits in "imm", sum the four products, and conditionally store the sum in "dst" using the low 4 bits of "imm".</description>
+	<description code='true'>
+DP(a[127:0], b[127:0], imm[7:0]) {
+	FOR j := 0 to 3
+		IF imm[4+j]
+			temp[i+31:i] := a[i+31:i] * b[i+31:i]
+		ELSE
+			temp[i+31:i] := 0
+		FI
+	ENDFOR
+
+	sum[31:0] := temp[127:96] + temp[95:64] + temp[63:32] + temp[31:0]
+
+	FOR j := 0 to 3
+		IF imm[j]
+			tmpdst[i+31:i] := temp[31:0]
+		ELSE
+			tmpdst[i+31:i] := 0
+		FI
+	ENDFOR
+	RETURN tmpdst[127:0]
+}
+
+dst[127:0] := DP(a[127:0], b[127:0], imm[7:0])
+dst[255:128] := DP(a[255:128], b[255:128], imm[7:0])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vdpps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_hadd_pd / vhaddpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_hadd_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Horizontally add adjacent pairs of double-precision (64-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[63:0] := a[127:64] + a[63:0]
+dst[127:64] := b[127:64] + b[63:0]
+dst[191:128] := a[255:192] + a[191:128]
+dst[255:192] := b[255:192] + b[191:128]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vhaddpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_hadd_ps / vhaddps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_hadd_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Horizontally add adjacent pairs of single-precision (32-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32] + a[31:0]
+dst[63:32] := a[127:96] + a[95:64]
+dst[95:64] := b[63:32] + b[31:0]
+dst[127:96] := b[127:96] + b[95:64]
+dst[159:128] := a[191:160] + a[159:128]
+dst[191:160] := a[255:224] + a[223:192]
+dst[223:192] := b[191:160] + b[159:128]
+dst[255:224] := b[255:224] + b[223:192]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vhaddps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_hsub_pd / vhsubpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_hsub_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Horizontally subtract adjacent pairs of double-precision (64-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[63:0] := a[127:64] - a[63:0]
+dst[127:64] := b[127:64] - b[63:0]
+dst[191:128] := a[255:192] - a[191:128]
+dst[255:192] := b[255:192] - b[191:128]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vhsubpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_hsub_ps / vhsubps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_hsub_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Horizontally add adjacent pairs of single-precision (32-bit) floating-point elements in "a" and "b", and pack the results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32] - a[31:0]
+dst[63:32] := a[127:96] - a[95:64]
+dst[95:64] := b[63:32] - b[31:0]
+dst[127:96] := b[127:96] - b[95:64]
+dst[159:128] := a[191:160] - a[159:128]
+dst[191:160] := a[255:224] - a[223:192]
+dst[223:192] := b[191:160] - b[159:128]
+dst[255:224] := b[255:224] - b[223:192]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vhsubps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_max_pd / vmaxpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_max_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := MAX(a[i+63:i], b[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmaxpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_max_ps / vmaxps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_max_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compare packed single-precision (32-bit) floating-point elements in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := MAX(a[i+31:i], b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmaxps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_min_pd / vminpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_min_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b", and store packed minimum values in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := MIN(a[i+63:i], b[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vminpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_min_ps / vminps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_min_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compare packed single-precision (32-bit) floating-point elements in "a" and "b", and store packed minimum values in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := MIN(a[i+31:i], b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vminps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_mul_pd / vmulpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_mul_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Multiply packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[i+63:i] * b[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmulpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_mul_ps / vmulps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_mul_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Multiply packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[i+31:i] * b[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmulps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_or_pd / vorpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_or_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the bitwise OR of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[i+63:i] BITWISE OR b[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vorpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_or_ps / vorps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_or_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise OR of packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[i+31:i] BITWISE OR b[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vorps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_shuffle_pd / vshufpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_shuffle_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Shuffle double-precision (64-bit) floating-point elements within 128-bit lanes using the control in "imm", and store the results in "dst". </description>
+	<description code='true'>
+dst[63:0] := (imm[0] == 0) ? a[63:0] : a[127:64]
+dst[127:64] := (imm[1] == 0) ? b[63:0] : b[127:64]
+dst[191:128] := (imm[2] == 0) ? a[191:128] : a[255:192]
+dst[255:192] := (imm[3] == 0) ? b[191:128] : b[255:192]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vshufpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_shuffle_ps / vshufps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_shuffle_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Shuffle single-precision (32-bit) floating-point elements in "a" within 128-bit lanes using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[31:0] := src[31:0]
+		1:	tmp[31:0] := src[63:32]
+		2:	tmp[31:0] := src[95:64]
+		3:	tmp[31:0] := src[127:96]
+	ESAC
+	RETURN tmp[31:0]
+}
+
+dst[31:0] := SELECT4(a[127:0], imm[1:0])
+dst[63:32] := SELECT4(a[127:0], imm[3:2])
+dst[95:64] := SELECT4(b[127:0], imm[5:4])
+dst[127:96] := SELECT4(b[127:0], imm[7:6])
+dst[159:128] := SELECT4(a[255:128], imm[1:0])
+dst[191:160] := SELECT4(a[255:128], imm[3:2])
+dst[223:192] := SELECT4(b[255:128], imm[5:4])
+dst[255:224] := SELECT4(b[255:128], imm[7:6])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vshufps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sub_pd / vsubpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_sub_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Subtract packed double-precision (64-bit) floating-point elements in "b" from packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[i+63:i] - b[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vsubpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sub_ps / vsubps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_sub_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Subtract packed single-precision (32-bit) floating-point elements in "b" from packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[i+31:i] - b[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vsubps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_xor_pd / vxorpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_xor_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the bitwise XOR of packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[i+63:i] XOR b[i+63:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vxorpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_xor_ps / vxorps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_xor_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise XOR of packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[i+31:i] XOR b[i+31:i]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vxorps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmp_pd / vcmppd -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm_cmp_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" based on the comparison operand specified by "imm", and store the results in "dst".</description>
+	<description code='true'>
+CASE (imm) of
+  0: OP := _CMP_EQ_OQ
+  1: OP := _CMP_LT_OS
+  2: OP := _CMP_LE_OS
+  3: OP := _CMP_UNORD_Q 
+  4: OP := _CMP_NEQ_UQ
+  5: OP := _CMP_NLT_US
+  6: OP := _CMP_NLE_US
+  7: OP := _CMP_ORD_Q
+  8: OP := _CMP_EQ_UQ
+  9: OP := _CMP_NGE_US
+  10: OP := _CMP_NGT_US
+  11: OP := _CMP_FALSE_OQ
+  12: OP := _CMP_NEQ_OQ
+  13: OP := _CMP_GE_OS
+  14: OP := _CMP_GT_OS
+  15: OP := _CMP_TRUE_UQ
+  16: OP := _CMP_EQ_OS
+  17: OP := _CMP_LT_OQ
+  18: OP := _CMP_LE_OQ
+  19: OP := _CMP_UNORD_S
+  20: OP := _CMP_NEQ_US
+  21: OP := _CMP_NLT_UQ
+  22: OP := _CMP_NLE_UQ
+  23: OP := _CMP_ORD_S
+  24: OP := _CMP_EQ_US
+  25: OP := _CMP_NGE_UQ 
+  26: OP := _CMP_NGT_UQ 
+  27: OP := _CMP_FALSE_OS 
+  28: OP := _CMP_NEQ_OS 
+  29: OP := _CMP_GE_OQ
+  30: OP := _CMP_GT_OQ
+  31: OP := _CMP_TRUE_US
+ESAC
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ( a[i+63:i] OP b[i+63:i] ) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcmppd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cmp_pd / vcmppd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_cmp_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed double-precision (64-bit) floating-point elements in "a" and "b" based on the comparison operand specified by "imm", and store the results in "dst".</description>
+	<description code='true'>
+CASE (imm) of
+  0: OP := _CMP_EQ_OQ
+  1: OP := _CMP_LT_OS
+  2: OP := _CMP_LE_OS
+  3: OP := _CMP_UNORD_Q 
+  4: OP := _CMP_NEQ_UQ
+  5: OP := _CMP_NLT_US
+  6: OP := _CMP_NLE_US
+  7: OP := _CMP_ORD_Q
+  8: OP := _CMP_EQ_UQ
+  9: OP := _CMP_NGE_US
+  10: OP := _CMP_NGT_US
+  11: OP := _CMP_FALSE_OQ
+  12: OP := _CMP_NEQ_OQ
+  13: OP := _CMP_GE_OS
+  14: OP := _CMP_GT_OS
+  15: OP := _CMP_TRUE_UQ
+  16: OP := _CMP_EQ_OS
+  17: OP := _CMP_LT_OQ
+  18: OP := _CMP_LE_OQ
+  19: OP := _CMP_UNORD_S
+  20: OP := _CMP_NEQ_US
+  21: OP := _CMP_NLT_UQ
+  22: OP := _CMP_NLE_UQ
+  23: OP := _CMP_ORD_S
+  24: OP := _CMP_EQ_US
+  25: OP := _CMP_NGE_UQ 
+  26: OP := _CMP_NGT_UQ 
+  27: OP := _CMP_FALSE_OS 
+  28: OP := _CMP_NEQ_OS 
+  29: OP := _CMP_GE_OQ
+  30: OP := _CMP_GT_OQ
+  31: OP := _CMP_TRUE_US
+ESAC
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ( a[i+63:i] OP b[i+63:i] ) ? 0xFFFFFFFFFFFFFFFF : 0
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcmppd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmp_ps / vcmpps -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_cmp_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed single-precision (32-bit) floating-point elements in "a" and "b" based on the comparison operand specified by "imm", and store the results in "dst".</description>
+	<description code='true'>
+CASE (imm) of
+  0: OP := _CMP_EQ_OQ
+  1: OP := _CMP_LT_OS
+  2: OP := _CMP_LE_OS
+  3: OP := _CMP_UNORD_Q 
+  4: OP := _CMP_NEQ_UQ
+  5: OP := _CMP_NLT_US
+  6: OP := _CMP_NLE_US
+  7: OP := _CMP_ORD_Q
+  8: OP := _CMP_EQ_UQ
+  9: OP := _CMP_NGE_US
+  10: OP := _CMP_NGT_US
+  11: OP := _CMP_FALSE_OQ
+  12: OP := _CMP_NEQ_OQ
+  13: OP := _CMP_GE_OS
+  14: OP := _CMP_GT_OS
+  15: OP := _CMP_TRUE_UQ
+  16: OP := _CMP_EQ_OS
+  17: OP := _CMP_LT_OQ
+  18: OP := _CMP_LE_OQ
+  19: OP := _CMP_UNORD_S
+  20: OP := _CMP_NEQ_US
+  21: OP := _CMP_NLT_UQ
+  22: OP := _CMP_NLE_UQ
+  23: OP := _CMP_ORD_S
+  24: OP := _CMP_EQ_US
+  25: OP := _CMP_NGE_UQ 
+  26: OP := _CMP_NGT_UQ 
+  27: OP := _CMP_FALSE_OS 
+  28: OP := _CMP_NEQ_OS 
+  29: OP := _CMP_GE_OQ
+  30: OP := _CMP_GT_OQ
+  31: OP := _CMP_TRUE_US
+ESAC
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ( a[i+31:i] OP b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcmpps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cmp_ps / vcmpps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_cmp_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare packed single-precision (32-bit) floating-point elements in "a" and "b" based on the comparison operand specified by "imm", and store the results in "dst".</description>
+	<description code='true'>
+CASE (imm) of
+  0: OP := _CMP_EQ_OQ
+  1: OP := _CMP_LT_OS
+  2: OP := _CMP_LE_OS
+  3: OP := _CMP_UNORD_Q 
+  4: OP := _CMP_NEQ_UQ
+  5: OP := _CMP_NLT_US
+  6: OP := _CMP_NLE_US
+  7: OP := _CMP_ORD_Q
+  8: OP := _CMP_EQ_UQ
+  9: OP := _CMP_NGE_US
+  10: OP := _CMP_NGT_US
+  11: OP := _CMP_FALSE_OQ
+  12: OP := _CMP_NEQ_OQ
+  13: OP := _CMP_GE_OS
+  14: OP := _CMP_GT_OS
+  15: OP := _CMP_TRUE_UQ
+  16: OP := _CMP_EQ_OS
+  17: OP := _CMP_LT_OQ
+  18: OP := _CMP_LE_OQ
+  19: OP := _CMP_UNORD_S
+  20: OP := _CMP_NEQ_US
+  21: OP := _CMP_NLT_UQ
+  22: OP := _CMP_NLE_UQ
+  23: OP := _CMP_ORD_S
+  24: OP := _CMP_EQ_US
+  25: OP := _CMP_NGE_UQ 
+  26: OP := _CMP_NGT_UQ 
+  27: OP := _CMP_FALSE_OS 
+  28: OP := _CMP_NEQ_OS 
+  29: OP := _CMP_GE_OQ
+  30: OP := _CMP_GT_OQ
+  31: OP := _CMP_TRUE_US
+ESAC
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ( a[i+31:i] OP b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcmpps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmp_sd / vcmpsd -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm_cmp_sd'>
+	<CPUID>AVX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare the lower double-precision (64-bit) floating-point element in "a" and "b" based on the comparison operand specified by "imm", store the result in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
+	<description code='true'>
+CASE (imm) of
+  0: OP := _CMP_EQ_OQ
+  1: OP := _CMP_LT_OS
+  2: OP := _CMP_LE_OS
+  3: OP := _CMP_UNORD_Q 
+  4: OP := _CMP_NEQ_UQ
+  5: OP := _CMP_NLT_US
+  6: OP := _CMP_NLE_US
+  7: OP := _CMP_ORD_Q
+  8: OP := _CMP_EQ_UQ
+  9: OP := _CMP_NGE_US
+  10: OP := _CMP_NGT_US
+  11: OP := _CMP_FALSE_OQ
+  12: OP := _CMP_NEQ_OQ
+  13: OP := _CMP_GE_OS
+  14: OP := _CMP_GT_OS
+  15: OP := _CMP_TRUE_UQ
+  16: OP := _CMP_EQ_OS
+  17: OP := _CMP_LT_OQ
+  18: OP := _CMP_LE_OQ
+  19: OP := _CMP_UNORD_S
+  20: OP := _CMP_NEQ_US
+  21: OP := _CMP_NLT_UQ
+  22: OP := _CMP_NLE_UQ
+  23: OP := _CMP_ORD_S
+  24: OP := _CMP_EQ_US
+  25: OP := _CMP_NGE_UQ 
+  26: OP := _CMP_NGT_UQ 
+  27: OP := _CMP_FALSE_OS 
+  28: OP := _CMP_NEQ_OS 
+  29: OP := _CMP_GE_OQ
+  30: OP := _CMP_GT_OQ
+  31: OP := _CMP_TRUE_US
+ESAC
+
+dst[63:0] := ( a[63:0] OP b[63:0] ) ? 0xFFFFFFFFFFFFFFFF : 0
+dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcmpsd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cmp_ss / vcmpss -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_cmp_ss'>
+	<CPUID>AVX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Compare the lower single-precision (32-bit) floating-point element in "a" and "b" based on the comparison operand specified by "imm", store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst". </description>
+	<description code='true'>
+CASE (imm) of
+  0: OP := _CMP_EQ_OQ
+  1: OP := _CMP_LT_OS
+  2: OP := _CMP_LE_OS
+  3: OP := _CMP_UNORD_Q 
+  4: OP := _CMP_NEQ_UQ
+  5: OP := _CMP_NLT_US
+  6: OP := _CMP_NLE_US
+  7: OP := _CMP_ORD_Q
+  8: OP := _CMP_EQ_UQ
+  9: OP := _CMP_NGE_US
+  10: OP := _CMP_NGT_US
+  11: OP := _CMP_FALSE_OQ
+  12: OP := _CMP_NEQ_OQ
+  13: OP := _CMP_GE_OS
+  14: OP := _CMP_GT_OS
+  15: OP := _CMP_TRUE_UQ
+  16: OP := _CMP_EQ_OS
+  17: OP := _CMP_LT_OQ
+  18: OP := _CMP_LE_OQ
+  19: OP := _CMP_UNORD_S
+  20: OP := _CMP_NEQ_US
+  21: OP := _CMP_NLT_UQ
+  22: OP := _CMP_NLE_UQ
+  23: OP := _CMP_ORD_S
+  24: OP := _CMP_EQ_US
+  25: OP := _CMP_NGE_UQ 
+  26: OP := _CMP_NGT_UQ 
+  27: OP := _CMP_FALSE_OS 
+  28: OP := _CMP_NEQ_OS 
+  29: OP := _CMP_GE_OQ
+  30: OP := _CMP_GT_OQ
+  31: OP := _CMP_TRUE_US
+ESAC
+
+dst[31:0] := ( a[31:0] OP b[31:0] ) ? 0xFFFFFFFF : 0
+dst[127:32] := a[127:32]
+dst[MAX:128] := 0
+	</description>
+
+	<mnemonic base='vcmpss'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtepi32_pd / vcvtdq2pd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_cvtepi32_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Convert packed 32-bit integers in "a" to packed double-precision (64-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	m := j*64
+	dst[m+63:m] := Convert_Int32_To_FP64(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcvtdq2pd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtepi32_ps / vcvtdq2ps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_cvtepi32_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256i'/>
+	<description>Convert packed 32-bit integers in "a" to packed single-precision (32-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := Convert_Int32_To_FP32(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcvtdq2ps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtpd_ps / vcvtpd2ps -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm256_cvtpd_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed single-precision (32-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_FP32(a[k+63:k])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcvtpd2ps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtps_epi32 / vcvtps2dq -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_cvtps_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := Convert_FP32_To_Int32(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcvtps2dq'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtps_pd / vcvtps2pd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_cvtps_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed double-precision (64-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 64*j
+	k := 32*j
+	dst[i+63:i] := Convert_FP32_To_FP64(a[k+31:k])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcvtps2pd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvttpd_epi32 / vcvttpd2dq -->
+<intrinsic tech='AVX' rettype='__m128i' name='_mm256_cvttpd_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed 32-bit integers with truncation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_Int32_Truncate(a[k+63:k])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcvttpd2dq'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtpd_epi32 / vcvtpd2dq -->
+<intrinsic tech='AVX' rettype='__m128i' name='_mm256_cvtpd_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Convert packed double-precision (64-bit) floating-point elements in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	k := 64*j
+	dst[i+31:i] := Convert_FP64_To_Int32(a[k+63:k])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcvtpd2dq'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvttps_epi32 / vcvttps2dq -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_cvttps_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed 32-bit integers with truncation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := Convert_FP32_To_Int32_Truncate(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcvttps2dq'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_extractf128_ps / vextractf128 -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm256_extractf128_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract 128 bits (composed of 4 packed single-precision (32-bit) floating-point elements) from "a", selected with "imm", and store the result in "dst".</description>
+	<description code='true'>
+CASE imm of
+	0: dst[127:0] := a[127:0]
+	1: dst[127:0] := a[255:128]
+ESAC
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vextractf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_extractf128_pd / vextractf128 -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm256_extractf128_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract 128 bits (composed of 2 packed double-precision (64-bit) floating-point elements) from "a", selected with "imm", and store the result in "dst".</description>
+	<description code='true'>
+CASE imm of
+	0: dst[127:0] := a[127:0]
+	1: dst[127:0] := a[255:128]
+ESAC
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vextractf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_extractf128_si256 / vextractf128 -->
+<intrinsic tech='AVX' rettype='__m128i' name='_mm256_extractf128_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Extract 128 bits (composed of integer data) from "a", selected with "imm", and store the result in "dst".</description>
+	<description code='true'>
+CASE imm of
+	0: dst[127:0] := a[127:0]
+	1: dst[127:0] := a[255:128]
+ESAC
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vextractf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_zeroall / vzeroall -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_zeroall'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Zero the contents of all XMM or YMM registers.</description>
+	<description code='true'>
+YMM0[MAX:0] := 0
+YMM1[MAX:0] := 0
+YMM2[MAX:0] := 0
+YMM3[MAX:0] := 0
+YMM4[MAX:0] := 0
+YMM5[MAX:0] := 0
+YMM6[MAX:0] := 0
+YMM7[MAX:0] := 0
+IF 64-bit mode
+	YMM8[MAX:0] := 0
+	YMM9[MAX:0] := 0
+	YMM10[MAX:0] := 0
+	YMM11[MAX:0] := 0
+	YMM12[MAX:0] := 0
+	YMM13[MAX:0] := 0
+	YMM14[MAX:0] := 0
+	YMM15[MAX:0] := 0
+FI
+</description>
+	<mnemonic base='vzeroall'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_zeroupper / vzeroupper -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_zeroupper'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Zero the upper 128 bits of all YMM registers; the lower 128-bits of the registers are unmodified.</description>
+	<description code='true'>
+YMM0[MAX:128] := 0
+YMM1[MAX:128] := 0
+YMM2[MAX:128] := 0
+YMM3[MAX:128] := 0
+YMM4[MAX:128] := 0
+YMM5[MAX:128] := 0
+YMM6[MAX:128] := 0
+YMM7[MAX:128] := 0
+IF 64-bit mode
+	YMM8[MAX:128] := 0
+	YMM9[MAX:128] := 0
+	YMM10[MAX:128] := 0
+	YMM11[MAX:128] := 0
+	YMM12[MAX:128] := 0
+	YMM13[MAX:128] := 0
+	YMM14[MAX:128] := 0
+	YMM15[MAX:128] := 0
+FI
+</description>
+	<mnemonic base='vzeroupper'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permutevar_ps / vpermilps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_permutevar_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Shuffle single-precision (32-bit) floating-point elements in "a" within 128-bit lanes using the control in "b", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[31:0] := src[31:0]
+		1:	tmp[31:0] := src[63:32]
+		2:	tmp[31:0] := src[95:64]
+		3:	tmp[31:0] := src[127:96]
+	ESAC
+	RETURN tmp[31:0]
+}
+
+dst[31:0] := SELECT4(a[127:0], b[1:0])
+dst[63:32] := SELECT4(a[127:0], b[33:32])
+dst[95:64] := SELECT4(a[127:0], b[65:64])
+dst[127:96] := SELECT4(a[127:0], b[97:96])
+dst[159:128] := SELECT4(a[255:128], b[129:128])
+dst[191:160] := SELECT4(a[255:128], b[161:160])
+dst[223:192] := SELECT4(a[255:128], b[193:192])
+dst[255:224] := SELECT4(a[255:128], b[225:224])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vpermilps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_permutevar_ps / vpermilps -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_permutevar_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Shuffle single-precision (32-bit) floating-point elements in "a" using the control in "b", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[31:0] := src[31:0]
+		1:	tmp[31:0] := src[63:32]
+		2:	tmp[31:0] := src[95:64]
+		3:	tmp[31:0] := src[127:96]
+	ESAC
+	RETURN tmp[31:0]
+}
+
+dst[31:0] := SELECT4(a[127:0], b[1:0])
+dst[63:32] := SELECT4(a[127:0], b[33:32])
+dst[95:64] := SELECT4(a[127:0], b[65:64])
+dst[127:96] := SELECT4(a[127:0], b[97:96])
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vpermilps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permute_ps / vpermilps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_permute_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle single-precision (32-bit) floating-point elements in "a" within 128-bit lanes using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[31:0] := src[31:0]
+		1:	tmp[31:0] := src[63:32]
+		2:	tmp[31:0] := src[95:64]
+		3:	tmp[31:0] := src[127:96]
+	ESAC
+	RETURN tmp[31:0]
+}
+
+dst[31:0] := SELECT4(a[127:0], imm[1:0])
+dst[63:32] := SELECT4(a[127:0], imm[3:2])
+dst[95:64] := SELECT4(a[127:0], imm[5:4])
+dst[127:96] := SELECT4(a[127:0], imm[7:6])
+dst[159:128] := SELECT4(a[255:128], imm[1:0])
+dst[191:160] := SELECT4(a[255:128], imm[3:2])
+dst[223:192] := SELECT4(a[255:128], imm[5:4])
+dst[255:224] := SELECT4(a[255:128], imm[7:6])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vpermilps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_permute_ps / vpermilps -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_permute_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle single-precision (32-bit) floating-point elements in "a" using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[31:0] := src[31:0]
+		1:	tmp[31:0] := src[63:32]
+		2:	tmp[31:0] := src[95:64]
+		3:	tmp[31:0] := src[127:96]
+	ESAC
+	RETURN tmp[31:0]
+}
+
+dst[31:0] := SELECT4(a[127:0], imm[1:0])
+dst[63:32] := SELECT4(a[127:0], imm[3:2])
+dst[95:64] := SELECT4(a[127:0], imm[5:4])
+dst[127:96] := SELECT4(a[127:0], imm[7:6])
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vpermilps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permutevar_pd / vpermilpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_permutevar_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Shuffle double-precision (64-bit) floating-point elements in "a" within 128-bit lanes using the control in "b", and store the results in "dst".</description>
+	<description code='true'>
+IF (b[1] == 0) dst[63:0] := a[63:0]
+IF (b[1] == 1) dst[63:0] := a[127:64]
+IF (b[65] == 0) dst[127:64] := a[63:0]
+IF (b[65] == 1) dst[127:64] := a[127:64]
+IF (b[129] == 0) dst[191:128] := a[191:128]
+IF (b[129] == 1) dst[191:128] := a[255:192]
+IF (b[193] == 0) dst[255:192] := a[191:128]
+IF (b[193] == 1) dst[255:192] := a[255:192]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vpermilpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_permutevar_pd / vpermilpd -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm_permutevar_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Shuffle double-precision (64-bit) floating-point elements in "a" using the control in "b", and store the results in "dst".</description>
+	<description code='true'>
+IF (b[1] == 0) dst[63:0] := a[63:0]
+IF (b[1] == 1) dst[63:0] := a[127:64]
+IF (b[65] == 0) dst[127:64] := a[63:0]
+IF (b[65] == 1) dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vpermilpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permute_pd / vpermilpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_permute_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle double-precision (64-bit) floating-point elements in "a" within 128-bit lanes using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+IF (imm[0] == 0) dst[63:0] := a[63:0]
+IF (imm[0] == 1) dst[63:0] := a[127:64]
+IF (imm[1] == 0) dst[127:64] := a[63:0]
+IF (imm[1] == 1) dst[127:64] := a[127:64]
+IF (imm[2] == 0) dst[191:128] := a[191:128]
+IF (imm[2] == 1) dst[191:128] := a[255:192]
+IF (imm[3] == 0) dst[255:192] := a[191:128]
+IF (imm[3] == 1) dst[255:192] := a[255:192]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vpermilpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_permute_pd / vpermilpd -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm_permute_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle double-precision (64-bit) floating-point elements in "a" using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+IF (imm[0] == 0) dst[63:0] := a[63:0]
+IF (imm[0] == 1) dst[63:0] := a[127:64]
+IF (imm[1] == 0) dst[127:64] := a[63:0]
+IF (imm[1] == 1) dst[127:64] := a[127:64]
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vpermilpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permute2f128_ps / vperm2f128 -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_permute2f128_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle 128-bits (composed of 4 packed single-precision (32-bit) floating-point elements) selected by "imm" from "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+SELECT4(src1, src2, control){
+	CASE(control[1:0])
+		0:	tmp[127:0] := src1[127:0]
+		1:	tmp[127:0] := src1[255:128]
+		2:	tmp[127:0] := src2[127:0]
+		3: 	tmp[127:0] := src2[255:128]
+	ESAC
+	IF control[3]
+		tmp[127:0] := 0
+	ENDIF
+	RETURN tmp[127:0]
+}
+
+dst[127:0] := SELECT4(a[255:0], b[255:0], imm[3:0])
+dst[255:128] := SELECT4(b[255:0], b[255:0], imm[7:4])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vperm2f128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permute2f128_pd / vperm2f128 -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_permute2f128_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle 128-bits (composed of 2 packed double-precision (64-bit) floating-point elements) selected by "imm" from "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+SELECT4(src1, src2, control){
+	CASE(control[1:0])
+		0:	tmp[127:0] := src1[127:0]
+		1:	tmp[127:0] := src1[255:128]
+		2:	tmp[127:0] := src2[127:0]
+		3: 	tmp[127:0] := src2[255:128]
+	ESAC
+	IF control[3]
+		tmp[127:0] := 0
+	ENDIF
+	RETURN tmp[127:0]
+}
+
+dst[127:0] := SELECT4(a[255:0], b[255:0], imm[3:0])
+dst[255:128] := SELECT4(b[255:0], b[255:0], imm[7:4])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vperm2f128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_permute2f128_si256 / vperm2f128 -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_permute2f128_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shuffle 128-bits (composed of integer data) selected by "imm" from "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+SELECT4(src1, src2, control){
+	CASE(control[1:0])
+		0:	tmp[127:0] := src1[127:0]
+		1:	tmp[127:0] := src1[255:128]
+		2:	tmp[127:0] := src2[127:0]
+		3: 	tmp[127:0] := src2[255:128]
+	ESAC
+	IF control[3]
+		tmp[127:0] := 0
+	ENDIF
+	RETURN tmp[127:0]
+}
+
+dst[127:0] := SELECT4(a[255:0], b[255:0], imm[3:0])
+dst[255:128] := SELECT4(b[255:0], b[255:0], imm[7:4])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vperm2f128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_broadcast_ss / vbroadcastss -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_broadcast_ss'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='float const *'/>
+	<description>Broadcast a single-precision (32-bit) floating-point element from memory to all elements of "dst".</description>
+	<description code='true'>
+tmp[31:0] = MEM[mem_addr+31:mem_addr]
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := tmp[31:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vbroadcastss'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_broadcast_ss / vbroadcastss -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_broadcast_ss'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='float const *'/>
+	<description>Broadcast a single-precision (32-bit) floating-point element from memory to all elements of "dst".</description>
+	<description code='true'>
+tmp[31:0] = MEM[mem_addr+31:mem_addr]
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := tmp[31:0]
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vbroadcastss'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_broadcast_sd / vbroadcastsd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_broadcast_sd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='mem_addr' type='double const *'/>
+	<description>Broadcast a double-precision (64-bit) floating-point element from memory to all elements of "dst".</description>
+	<description code='true'>
+tmp[63:0] = MEM[mem_addr+63:mem_addr]
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := tmp[63:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vbroadcastsd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_broadcast_ps / vbroadcastf128 -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_broadcast_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128 const *'/>
+	<description>Broadcast 128 bits from memory (composed of 4 packed single-precision (32-bit) floating-point elements) to all elements of "dst".</description>
+	<description code='true'>
+tmp[127:0] = MEM[mem_addr+127:mem_addr]
+dst[127:0] := tmp[127:0]
+dst[255:128] := tmp[127:0]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vbroadcastf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_broadcast_pd / vbroadcastf128 -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_broadcast_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m128d const *'/>
+	<description>Broadcast 128 bits from memory (composed of 2 packed double-precision (64-bit) floating-point elements) to all elements of "dst".</description>
+	<description code='true'>
+tmp[127:0] = MEM[mem_addr+127:mem_addr]
+dst[127:0] := tmp[127:0]
+dst[255:128] := tmp[127:0]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vbroadcastf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_insertf128_ps / vinsertf128 -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_insertf128_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m128'/>
+	<parameter varname='imm' type='int'/>
+	<description>Copy "a" to "dst", then insert 128 bits (composed of 4 packed single-precision (32-bit) floating-point elements) from "b" into "dst" at the location specified by "imm".</description>
+	<description code='true'>
+dst[255:0] := a[255:0]
+CASE (imm[1:0]) of
+	0: dst[127:0] := b[127:0]
+	1: dst[255:128] := b[127:0]
+ESAC
+dst[MAX:256] := 0
+	</description>	
+	<mnemonic base='vinsertf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_insertf128_pd / vinsertf128 -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_insertf128_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m128d'/>
+	<parameter varname='imm' type='int'/>
+	<description>Copy "a" to "dst", then insert 128 bits (composed of 2 packed double-precision (64-bit) floating-point elements) from "b" into "dst" at the location specified by "imm".</description>
+	<description code='true'>
+dst[255:0] := a[255:0]
+CASE imm of
+	0: dst[127:0] := b[127:0]
+	1: dst[255:128] := b[127:0]
+ESAC
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vinsertf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_insertf128_si256 / vinsertf128 -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_insertf128_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m128i'/>
+	<parameter varname='imm' type='int'/>
+	<description>Copy "a" to "dst", then insert 128 bits from "b" into "dst" at the location specified by "imm".</description>
+	<description code='true'>
+dst[255:0] := a[255:0]
+CASE (imm[1:0]) of
+	0: dst[127:0] := b[127:0]
+	1: dst[255:128] := b[127:0]
+ESAC
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vinsertf128'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_load_pd / vmovapd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_load_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double const *'/>
+	<description>Load 256-bits (composed of 4 packed double-precision (64-bit) floating-point elements) from memory into "dst".
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovapd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_store_pd / vmovapd -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_store_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double *'/>
+	<parameter varname='a' type='__m256d'/>
+	<description>Store 256-bits (composed of 4 packed double-precision (64-bit) floating-point elements) from "a" into memory.
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovapd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_load_ps / vmovaps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_load_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='float const *'/>
+	<description>Load 256-bits (composed of 8 packed single-precision (32-bit) floating-point elements) from memory into "dst".
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovaps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_store_ps / vmovaps -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_store_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='float *'/>
+	<parameter varname='a' type='__m256'/>
+	<description>Store 256-bits (composed of 8 packed single-precision (32-bit) floating-point elements) from "a" into memory.
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovaps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_loadu_pd / vmovupd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_loadu_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='double const *'/>
+	<description>Load 256-bits (composed of 4 packed double-precision (64-bit) floating-point elements) from memory into "dst".
+	"mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovupd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_storeu_pd / vmovupd -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_storeu_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double *'/>
+	<parameter varname='a' type='__m256d'/>
+	<description>Store 256-bits (composed of 4 packed double-precision (64-bit) floating-point elements) from "a" into memory.
+	"mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovupd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_loadu_ps / vmovups -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_loadu_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='float const *'/>
+	<description>Load 256-bits (composed of 8 packed single-precision (32-bit) floating-point elements) from memory into "dst".
+	"mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovups'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_storeu_ps / vmovups -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_storeu_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='float *'/>
+	<parameter varname='a' type='__m256'/>
+	<description>Store 256-bits (composed of 8 packed single-precision (32-bit) floating-point elements) from "a" into memory.
+	"mem_addr" does not need to be aligned on any particular boundary.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovups'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_load_si256 / vmovdqa -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_load_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m256i const *'/>
+	<description>Load 256-bits of integer data from memory into "dst".
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovdqa'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_store_si256 / vmovdqa -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_store_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m256i *'/>
+	<parameter varname='a' type='__m256i'/>
+	<description>Store 256-bits of integer data from "a" into memory.
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovdqa'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_loadu_si256 / vmovdqu -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_loadu_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m256i const *'/>
+	<description>Load 256-bits of integer data from memory into "dst".
+	"mem_addr" does not need to be aligned on any particular boundary.
+	</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovdqu'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_storeu_si256 / vmovdqu -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_storeu_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m256i *'/>
+	<parameter varname='a' type='__m256i'/>
+	<description>Store 256-bits of integer data from "a" into memory.
+	"mem_addr" does not need to be aligned on any particular boundary.
+	</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovdqu'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_maskload_pd / vmaskmovpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_maskload_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='a' type='double const *'/>
+	<parameter varname='mask' type='__m256i'/>
+	<description>Load packed double-precision (64-bit) floating-point elements from memory into "dst" using "mask" (elements are zeroed out when the high bit of the corresponding element is not set).</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF mask[i+63]
+		dst[i+63:i] := MEM[mem_addr+i+63:mem_addr+i]
+	ELSE
+		dst[i+63:i] := 0
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmaskmovpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_maskstore_pd / vmaskmovpd -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_maskstore_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double *'/>
+	<parameter varname='mask' type='__m256i'/>
+	<parameter varname='a' type='__m256d'/>
+	<description>Store packed double-precision (64-bit) floating-point elements from "a" into memory using "mask".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF mask[i+63]
+		MEM[mem_addr+i+63:mem_addr+i] := a[i+63:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='vmaskmovpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maskload_pd / vmaskmovpd -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm_maskload_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='a' type='double const *'/>
+	<parameter varname='mask' type='__m128i'/>
+	<description>Load packed double-precision (64-bit) floating-point elements from memory into "dst" using "mask" (elements are zeroed out when the high bit of the corresponding element is not set).</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF mask[i+63]
+		dst[i+63:i] := MEM[mem_addr+i+63:mem_addr+i]
+	ELSE
+		dst[i+63:i] := 0
+	FI
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vmaskmovpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maskstore_pd / vmaskmovpd -->
+<intrinsic tech='AVX' rettype='void' name='_mm_maskstore_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double *'/>
+	<parameter varname='mask' type='__m128i'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Store packed double-precision (64-bit) floating-point elements from "a" into memory using "mask".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	IF mask[i+63]
+		MEM[mem_addr+i+63:mem_addr+i] := a[i+63:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='vmaskmovpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_maskload_ps / vmaskmovps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_maskload_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='a' type='float const *'/>
+	<parameter varname='mask' type='__m256i'/>
+	<description>Load packed single-precision (32-bit) floating-point elements from memory into "dst" using "mask" (elements are zeroed out when the high bit of the corresponding element is not set).</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF mask[i+31]
+		dst[i+31:i] := MEM[mem_addr+i+31:mem_addr+i]
+	ELSE
+		dst[i+31:i] := 0
+	FI
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmaskmovps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_maskstore_ps / vmaskmovps -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_maskstore_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='float *'/>
+	<parameter varname='mask' type='__m256i'/>
+	<parameter varname='a' type='__m256'/>
+	<description>Store packed single-precision (32-bit) floating-point elements from "a" into memory using "mask".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF mask[i+31]
+		MEM[mem_addr+i+31:mem_addr+i] := a[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='vmaskmovps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maskload_ps / vmaskmovps -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_maskload_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='a' type='float const *'/>
+	<parameter varname='mask' type='__m128i'/>
+	<description>Load packed single-precision (32-bit) floating-point elements from memory into "dst" using "mask" (elements are zeroed out when the high bit of the corresponding element is not set).</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF mask[i+31]
+		dst[i+31:i] := MEM[mem_addr+i+31:mem_addr+i]
+	ELSE
+		dst[i+31:i] := 0
+	FI
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vmaskmovps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_maskstore_ps / vmaskmovps -->
+<intrinsic tech='AVX' rettype='void' name='_mm_maskstore_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='float *'/>
+	<parameter varname='mask' type='__m128i'/>
+	<parameter varname='a' type='__m128'/>
+	<description>Store packed single-precision (32-bit) floating-point elements from "a" into memory using "mask".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	IF mask[i+31]
+		MEM[mem_addr+i+31:mem_addr+i] := a[i+31:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='vmaskmovps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_movehdup_ps / vmovshdup -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_movehdup_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Duplicate odd-indexed single-precision (32-bit) floating-point elements from "a", and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[31:0] := a[63:32] 
+dst[63:32] := a[63:32] 
+dst[95:64] := a[127:96] 
+dst[127:96] := a[127:96]
+dst[159:128] := a[191:160] 
+dst[191:160] := a[191:160] 
+dst[223:192] := a[255:224] 
+dst[255:224] := a[255:224]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovshdup'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_moveldup_ps / vmovsldup -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_moveldup_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Duplicate even-indexed single-precision (32-bit) floating-point elements from "a", and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[31:0] := a[31:0] 
+dst[63:32] := a[31:0] 
+dst[95:64] := a[95:64] 
+dst[127:96] := a[95:64]
+dst[159:128] := a[159:128] 
+dst[191:160] := a[159:128] 
+dst[223:192] := a[223:192] 
+dst[255:224] := a[223:192]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovsldup'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_movedup_pd / vmovddup -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_movedup_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Move</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Duplicate even-indexed double-precision (64-bit) floating-point elements from "a", and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+dst[127:64] := a[63:0]
+dst[191:128] := a[191:128]
+dst[255:192] := a[191:128]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vmovddup'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_lddqu_si256 / vlddqu -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_lddqu_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='__m256i const *'/>
+	<description>Load 256-bits of integer data from unaligned memory into "dst". This intrinsic may perform better than "_mm256_loadu_si256" when the data crosses a cache line boundary.</description>
+	<description code='true'>
+dst[255:0] := MEM[mem_addr+255:mem_addr]
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vlddqu'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_stream_si256 / vmovntdq -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_stream_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='__m256i *'/>
+	<parameter varname='a' type='__m256'/>
+	<description>Store 256-bits of integer data from "a" into memory using a non-temporal memory hint.
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovntdq'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_stream_pd / vmovntpd -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_stream_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='double *'/>
+	<parameter varname='a' type='__m256d'/>
+	<description>Store 256-bits (composed of 4 packed double-precision (64-bit) floating-point elements) from "a" into memory using a non-temporal memory hint.
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovntpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_stream_ps / vmovntps -->
+<intrinsic tech='AVX' rettype='void' name='_mm256_stream_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='float *'/>
+	<parameter varname='a' type='__m256'/>
+	<description>Store 256-bits (composed of 8 packed single-precision (32-bit) floating-point elements) from "a" into memory using a non-temporal memory hint.
+	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+255:mem_addr] := a[255:0]
+	</description>
+	<mnemonic base='vmovntps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_rcp_ps / vrcpps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_rcp_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the approximate reciprocal of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst". The maximum relative error for this approximation is less than 1.5*2^-12.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := APPROXIMATE(1.0/a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vrcpps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_rsqrt_ps / vrsqrtps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_rsqrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the approximate reciprocal square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst". The maximum relative error for this approximation is less than 1.5*2^-12.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := APPROXIMATE(1.0 / SQRT(a[i+31:i]))
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vrsqrtps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sqrt_pd / vsqrtpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_sqrt_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the square root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SQRT(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vsqrtpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sqrt_ps / vsqrtps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_sqrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vsqrtps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_round_pd / vroundpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_round_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='rounding' type='int'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" using the "rounding" parameter, and store the results as packed double-precision floating-point elements in "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ROUND(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vroundpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_round_ps / vroundps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_round_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='rounding' type='int'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" using the "rounding" parameter, and store the results as packed single-precision floating-point elements in "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ROUND(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vroundps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_unpackhi_pd / vunpckhpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_unpackhi_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Unpack and interleave double-precision (64-bit) floating-point elements from the high half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_QWORDS(src1[127:0], src2[127:0]){
+	dst[63:0] := src1[127:64] 
+	dst[127:64] := src2[127:64] 
+	RETURN dst[127:0]
+}	
+	
+dst[127:0] := INTERLEAVE_HIGH_QWORDS(a[127:0], b[127:0])
+dst[255:128] := INTERLEAVE_HIGH_QWORDS(a[255:128], b[255:128])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vunpckhpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_unpackhi_ps / vunpckhps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_unpackhi_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Unpack and interleave single-precision (32-bit) floating-point elements from the high half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_DWORDS(src1[127:0], src2[127:0]){
+	dst[31:0] := src1[95:64] 
+	dst[63:32] := src2[95:64] 
+	dst[95:64] := src1[127:96] 
+	dst[127:96] := src2[127:96] 
+	RETURN dst[127:0]
+}	
+	
+dst[127:0] := INTERLEAVE_HIGH_DWORDS(a[127:0], b[127:0])
+dst[255:128] := INTERLEAVE_HIGH_DWORDS(a[255:128], b[255:128])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vunpckhps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_unpacklo_pd / vunpcklpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_unpacklo_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Unpack and interleave double-precision (64-bit) floating-point elements from the low half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_QWORDS(src1[127:0], src2[127:0]){
+	dst[63:0] := src1[63:0] 
+	dst[127:64] := src2[63:0] 
+	RETURN dst[127:0]
+}
+
+dst[127:0] := INTERLEAVE_QWORDS(a[127:0], b[127:0])
+dst[255:128] := INTERLEAVE_QWORDS(a[255:128], b[255:128])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vunpcklpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_unpacklo_ps / vunpcklps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_unpacklo_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Unpack and interleave single-precision (32-bit) floating-point elements from the low half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_DWORDS(src1[127:0], src2[127:0]){
+	dst[31:0] := src1[31:0] 
+	dst[63:32] := src2[31:0] 
+	dst[95:64] := src1[63:32] 
+	dst[127:96] := src2[63:32] 
+	RETURN dst[127:0]
+}	
+
+dst[127:0] := INTERLEAVE_DWORDS(a[127:0], b[127:0])
+dst[255:128] := INTERLEAVE_DWORDS(a[255:128], b[255:128])
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vunpcklps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testz_si256 / vptest -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testz_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Compute the bitwise AND of 256 bits (representing integer data) in "a" and "b", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return the "ZF" value.</description>
+	<description code='true'>
+IF (a[255:0] AND b[255:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[255:0] AND NOT b[255:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='vptest'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testc_si256 / vptest -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testc_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Compute the bitwise AND of 256 bits (representing integer data) in "a" and "b", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return the "CF" value.</description>
+	<description code='true'>
+IF (a[255:0] AND b[255:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[255:0] AND NOT b[255:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='vptest'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testnzc_si256 / vptest -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testnzc_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Compute the bitwise AND of 256 bits (representing integer data) in "a" and "b", and set "ZF" to 1 if the result is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", and set "CF" to 1 if the result is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+IF (a[255:0] AND b[255:0] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+IF (a[255:0] AND NOT b[255:0] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='vptest'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testz_pd / vtestpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testz_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the bitwise AND of 256 bits (representing double-precision (64-bit) floating-point elements) in "a" and "b", producing an intermediate 256-bit value, and set "ZF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "ZF" value.</description>
+	<description code='true'>
+tmp[255:0] := a[255:0] AND b[255:0]
+IF (tmp[63] == tmp[127] == tmp[191] == tmp[255] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[255:0] := a[255:0] AND NOT b[255:0]
+IF (tmp[63] == tmp[127] == tmp[191] == tmp[255] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='vtestpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testc_pd / vtestpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testc_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the bitwise AND of 256 bits (representing double-precision (64-bit) floating-point elements) in "a" and "b", producing an intermediate 256-bit value, and set "ZF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "CF" value.</description>
+	<description code='true'>
+tmp[255:0] := a[255:0] AND b[255:0]
+IF (tmp[63] == tmp[127] == tmp[191] == tmp[255] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[255:0] := a[255:0] AND NOT b[255:0]
+IF (tmp[63] == tmp[127] == tmp[191] == tmp[255] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='vtestpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testnzc_pd / vtestpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testnzc_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the bitwise AND of 256 bits (representing double-precision (64-bit) floating-point elements) in "a" and "b", producing an intermediate 256-bit value, and set "ZF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+tmp[255:0] := a[255:0] AND b[255:0]
+IF (tmp[63] == tmp[127] == tmp[191] == tmp[255] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[255:0] := a[255:0] AND NOT b[255:0]
+IF (tmp[63] == tmp[127] == tmp[191] == tmp[255] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='vtestpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testz_pd / vtestpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm_testz_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the bitwise AND of 128 bits (representing double-precision (64-bit) floating-point elements) in "a" and "b", producing an intermediate 128-bit value, and set "ZF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "ZF" value.</description>
+	<description code='true'>
+tmp[127:0] := a[127:0] AND b[127:0]
+IF (tmp[63] == tmp[127] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[127:0] := a[127:0] AND NOT b[127:0]
+IF (tmp[63] == tmp[127] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='vtestpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testc_pd / vtestpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm_testc_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the bitwise AND of 128 bits (representing double-precision (64-bit) floating-point elements) in "a" and "b", producing an intermediate 128-bit value, and set "ZF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "CF" value.</description>
+	<description code='true'>
+tmp[127:0] := a[127:0] AND b[127:0]
+IF (tmp[63] == tmp[127] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[127:0] := a[127:0] AND NOT b[127:0]
+IF (tmp[63] == tmp[127] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='vtestpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testnzc_pd / vtestpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm_testnzc_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the bitwise AND of 128 bits (representing double-precision (64-bit) floating-point elements) in "a" and "b", producing an intermediate 128-bit value, and set "ZF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+tmp[127:0] := a[127:0] AND b[127:0]
+IF (tmp[63] == tmp[127] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[127:0] := a[127:0] AND NOT b[127:0]
+IF (tmp[63] == tmp[127] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='vtestpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testz_ps / vtestps -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testz_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise AND of 256 bits (representing single-precision (32-bit) floating-point elements) in "a" and "b", producing an intermediate 256-bit value, and set "ZF" to 1 if the sign bit of each 32-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "ZF" value.</description>
+	<description code='true'>
+tmp[255:0] := a[255:0] AND b[255:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == tmp[160] == tmp[191] == tmp[224] == tmp[255] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[255:0] := a[255:0] AND NOT b[255:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == tmp[160] == tmp[191] == tmp[224] == tmp[255] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='vtestps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testc_ps / vtestps -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testc_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise AND of 256 bits (representing single-precision (32-bit) floating-point elements) in "a" and "b", producing an intermediate 256-bit value, and set "ZF" to 1 if the sign bit of each 32-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "CF" value.</description>
+	<description code='true'>
+tmp[255:0] := a[255:0] AND b[255:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == tmp[160] == tmp[191] == tmp[224] == tmp[255] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[255:0] := a[255:0] AND NOT b[255:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == tmp[160] == tmp[191] == tmp[224] == tmp[255] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='vtestps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_testnzc_ps / vtestps -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_testnzc_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the bitwise AND of 256 bits (representing single-precision (32-bit) floating-point elements) in "a" and "b", producing an intermediate 256-bit value, and set "ZF" to 1 if the sign bit of each 32-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+tmp[255:0] := a[255:0] AND b[255:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == tmp[160] == tmp[191] == tmp[224] == tmp[255]  == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[255:0] := a[255:0] AND NOT b[255:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == tmp[160] == tmp[191] == tmp[224] == tmp[255]  == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='vtestps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testz_ps / vtestps -->
+<intrinsic tech='AVX' rettype='int' name='_mm_testz_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Compute the bitwise AND of 128 bits (representing single-precision (32-bit) floating-point elements) in "a" and "b", producing an intermediate 128-bit value, and set "ZF" to 1 if the sign bit of each 32-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "ZF" value.</description>
+	<description code='true'>
+tmp[127:0] := a[127:0] AND b[127:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[127:0] := a[127:0] AND NOT b[127:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN ZF
+	</description>
+	<mnemonic base='vtestps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testc_ps / vtestps -->
+<intrinsic tech='AVX' rettype='int' name='_mm_testc_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Compute the bitwise AND of 128 bits (representing single-precision (32-bit) floating-point elements) in "a" and "b", producing an intermediate 128-bit value, and set "ZF" to 1 if the sign bit of each 32-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return the "CF" value.</description>
+	<description code='true'>
+tmp[127:0] := a[127:0] AND b[127:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[127:0] := a[127:0] AND NOT b[127:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+RETURN CF
+	</description>
+	<mnemonic base='vtestps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_testnzc_ps / vtestps -->
+<intrinsic tech='AVX' rettype='int' name='_mm_testnzc_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Compute the bitwise AND of 128 bits (representing single-precision (32-bit) floating-point elements) in "a" and "b", producing an intermediate 128-bit value, and set "ZF" to 1 if the sign bit of each 32-bit element in the intermediate value is zero, otherwise set "ZF" to 0. Compute the bitwise AND NOT of "a" and "b", producing an intermediate value, and set "CF" to 1 if the sign bit of each 64-bit element in the intermediate value is zero, otherwise set "CF" to 0. Return 1 if both the "ZF" and "CF" values are zero, otherwise return 0.</description>
+	<description code='true'>
+tmp[127:0] := a[127:0] AND b[127:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == 0)
+	ZF := 1
+ELSE
+	ZF := 0
+FI
+tmp[127:0] := a[127:0] AND NOT b[127:0]
+IF (tmp[31] == tmp[63] == tmp[95] == tmp[127] == 0)
+	CF := 1
+ELSE
+	CF := 0
+FI
+IF (ZF == 0 &amp;&amp; CF == 0)
+	RETURN 1
+ELSE
+	RETURN 0
+FI
+	</description>
+	<mnemonic base='vtestps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_movemask_pd / vmovmskpd -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_movemask_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Set each bit of mask "dst" based on the most significant bit of the corresponding packed double-precision (64-bit) floating-point element in "a".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	IF a[i+63]
+		dst[j] := 1
+	ELSE
+		dst[j] := 0
+	FI
+ENDFOR
+dst[MAX:4] := 0
+	</description>
+	<mnemonic base='vmovmskpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_movemask_ps / vmovmskps -->
+<intrinsic tech='AVX' rettype='int' name='_mm256_movemask_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Set each bit of mask "dst" based on the most significant bit of the corresponding packed single-precision (32-bit) floating-point element in "a".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	IF a[i+31]
+		dst[j] := 1
+	ELSE
+		dst[j] := 0
+	FI
+ENDFOR
+dst[MAX:8] := 0
+	</description>
+	<mnemonic base='vmovmskps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setzero_pd / vxorpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_setzero_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<description>Return vector of type __m256d with all elements set to zero.</description>
+	<description code='true'>
+dst[MAX:0] := 0
+	</description>
+	<mnemonic base='vxorpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setzero_ps / vxorps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_setzero_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<description>Return vector of type __m256 with all elements set to zero.</description>
+	<description code='true'>
+dst[MAX:0] := 0
+	</description>
+	<mnemonic base='vxorps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setzero_si256 / vpxor -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_setzero_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<description>Return vector of type __m256i with all elements set to zero.</description>
+	<description code='true'>
+dst[MAX:0] := 0
+	</description>
+	<mnemonic base='vpxor'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set_pd / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256d' name='_mm256_set_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+   	<category>Set</category>
+	<parameter varname='e3' type='double'/>
+	<parameter varname='e2' type='double'/>
+	<parameter varname='e1' type='double'/>
+	<parameter varname='e0' type='double'/>
+	<description>Set packed double-precision (64-bit) floating-point elements in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[63:0] := e3
+dst[127:64] := e2
+dst[191:128] := e1
+dst[255:192] := e0
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set_ps / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256' name='_mm256_set_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e7' type='float'/>
+	<parameter varname='e6' type='float'/>
+	<parameter varname='e5' type='float'/>
+	<parameter varname='e4' type='float'/>
+	<parameter varname='e3' type='float'/>
+	<parameter varname='e2' type='float'/>
+	<parameter varname='e1' type='float'/>
+	<parameter varname='e0' type='float'/>
+	<description>Set packed single-precision (32-bit) floating-point elements in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[31:0] := e7
+dst[63:32] := e6
+dst[95:64] := e5
+dst[127:96] := e4
+dst[159:128] := e3
+dst[191:160] := e2
+dst[223:192] := e1
+dst[255:224] := e0
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set_epi8 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set_epi8'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='e31' type='char'/>
+	<parameter varname='e30' type='char'/>
+	<parameter varname='e29' type='char'/>
+	<parameter varname='e28' type='char'/>
+	<parameter varname='e27' type='char'/>
+	<parameter varname='e26' type='char'/>
+	<parameter varname='e25' type='char'/>
+	<parameter varname='e24' type='char'/>
+	<parameter varname='e23' type='char'/>
+	<parameter varname='e22' type='char'/>
+	<parameter varname='e21' type='char'/>
+	<parameter varname='e20' type='char'/>
+	<parameter varname='e19' type='char'/>
+	<parameter varname='e18' type='char'/>
+	<parameter varname='e17' type='char'/>
+	<parameter varname='e16' type='char'/>
+ 	<parameter varname='e15' type='char'/>
+	<parameter varname='e14' type='char'/>
+	<parameter varname='e13' type='char'/>
+	<parameter varname='e12' type='char'/>
+	<parameter varname='e11' type='char'/>
+	<parameter varname='e10' type='char'/>
+	<parameter varname='e9' type='char'/>
+	<parameter varname='e8' type='char'/>
+	<parameter varname='e7' type='char'/>
+	<parameter varname='e6' type='char'/>
+	<parameter varname='e5' type='char'/>
+	<parameter varname='e4' type='char'/>
+	<parameter varname='e3' type='char'/>
+	<parameter varname='e2' type='char'/>
+	<parameter varname='e1' type='char'/>
+	<parameter varname='e0' type='char'/>
+	<description>Set packed 8-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[7:0] := e31
+dst[15:8] := e30
+dst[23:16] := e29
+dst[31:24] := e28
+dst[39:32] := e27
+dst[47:40] := e26
+dst[55:48] := e25
+dst[63:56] := e24
+dst[71:64] := e23
+dst[79:72] := e22
+dst[87:80] := e21
+dst[95:88] := e20
+dst[103:96] := e19
+dst[111:104] := e18
+dst[119:112] := e17
+dst[127:120] := e16
+dst[135:128] := e15
+dst[143:136] := e14
+dst[151:144] := e13
+dst[159:152] := e12
+dst[167:160] := e11
+dst[175:168] := e10
+dst[183:176] := e9
+dst[191:184] := e8
+dst[199:192] := e7
+dst[207:200] := e6
+dst[215:208] := e5
+dst[223:216] := e4
+dst[231:224] := e3
+dst[239:232] := e2
+dst[247:240] := e1
+dst[255:248] := e0
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set_epi16 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set_epi16'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='e15' type='short'/>
+	<parameter varname='e14' type='short'/>
+	<parameter varname='e13' type='short'/>
+	<parameter varname='e12' type='short'/>
+	<parameter varname='e11' type='short'/>
+	<parameter varname='e10' type='short'/>
+	<parameter varname='e9' type='short'/>
+	<parameter varname='e8' type='short'/>
+	<parameter varname='e7' type='short'/>
+	<parameter varname='e6' type='short'/>
+	<parameter varname='e5' type='short'/>
+	<parameter varname='e4' type='short'/>
+	<parameter varname='e3' type='short'/>
+	<parameter varname='e2' type='short'/>
+	<parameter varname='e1' type='short'/>
+	<parameter varname='e0' type='short'/>
+	<description>Set packed 16-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[15:0] := e15
+dst[31:16] := e14
+dst[47:32] := e13
+dst[63:48] := e12
+dst[79:64] := e11
+dst[95:80] := e10
+dst[111:96] := e9
+dst[127:112] := e8
+dst[145:128] := e7
+dst[159:144] := e6
+dst[175:160] := e5
+dst[191:176] := e4
+dst[207:192] := e3
+dst[223:208] := e2
+dst[239:224] := e1
+dst[255:240] := e0
+dst[MAX:256] := 0
+	</description>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set_epi32 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e7' type='int'/>
+	<parameter varname='e6' type='int'/>
+	<parameter varname='e5' type='int'/>
+	<parameter varname='e4' type='int'/>
+	<parameter varname='e3' type='int'/>
+	<parameter varname='e2' type='int'/>
+	<parameter varname='e1' type='int'/>
+	<parameter varname='e0' type='int'/>
+	<description>Set packed 32-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[31:0] := e7
+dst[63:32] := e6
+dst[95:64] := e5
+dst[127:96] := e4
+dst[159:128] := e3
+dst[191:160] := e2
+dst[223:192] := e1
+dst[255:224] := e0
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set_epi64x / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set_epi64x'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e3' type='__int64'/>
+	<parameter varname='e2' type='__int64'/>
+	<parameter varname='e1' type='__int64'/>
+	<parameter varname='e0' type='__int64'/>
+	<description>Set packed 64-bit integers in "dst" with the supplied values.</description>
+	<description code='true'>
+dst[63:0] := e3
+dst[127:64] := e2
+dst[191:128] := e1
+dst[255:192] := e0
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setr_pd / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256d' name='_mm256_setr_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e3' type='double'/>
+	<parameter varname='e2' type='double'/>
+	<parameter varname='e1' type='double'/>
+	<parameter varname='e0' type='double'/>
+	<description>Set packed double-precision (64-bit) floating-point elements in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[63:0] := e0
+dst[127:64] := e1
+dst[191:128] := e2
+dst[255:192] := e3
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setr_ps / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256' name='_mm256_setr_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e7' type='float'/>
+	<parameter varname='e6' type='float'/>
+	<parameter varname='e5' type='float'/>
+	<parameter varname='e4' type='float'/>
+	<parameter varname='e3' type='float'/>
+	<parameter varname='e2' type='float'/>
+	<parameter varname='e1' type='float'/>
+	<parameter varname='e0' type='float'/>
+	<description>Set packed single-precision (32-bit) floating-point elements in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[31:0] := e0
+dst[63:32] := e1
+dst[95:64] := e2
+dst[127:96] := e3
+dst[159:128] := e4
+dst[191:160] := e5
+dst[223:192] := e6
+dst[255:224] := e7
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setr_epi8 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_setr_epi8'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e31' type='char'/>
+	<parameter varname='e30' type='char'/>
+	<parameter varname='e29' type='char'/>
+	<parameter varname='e28' type='char'/>
+	<parameter varname='e27' type='char'/>
+	<parameter varname='e26' type='char'/>
+	<parameter varname='e25' type='char'/>
+	<parameter varname='e24' type='char'/>
+	<parameter varname='e23' type='char'/>
+	<parameter varname='e22' type='char'/>
+	<parameter varname='e21' type='char'/>
+	<parameter varname='e20' type='char'/>
+	<parameter varname='e19' type='char'/>
+	<parameter varname='e18' type='char'/>
+	<parameter varname='e17' type='char'/>
+	<parameter varname='e16' type='char'/>
+ 	<parameter varname='e15' type='char'/>
+	<parameter varname='e14' type='char'/>
+	<parameter varname='e13' type='char'/>
+	<parameter varname='e12' type='char'/>
+	<parameter varname='e11' type='char'/>
+	<parameter varname='e10' type='char'/>
+	<parameter varname='e9' type='char'/>
+	<parameter varname='e8' type='char'/>
+	<parameter varname='e7' type='char'/>
+	<parameter varname='e6' type='char'/>
+	<parameter varname='e5' type='char'/>
+	<parameter varname='e4' type='char'/>
+	<parameter varname='e3' type='char'/>
+	<parameter varname='e2' type='char'/>
+	<parameter varname='e1' type='char'/>
+	<parameter varname='e0' type='char'/>
+	<description>Set packed 8-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[7:0] := e0
+dst[15:8] := e1
+dst[23:16] := e2
+dst[31:24] := e3
+dst[39:32] := e4
+dst[47:40] := e5
+dst[55:48] := e6
+dst[63:56] := e7
+dst[71:64] := e8
+dst[79:72] := e9
+dst[87:80] := e10
+dst[95:88] := e11
+dst[103:96] := e12
+dst[111:104] := e13
+dst[119:112] := e14
+dst[127:120] := e15
+dst[135:128] := e16
+dst[143:136] := e17
+dst[151:144] := e18
+dst[159:152] := e19
+dst[167:160] := e20
+dst[175:168] := e21
+dst[183:176] := e22
+dst[191:184] := e23
+dst[199:192] := e24
+dst[207:200] := e25
+dst[215:208] := e26
+dst[223:216] := e27
+dst[231:224] := e28
+dst[239:232] := e29
+dst[247:240] := e30
+dst[255:248] := e31
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setr_epi16 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_setr_epi16'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='e15' type='short'/>
+	<parameter varname='e14' type='short'/>
+	<parameter varname='e13' type='short'/>
+	<parameter varname='e12' type='short'/>
+	<parameter varname='e11' type='short'/>
+	<parameter varname='e10' type='short'/>
+	<parameter varname='e9' type='short'/>
+	<parameter varname='e8' type='short'/>
+	<parameter varname='e7' type='short'/>
+	<parameter varname='e6' type='short'/>
+	<parameter varname='e5' type='short'/>
+	<parameter varname='e4' type='short'/>
+	<parameter varname='e3' type='short'/>
+	<parameter varname='e2' type='short'/>
+	<parameter varname='e1' type='short'/>
+	<parameter varname='e0' type='short'/>
+	<description>Set packed 16-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[15:0] := e0
+dst[31:16] := e1
+dst[47:32] := e2
+dst[63:48] := e3
+dst[79:64] := e4
+dst[95:80] := e5
+dst[111:96] := e6
+dst[127:112] := e7
+dst[145:128] := e8
+dst[159:144] := e9
+dst[175:160] := e10
+dst[191:176] := e11
+dst[207:192] := e12
+dst[223:208] := e13
+dst[239:224] := e14
+dst[255:240] := e15
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setr_epi32 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_setr_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='e7' type='int'/>
+	<parameter varname='e6' type='int'/>
+	<parameter varname='e5' type='int'/>
+	<parameter varname='e4' type='int'/>
+	<parameter varname='e3' type='int'/>
+	<parameter varname='e2' type='int'/>
+	<parameter varname='e1' type='int'/>
+	<parameter varname='e0' type='int'/>
+	<description>Set packed 32-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[31:0] := e0
+dst[63:32] := e1
+dst[95:64] := e2
+dst[127:96] := e3
+dst[159:128] := e4
+dst[191:160] := e5
+dst[223:192] := e6
+dst[255:224] := e7
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_setr_epi64x / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_setr_epi64x'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='e3' type='__int64'/>
+	<parameter varname='e2' type='__int64'/>
+	<parameter varname='e1' type='__int64'/>
+	<parameter varname='e0' type='__int64'/>
+	<description>Set packed 64-bit integers in "dst" with the supplied values in reverse order.</description>
+	<description code='true'>
+dst[63:0] := e0
+dst[127:64] := e1
+dst[191:128] := e2
+dst[255:192] := e3
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set1_pd / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256d' name='_mm256_set1_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='double'/>
+	<description>Broadcast double-precision (64-bit) floating-point value "a" to all elements of "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[63:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set1_ps / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256' name='_mm256_set1_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='float'/>
+	<description>Broadcast single-precision (32-bit) floating-point value "a" to all elements of "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[31:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set1_epi8 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set1_epi8'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='a' type='char'/>
+	<description>Broadcast 8-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastb".</description>
+	<description code='true'>
+FOR j := 0 to 31
+	i := j*8
+	dst[i+7:i] := a[7:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set1_epi16 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set1_epi16'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='a' type='short'/>
+	<description>Broadcast 16-bit integer "a" to all all elements of "dst". This intrinsic may generate the "vpbroadcastw".</description>
+	<description code='true'>
+FOR j := 0 to 15
+	i := j*16
+	dst[i+15:i] := a[15:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set1_epi32 / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set1_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+ 	<parameter varname='a' type='int'/>
+	<description>Broadcast 32-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastd".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := a[31:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_set1_epi64x / vpxor -->
+<intrinsic tech='AVX' sequence='true' rettype='__m256i' name='_mm256_set1_epi64x'>
+	<CPUID>AVX</CPUID>
+	<category>Set</category>
+   	<parameter varname='a' type='int'/>
+	<description>Broadcast 64-bit integer "a" to all elements of "dst". This intrinsic may generate the "vpbroadcastq".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := a[63:0]
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+  	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castpd_ps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_castpd_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Cast vector of type __m256d to type __m256.
+	This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castps_pd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_castps_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Cast vector of type __m256 to type __m256d.
+	This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castps_si256 -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_castps_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Casts vector of type __m256 to type __m256i. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castpd_si256 -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_castpd_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Casts vector of type __m256d to type __m256i. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castsi256_ps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_castsi256_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256i'/>
+	<description>Casts vector of type __m256i to type __m256. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castsi256_pd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_castsi256_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256i'/>
+	<description>Casts vector of type __m256i to type __m256d. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castps256_ps128 -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm256_castps256_ps128'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Casts vector of type __m256 to type __m128. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castpd256_pd128 -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm256_castpd256_pd128'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Casts vector of type __m256d to type __m128d. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castsi256_si128 -->
+<intrinsic tech='AVX' rettype='__m128i' name='_mm256_castsi256_si128'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m256i'/>
+	<description>Casts vector of type __m256i to type __m128i. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castps128_ps256 -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_castps128_ps256'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Casts vector of type __m128 to type __m256; the upper 128 bits of the result are undefined. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castpd128_pd256 -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_castpd128_pd256'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Casts vector of type __m128d to type __m256d; the upper 128 bits of the result are undefined. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_castsi128_si256 -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_castsi128_si256'>
+	<CPUID>AVX</CPUID>
+	<category>Cast</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Casts vector of type __m128i to type __m256i; the upper 128 bits of the result are undefined. This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.
+	</description>
+	<mnemonic base='-'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_floor_ps / vroundps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_floor_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" down to an integer value, and store the results as packed single-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := FLOOR(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vroundps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_ceil_ps / vroundps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_ceil_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" up to an integer value, and store the results as packed single-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := CEIL(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vroundps'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_floor_pd / vroundpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_floor_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" down to an integer value, and store the results as packed double-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := FLOOR(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vroundpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_ceil_pd / vroundpd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_ceil_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" up to an integer value, and store the results as packed double-precision floating-point elements in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := CEIL(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vroundpd'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _readfsbase_u32 / rdfsbase r32 -->
+<intrinsic tech='OS' rettype='unsigned int' name='_readfsbase_u32'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<description>Read the FS segment base register and store the 32-bit result in "dst".</description>
+	<description code='true'>
+dst[31:0] := FS_Segment_Base_Register;
+dst[63:32] := 0
+	</description>
+	<mnemonic base='rdfsbase r32'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _readfsbase_u64 / rdfsbase r64 -->
+<intrinsic tech='OS' rettype='unsigned __int64' name='_readfsbase_u64'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<description>Read the FS segment base register and store the 64-bit result in "dst".</description>
+	<description code='true'>
+dst[63:0] := FS_Segment_Base_Register;
+	</description>
+	<mnemonic base='rdfsbase r64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _readgsbase_u32 / rdgsbase r32 -->
+<intrinsic tech='OS' rettype='unsigned int' name='_readgsbase_u32'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<description>Read the GS segment base register and store the 32-bit result in "dst".</description>
+	<description code='true'>
+dst[31:0] := GS_Segment_Base_Register;
+dst[63:32] := 0
+	</description>
+	<mnemonic base='rdgsbase r32'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _readgsbase_u64 / rdgsbase r64 -->
+<intrinsic tech='OS' rettype='unsigned __int64' name='_readgsbase_u64'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<description>Read the GS segment base register and store the 64-bit result in "dst".</description>
+	<description code='true'>
+dst[63:0] := GS_Segment_Base_Register;
+	</description>
+	<mnemonic base='rdgsbase r64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rdrand16_step / rdrand r16 -->
+<intrinsic tech='Misc' rettype='int' name='_rdrand16_step'>
+	<type>Integer</type>
+	<CPUID>RDRAND</CPUID>
+	<category>General Support</category>
+	<parameter varname='val' type='unsigned short*'/>
+	<description>Read a hardware generated 16-bit random value and store the result in "val". Return 1 if a random value was generated, and 0 otherwise.
+</description>
+	<description code='true'>
+IF HW_RND_GEN.ready = 1
+	val[15:0] := HW_RND_GEN.data;
+	RETURN 1;
+ELSE
+	val[15:0] := 0;
+	RETURN 0;
+FI
+	</description>
+	<mnemonic base='rdrand r16'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rdrand32_step / rdrand r32 -->
+<intrinsic tech='Misc' rettype='int' name='_rdrand32_step'>
+	<type>Integer</type>
+	<CPUID>RDRAND</CPUID>
+	<category>General Support</category>
+	<parameter varname='val' type='unsigned int*'/>
+	<description>Read a hardware generated 32-bit random value and store the result in "val". Return 1 if a random value was generated, and 0 otherwise.
+</description>
+	<description code='true'>
+IF HW_RND_GEN.ready = 1
+	val[31:0] := HW_RND_GEN.data;
+	RETURN 1;
+ELSE
+	val[31:0] := 0;
+	RETURN 0;
+FI
+	</description>
+	<mnemonic base='rdrand r32'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rdrand64_step / rdrand r64 -->
+<intrinsic tech='Misc' rettype='int' name='_rdrand64_step'>
+	<type>Integer</type>
+	<CPUID>RDRAND</CPUID>
+	<category>General Support</category>
+	<parameter varname='val' type='unsigned__int64*'/>
+	<description>Read a hardware generated 64-bit random value and store the result in "val". Return 1 if a random value was generated, and 0 otherwise.
+</description>
+	<description code='true'>
+IF HW_RND_GEN.ready = 1
+	val[63:0] := HW_RND_GEN.data;
+	RETURN 1;
+ELSE
+	val[63:0] := 0;
+	RETURN 0;
+FI
+	</description>
+	<mnemonic base='rdrand r64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _writefsbase_u32 / wrfsbase r32 -->
+<intrinsic tech='OS' rettype='void' name='_writefsbase_u32'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<parameter varname='a' type='unsigned int'/>
+	<description>Write the unsigned 32-bit integer "a" to the FS segment base register.</description>
+	<description code='true'>
+FS_Segment_Base_Register[31:0] := a[31:0];
+FS_Segment_Base_Register[63:32] := 0
+	</description>
+	<mnemonic base='wrfsbase r32'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _writefsbase_u64 / wrfsbase r64 -->
+<intrinsic tech='OS' rettype='void' name='_writefsbase_u64'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<parameter varname='a' type='unsigned __int64'/>
+	<description>Write the unsigned 64-bit integer "a" to the FS segment base register.</description>
+	<description code='true'>
+FS_Segment_Base_Register[63:0] := a[63:0];
+	</description>
+	<mnemonic base='wrfsbase r64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _writegsbase_u32 / wrgsbase r32 -->
+<intrinsic tech='OS' rettype='void' name='_writegsbase_u32'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<parameter varname='a' type='unsigned int'/>
+	<description>Write the unsigned 32-bit integer "a" to the GS segment base register.</description>
+	<description code='true'>
+GS_Segment_Base_Register[31:0] := a[31:0];
+GS_Segment_Base_Register[63:32] := 0
+	</description>
+	<mnemonic base='wrgsbase r32'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _writegsbase_u64 / wrgsbase r64 -->
+<intrinsic tech='OS' rettype='void' name='_writegsbase_u64'>
+	<CPUID>FSGSBASE</CPUID>
+	<category>General Support</category>
+	<parameter varname='a' type='unsigned __int64'/>
+	<description>Write the unsigned 64-bit integer "a" to the GS segment base register.</description>
+	<description code='true'>
+GS_Segment_Base_Register[63:0] := a[63:0];
+	</description>
+	<mnemonic base='wrgsbase r64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtph_ps / vcvtph2ps -->
+<intrinsic tech='Misc' rettype='__m128' name='_mm_cvtph_ps'>
+	<CPUID>FP16C</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Convert packed half-precision (16-bit) floating-point elements in "a" to packed single-precision (32-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	m := j*16
+	dst[i+31:i] := Convert_FP16_To_FP32(a[m+15:m])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcvtph2ps'/>
+	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtph_ps / vcvtph2ps -->
+<intrinsic tech='Misc' rettype='__m256' name='_mm256_cvtph_ps'>
+	<CPUID>FP16C</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Convert packed half-precision (16-bit) floating-point elements in "a" to packed single-precision (32-bit) floating-point elements, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	m := j*16
+	dst[i+31:i] := Convert_FP16_To_FP32(a[m+15:m])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base='vcvtph2ps'/>
+	<header>immintrin.h</header>
+</intrinsic>	
+
+
+<!-- _mm_cvtps_ph / vcvtps2ph -->
+<intrinsic tech='Misc' rettype='__m128i' name='_mm_cvtps_ph'>
+	<CPUID>FP16C</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='rounding' type='const int'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed half-precision (16-bit) floating-point elements, and store the results in "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 16*j
+	l := 32*j
+	dst[i+15:i] := Convert_FP32_To_FP16FP(a[l+31:l])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcvtps2ph'/>
+	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cvtps_ph / vcvtps2ph -->
+<intrinsic tech='Misc' rettype='__m128i' name='_mm256_cvtps_ph'>
+	<CPUID>FP16C</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='rounding' type='const int'/>
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed half-precision (16-bit) floating-point elements, and store the results in "dst".
+	[round_note]
+	</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 16*j
+	l := 32*j
+	dst[i+15:i] := Convert_FP32_To_FP16FP(a[l+31:l])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base='vcvtps2ph'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_undefined_ps -->
+<intrinsic tech='AVX' rettype='__m128' name='_mm_undefined_ps'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Return vector of type __m128 with undefined elements.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_undefined_pd -->
+<intrinsic tech='AVX' rettype='__m128d' name='_mm_undefined_pd'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Return vector of type __m128d with undefined elements.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_undefined_si128 -->
+<intrinsic tech='AVX' rettype='__m128i' name='_mm_undefined_si128'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Return vector of type __m128i with undefined elements.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_undefined_ps -->
+<intrinsic tech='AVX' rettype='__m256' name='_mm256_undefined_ps'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Return vector of type __m256 with undefined elements.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_undefined_pd -->
+<intrinsic tech='AVX' rettype='__m256d' name='_mm256_undefined_pd'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Return vector of type __m256d with undefined elements.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_undefined_si256 -->
+<intrinsic tech='AVX' rettype='__m256i' name='_mm256_undefined_si256'>
+	<CPUID>AVX</CPUID>
+	<category>General Support</category>
+	<description>Return vector of type __m256i with undefined elements.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

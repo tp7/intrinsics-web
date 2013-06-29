@@ -1,0 +1,2812 @@
+<!-- 
+	This latency and throughput information comes from Appendix C.3 of "Intel® 64 and IA-32 Architectures Optimization Reference Manual" (Order Number: 248966) 
+	
+	WARNING: Do not put latency or throughput data for future architectures in here!
+	
+	Last updated for IVB (06_3A) on 1/31/2013.
+-->
+
+<mnemonicLTList>
+
+	<!-- IVB -->
+	<mnemonicLT base='RDRAND'>
+		<family base='06_3A' parameters='r64' latency='&lt;200' throughput='&lt;200'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPH2PS'>
+		<family base='06_3A' parameters='ymm, xmm' latency='7' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPH2PS'>
+		<family base='06_3A' parameters='xmm, xmm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPS2PH'>
+		<family base='06_3A' parameters='ymm, xmm, imm' latency='10' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPS2PH'>
+		<family base='06_3A' parameters='xmm, xmm, imm' latency='9' throughput='1'/>
+	</mnemonicLT>
+
+	<!-- AVX -->
+	<mnemonicLT base='VADDPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VADDPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VADDSUBPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VADDSUBPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VANDNPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VANDNPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VANDPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VANDPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VBLENDPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, imm' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='VBLENDPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, imm' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='VBLENDVPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, ymm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VBLENDVPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, ymm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCMPPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCMPPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTDQ2PD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTDQ2PS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPD2DQ'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTTPD2DQ'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPD2PS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPS2DQ'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTTPS2DQ'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VCVTPS2PD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VDIVPD'>
+		<family base='06_3A' parameters='ymm, ymm, ymm' latency='35' throughput='28'/>
+		<family base='06_2A/2D' parameters='ymm, ymm, ymm' latency='45' throughput='44'/>
+	</mnemonicLT>
+	<mnemonicLT base='VDIVPS'>
+		<family base='06_3A' parameters='ymm, ymm, ymm' latency='21' throughput='14'/>
+		<family base='06_2A/2D' parameters='ymm, ymm, ymm' latency='29' throughput='28'/>
+	</mnemonicLT>
+	<mnemonicLT base='VDPPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='12' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='VEXTRACTF128'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMAXPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMAXPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMINPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMINPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVAPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVAPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVDDUP'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVDQA'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVDQU'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVMSKPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVMSKPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVSHDUP'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVSLDUP'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVUPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMOVUPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMULPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VMULPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VORPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VORPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VPERM2F128'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VPERMILPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VPERMILPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VRCPPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='7' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VROUNDPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, imm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VROUNDPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, imm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VRSQRTPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='7' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VSHUFPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VSHUFPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VSQRTPD'>
+		<family base='06_3A' parameters='ymm, ymm' latency='35' throughput='28'/>
+		<family base='06_2A/2D' parameters='ymm, ymm' latency='45' throughput='44'/>
+	</mnemonicLT>
+	<mnemonicLT base='VSQRTPS'>
+		<family base='06_3A' parameters='ymm, ymm' latency='21' throughput='14'/>
+		<family base='06_2A/2D' parameters='ymm, ymm' latency='29' throughput='28'/>
+	</mnemonicLT>
+	<mnemonicLT base='VSUBPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, imm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VSUBPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, imm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VTESTPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VTESTPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VUNPCKHPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VUNPCKHPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VUNPCKLPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VUNPCKLPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VXORPD'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VXORPS'>
+		<family base='06_2A/2D/3A' parameters='ymm, ymm, ymm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='VZEROUPPER'>
+		<family base='06_2A/2D/3A' parameters='' latency='0' throughput='1'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- AES and PCLMULQDQ -->
+	<mnemonicLT base='AESDEC'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='8' throughput='1'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='AESDECLAST'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='8' throughput='1'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='AESENC'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='8' throughput='1'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='AESENCLAST'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='8' throughput='1'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='AESIMC'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='12' throughput='2'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='AESKEYGENASSIST'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm' latency='10' throughput='2'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm, imm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCLMULQDQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm' latency='14' throughput='8'/>
+		<family base='06_25/2C/2F' parameters='xmm, xmm, imm' latency='14' throughput='8'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- SSE4.2 -->
+	<mnemonicLT base='CRC32'>
+		<family base='06_2A/2D' parameters='r32, r32' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, r32' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPESTRI'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm' latency='11' throughput='3'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPESTRM'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm' latency='11' throughput='3'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPISTRI'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm' latency='11' throughput='3'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPISTRM'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm' latency='11' throughput='3'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='POPCNT'>
+		<family base='06_2A/2D' parameters='r32, r32' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, r32' latency='3' throughput='1'/>
+		<family base='06_2A/2D' parameters='r/2F64, r64' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='r64, r64' latency='3' throughput='1'/>
+	</mnemonicLT>
+
+	
+	
+	<!-- SSE4.1 -->
+	<mnemonicLT base='BLENDPD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='BLENDPS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='BLENDVPD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='2' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='BLENDVPS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='2' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='DPPD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='9' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='9' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='9' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='DPPS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='12' throughput='2'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='11' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='11' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='EXTRACTPS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='INSERTPS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MPSADBW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKUSDW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PBLENDW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PBLENVB'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PEXTRB'>
+		<family base='06_2A/2D' parameters='reg, xmm, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='reg, xmm, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='reg, xmm, imm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PEXTRD'>
+		<family base='06_2A/2D' parameters='reg, xmm, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='reg, xmm, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='reg, xmm, imm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PEXTRW'>
+		<family base='06_2A/2D' parameters='reg, xmm, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='reg, xmm, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='reg, xmm, imm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHMINPOSUW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PINSRB'>
+		<family base='06_2A/2D' parameters='xmm, reg, imm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, reg, imm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, reg, imm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PINSRD'>
+		<family base='06_2A/2D' parameters='xmm, reg, imm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, reg, imm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, reg, imm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PINSRW'>
+		<family base='06_2A/2D' parameters='xmm, reg, imm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, reg, imm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, reg, imm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMAXSB'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMAXSD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMAXUD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMAXUW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMINSB'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMINSD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMINUD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMINUW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVSXBD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVSXBQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVSXBW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVSXDQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVSXWD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVSXWQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVZXBD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVZXBQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVZXBW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVZXDQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVZXWD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVZXWQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULDQ'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULLD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='6' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PTEST'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='ROUNDPD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='ROUNDPS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='ROUNDSD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='ROUNDSS'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- SSSE3 -->
+	<mnemonicLT base='PALIGNR'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2, imm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2, imm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2, imm' latency='2' throughput='1'/>
+		<family base='06_17' parameters='mm1, mm2, imm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm1, mm2, imm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHADDD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='5' throughput='3'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='3' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHADDSW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='6' throughput='4'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='5' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHADDW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='6' throughput='4'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='5' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHSUBD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='5' throughput='3'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='3' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHSUBSW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='6' throughput='4'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='5' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='PHSUBW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='6' throughput='4'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='5' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMADDUBSW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULHRSW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='3' throughput='1'/>
+		<family base='06_17' parameters='mm1, mm2' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSHUFB'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='3' throughput='2'/>
+		<family base='06_17' parameters='mm1, mm2' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSIGNB'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17' parameters='mm1, mm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSIGND'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17' parameters='mm1, mm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSIGNW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17' parameters='mm1, mm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm1, mm2' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PABSB'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='PABSD'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='PABSW'>
+		<family base='06_2A/2D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- SSE3 -->
+	<mnemonicLT base='ADDSUBPD'>
+		<family base='06_2A' parameters='' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='' latency='5' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ADDSUBPS'>
+		<family base='06_2A' parameters='' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='' latency='5' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='HADDPD'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='6' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='0F_03' parameters='' latency='13' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='HADDPS'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='7' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='9' throughput='4'/>
+		<family base='0F_03' parameters='' latency='13' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='HSUBPD'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='6' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='0F_03' parameters='' latency='13' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='HSUBPS'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='xmm1, xmm2' latency='5' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='7' throughput='2'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='9' throughput='4'/>
+		<family base='0F_03' parameters='' latency='13' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVDDUP'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm1, xmm2' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVSHDUP'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm1, xmm2' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm1, xmm2' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVSLDUP'>
+		<family base='06_2A' parameters='xmm1, xmm2' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm1, xmm2' latency='6' throughput='2'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- SSE2 128-bit Integer -->
+	<mnemonicLT base='CVTDQ2PS'>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm ,xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='5' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPS2DQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='5' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTPS2DQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='5' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MASKMOVDQU'>
+		<family base='06_0F' parameters='xmm, xmm' latency='8' throughput='2'/>
+		<family base='06_0F' parameters='r32, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, r32' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, r32' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='xmm, r32' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, r64' latency='1' throughput='0.5'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVD'>
+		<family base='06_2A/2D' parameters='xmm, r32' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, r32' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, r32' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, r32' latency='1' throughput='0.5'/>
+		<family base='06_2A/2D' parameters='xmm, r64' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, r64' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, r64' latency='1' throughput='0.5'/>
+		<family base='06_2A/2D' parameters='r32, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='r32, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='r32, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='r64, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='r32, xmm' latency='10' throughput='1'/>
+		<family base='0F_02' parameters='r32, xmm' latency='10' throughput='1'/>
+		<family base='0F_03' parameters='xmm, r32' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, r32' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVDQ2Q'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='' throughput='0.33'/>
+		<family base='06_0F' parameters='mm, xmm' latency='1' throughput=''/>
+		<family base='06_0E' parameters='mm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, xmm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, xmm' latency='8' throughput='2'/>
+		<family base='0F_02' parameters='mm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVDQA'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='1'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVDQU'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='1'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVQ2DQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, mm' latency='' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, mm' latency='8' throughput='2'/>
+		<family base='0F_02' parameters='xmm, mm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKSSDW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKSSWB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKUSWB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDSB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDSW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDUSB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDUSW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PAND'>	
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PANDN'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PAVGB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PAVGW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PEXTRW'>
+		<family base='06_2A/2D' parameters='r32, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='r32, xmm, imm8' latency='' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm, imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm, imm8' latency='3' throughput='2'/>
+		<family base='06_0D' parameters='r32, xmm, imm8' latency='3' throughput='2'/>
+		<family base='0F_03' parameters='r32, xmm, imm8' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm, imm8' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PINSRW'>
+		<family base='06_2A/2D' parameters='xmm, r32, imm8' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, r32, imm8' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, r32, imm8' latency='' throughput='1'/>
+		<family base='06_0F' parameters='xmm, r32, imm8' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, r32, imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, r32, imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, r32, imm8' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, r32, imm8' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMADDWD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMADDUBSW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMAX'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMIN'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVMSKB'>
+		<family base='06_2A/2D' parameters='r32, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='r32, xmm' latency='' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm' latency='' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='r32, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULHUW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULHW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULLW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULUDQ'>
+		<family base='06_2A/2D' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='8' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='8' throughput='2'/>
+		<family base='0F_03' parameters='mm, mm' latency='9' throughput=''/>
+		<family base='0F_02' parameters='mm, mm' latency='8' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='POR'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSADBW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSHUFD'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm, imm8' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm, imm8' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSHUFHW'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSHUFLW'>
+		<family base='06_2A/2D' parameters='xmm, xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLDQ'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, imm8' latency='3' throughput='2'/>
+		<family base='06_0E' parameters='xmm, imm8' latency='4' throughput='3'/>
+		<family base='06_0D' parameters='xmm, imm8' latency='4' throughput='3'/>
+		<family base='0F_03' parameters='xmm, imm8' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, imm8' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLW'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='Q xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='Q xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='Q xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='Q xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLD'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='Q xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='Q xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='Q xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='Q xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLQ'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLL'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRL'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRAW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRAD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLDQ'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, imm8' latency='2' throughput='1'/>
+		<family base='06_0D' parameters='xmm, imm8' latency='4' throughput='4'/>
+		<family base='0F_03' parameters='xmm, imm8' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, imm8' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='LQ xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='LQ xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='LQ xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='LQ xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLD'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='LQ xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='LQ xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLQ'>
+		<family base='06_2A/2D' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='LQ xmm, xmm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='LQ xmm, xmm/imm8' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm/imm8' latency='2' throughput='2'/>
+	</mnemonicLT>	
+	<mnemonicLT base='PSUBB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='BD xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='BD xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='BD xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='BD xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='BD xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='BD xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='BD xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='BD xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBSB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBSW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBUSB'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBUSW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='SUBUSB/PSUBUSW xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>	
+	<mnemonicLT base='PUNPCKHBW'>	
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKHWD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKHDQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKHQDQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLBW'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLWD'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLDQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLQDQ'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PXOR'>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+
+	
+	
+	<!-- SSE2 Double-Precision Floating-Point -->
+	<mnemonicLT base='ADDPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ADDSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ANDNPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ANDPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CMPPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm, imm8' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm, imm8' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm, imm8' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm, imm8' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CMPSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm, imm8' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm, imm8' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm, imm8' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='COMISD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTDQ2PD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='8' throughput='3'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='3'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTDQ2PS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPD2PI'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='9' throughput='1'/>
+		<family base='06_17/1D' parameters='mm, xmm 0' latency='7' throughput='1'/>
+		<family base='06_0F' parameters='mm, xmm 0' latency='' throughput='1'/>
+		<family base='0F_03' parameters='mm, xmm' latency='12' throughput='3'/>
+		<family base='0F_02' parameters='mm, xmm' latency='11' throughput='3'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPD2DQ'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='10' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='9' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPD2PS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='11' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='10' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPI2PD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput=''/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput=''/>
+		<family base='06_0F' parameters='xmm, mm' latency='4' throughput='1'/>
+		<family base='06_0E' parameters='xmm, mm' latency='5' throughput=''/>
+		<family base='06_0D' parameters='xmm, mm' latency='5' throughput=''/>
+		<family base='0F_03' parameters='xmm, mm' latency='12' throughput='2'/>
+		<family base='0F_02' parameters='xmm, mm' latency='11' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPS2DQ'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput=''/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput=''/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTPS2DQ'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput=''/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput=''/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPS2PD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='3'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='3'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='3' throughput=''/>
+		<family base='0F_02' parameters='xmm, xmm' latency='2' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTSD2SI'>
+		<family base='06_2A/2D/3A' parameters='r32, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='r32, xmm' latency='' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='4' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='r64, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='3' throughput='1'/>
+		
+		<family base='0F_03' parameters='r32, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTSD2SI'>
+		<family base='06_2A/2D/3A' parameters='r32, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='r32, xmm' latency='' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='4' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='r64, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='3' throughput='1'/>
+		
+		<family base='0F_03' parameters='r32, xmm' latency='8' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTSD2SS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='17' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='16' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTSI2SD'>
+		<family base='06_2A/2D/3A' parameters='xmm, r32' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, r32' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, r32' latency='' throughput='3'/>
+		<family base='06_0F' parameters='xmm, r32' latency='' throughput='1'/>
+		<family base='06_0E' parameters='xmm, r32' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='xmm, r32' latency='4' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='xmm, r64' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, r64' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, r64' latency='4' throughput='1'/>
+		
+		<family base='0F_03' parameters='xmm, r32' latency='16' throughput='2'/>
+		<family base='0F_02' parameters='xmm, r32' latency='15' throughput='3'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTSS2SD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTPD2PI'>
+		<family base='06_2A/2D/3A' parameters='mm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='mm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='mm, xmm' latency='' throughput='1'/>
+		<family base='06_0E' parameters='mm, xmm' latency='5' throughput=''/>
+		<family base='06_0D' parameters='mm, xmm' latency='5' throughput=''/>
+		<family base='0F_03' parameters='mm, xmm' latency='12' throughput='3'/>
+		<family base='0F_02' parameters='mm, xmm' latency='11' throughput='3'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTPD2DQ'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='10' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='9' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='DIVPD'>
+		<family base='06_3A' parameters='xmm, xmm' latency='20' throughput='14'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='22' throughput='22'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;24' throughput='&lt;20'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;32' throughput='&lt;26'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;35' throughput='&lt;30'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='63' throughput='62'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='63' throughput='62'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='70' throughput='70'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='69' throughput='69'/>
+	</mnemonicLT>
+	<mnemonicLT base='DIVSD'>
+		<family base='06_3A' parameters='xmm, xmm' latency='20' throughput='14'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='22' throughput='22'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;24' throughput='&lt;20'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;32' throughput='&lt;26'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;35' throughput='&lt;30'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='32' throughput='31'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='32' throughput='31'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='39' throughput='39'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='38' throughput='38'/>
+	</mnemonicLT>
+	<mnemonicLT base='MAXPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MAXSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MINPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MINSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVAPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='1'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVMSKPD'>
+		<family base='06_2A/2D/3A' parameters='r32, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='1' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='r64, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='1' throughput='1'/>
+		
+		<family base='0F_03' parameters='r32, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVUPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='1'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MULPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='7' throughput='4'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='7' throughput='4'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MULSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ORPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='SHUFPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm, imm8' latency='2' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm,imm8' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm,imm8' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='SQRTPD'>
+		<family base='06_3A' parameters='xmm, xmm' latency='20' throughput='14'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='22' throughput='22'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;34' throughput='&lt;30'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;31' throughput='&lt;25'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;60' throughput='&lt;57'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='115' throughput='114'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='115' throughput='114'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='70' throughput='70'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='69' throughput='69'/>
+	</mnemonicLT>
+	<mnemonicLT base='SQRTSD'>
+		<family base='06_3A' parameters='xmm, xmm' latency='20' throughput='14'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='22' throughput='22'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;34' throughput='&lt;30'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;31' throughput='&lt;25'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;60' throughput='&lt;57'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='58' throughput='57'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='58' throughput='57'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='39' throughput='39'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='38' throughput='38'/>
+	</mnemonicLT>
+	<mnemonicLT base='SUBPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='SUBSD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='UCOMISD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='UNPCKHPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='UNPCKLPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='XORPD'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- SSE Single-Precision Floating-Point  -->
+	<mnemonicLT base='ADDPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ADDSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ANDNPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ANDPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CMPPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CMPSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='COMISS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPI2PS'>
+		<family base='06_2A/2D/3A' parameters='xmm, mm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, mm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, mm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, mm' latency='12' throughput='2'/>
+		<family base='0F_02' parameters='xmm, mm' latency='11' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTPS2PI'>
+		<family base='06_2A/2D/3A' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='mm, xmm' latency='8' throughput='2'/>
+		<family base='0F_02' parameters='mm, xmm' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTSI2SS'>
+		<family base='06_2A/2D/3A' parameters='xmm, r32' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, r32' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, r32' latency='6' throughput='3'/>
+		<family base='06_0F' parameters='xmm, r32' latency='4' throughput='1'/>
+		<family base='0F_03' parameters='xmm, r32' latency='12' throughput='2'/>
+		<family base='0F_02' parameters='xmm, r32' latency='11' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTSS2SI'>
+		<family base='06_2A/2D/3A' parameters='r32, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='r32, xmm' latency='6' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='4' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='r64, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='4' throughput='1'/>
+		
+		<family base='0F_03' parameters='r32, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTSS2SI'>
+		<family base='06_2A/2D/3A' parameters='r32, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='r32, xmm' latency='6' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm' latency='4' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='r64, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='4' throughput='1'/>
+		
+		<family base='0F_03' parameters='r32, xmm' latency='9' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='8' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='CVTTPS2PI'>
+		<family base='06_2A/2D/3A' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='mm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='mm, xmm' latency='8' throughput='2'/>
+		<family base='0F_02' parameters='mm, xmm' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='DIVPS'>
+		<family base='06_3A' parameters='xmm, xmm' latency='13' throughput='7'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='14' throughput='14'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;16' throughput='&lt;12'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;21' throughput='&lt;21'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;21' throughput='&lt;21'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='35' throughput='34'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='35' throughput='34'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='40' throughput='40'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='39' throughput='39'/>
+	</mnemonicLT>
+	<mnemonicLT base='DIVSS'>
+		<family base='06_3A' parameters='xmm, xmm' latency='13' throughput='7'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='14' throughput='14'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;16' throughput='&lt;12'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;21' throughput='&lt;21'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;21' throughput='&lt;21'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='18' throughput='17'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='18' throughput='17'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='32' throughput='32'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='23' throughput='23'/>
+	</mnemonicLT>
+	<mnemonicLT base='FXRSTOR'>
+		<family base='0F_02' parameters='' latency='150' throughput=''/>
+	</mnemonicLT>
+	<mnemonicLT base='FXSAVE'>
+		<family base='0F_02' parameters='' latency='100' throughput=''/>
+	</mnemonicLT>
+	<mnemonicLT base='MAXPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MAXSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MINPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MINSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVAPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='1'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVHLPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVLHPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVMSKPS'>
+		<family base='06_2A/2D/3A' parameters='r32, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r32, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='r32, xmm ' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='r32, xmm ' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='r32, xmm ' latency='1' throughput='1'/>
+		
+		<family base='06_2A/2D/3A' parameters='r64, xmm' latency='2' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='r64, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='r64, xmm' latency='1' throughput='1'/>
+		
+		<family base='0F_03' parameters='r32, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='r32, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVUPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='1' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MULPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='MULSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0E' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='06_0D' parameters='xmm, xmm' latency='4' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='ORPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='RCPPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='4'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='RCPSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='3'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='3'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='RSQRTPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='4'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='RSQRTSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='5' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='3'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='3'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='2'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='4'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='4'/>
+	</mnemonicLT>
+	<mnemonicLT base='SHUFPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm, imm8' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm, imm8' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm, imm8' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='SQRTPS'>
+		<family base='06_3A' parameters='xmm, xmm' latency='13' throughput='7'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='14' throughput='14'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;20' throughput='&lt;16'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;21' throughput='&lt;14'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;32' throughput='&lt;27'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='40' throughput='40'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='39' throughput='39'/>
+	</mnemonicLT>
+	<mnemonicLT base='SQRTSS'>
+		<family base='06_3A' parameters='xmm, xmm' latency='13' throughput='7'/>
+		<family base='06_2A/2D' parameters='xmm, xmm' latency='14' throughput='14'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='&lt;20' throughput='&lt;16'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='&lt;21' throughput='&lt;14'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='&lt;32' throughput='&lt;27'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='32' throughput='32'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='23' throughput='23'/>
+	</mnemonicLT>
+	<mnemonicLT base='SUBPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='SUBSS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='5' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='UCOMISS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='UNPCKHPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='6' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='6' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='UNPCKLPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='XORPS'>
+		<family base='06_2A/2D/3A' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_25/2C/1A/1E/1F/2E/2F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_17/1D' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='xmm, xmm' latency='1' throughput='0.33'/>
+		<family base='0F_03' parameters='xmm, xmm' latency='4' throughput='2'/>
+		<family base='0F_02' parameters='xmm, xmm' latency='4' throughput='2'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- SSE 64-bit Integer -->
+	<mnemonicLT base='MASKMOVQ'>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PAVGB'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PAVGW'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PEXTRW'>	
+		<family base='06_17' parameters='r32, mm,imm8' latency='' throughput='1'/>
+		<family base='06_0F' parameters='r32, mm,imm8' latency='2' throughput='1'/>
+		<family base='06_0E' parameters='r32, mm,imm8' latency='2' throughput='1'/>
+		<family base='06_0D' parameters='r32, mm,imm8' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='r32, mm, imm8' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='r32, mm, imm8' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PINSRW'>
+		<family base='06_17' parameters='mm, r32, imm8' latency='0' throughput='1'/>
+		<family base='06_0F' parameters='mm, r32, imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, r32, imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, r32, imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, r32, imm8' latency='4' throughput='1'/>
+		<family base='0F_02' parameters='mm, r32, imm8' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMAX'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMIN'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMOVMSKB'>
+		<family base='06_17' parameters='r32, mm' latency='' throughput='1'/>
+		<family base='06_0F' parameters='r32, mm' latency='' throughput='1'/>
+		<family base='06_0E' parameters='r32, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='r32, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='r32, mm' latency='7' throughput='2'/>
+		<family base='0F_02' parameters='r32, mm' latency='7' throughput='2'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULHUW'>
+		<family base='06_17' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='9' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='8' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSADBW'>
+		<family base='06_17' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='5' throughput='2'/>
+		<family base='06_0D' parameters='mm, mm' latency='5' throughput='2'/>
+		<family base='0F_03' parameters='mm, mm' latency='4' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='4' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSHUFW'>
+		<family base='06_17' parameters='mm, mm, imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm, imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm, imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm, imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm, imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm, imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- MMX -->
+	<mnemonicLT base='EMMS'>
+		<family base='06_17' parameters='' latency='' throughput='6'/>
+		<family base='06_0E' parameters='' latency='6' throughput='5'/>
+		<family base='06_0D' parameters='' latency='6' throughput='5'/>
+		<family base='0F_02' parameters='' latency='12' throughput='12'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVD'>
+		<family base='06_0F' parameters='mm, r32' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='mm, r32' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, r32' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='r32, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='r32, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='r32, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, r32' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, r32' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='r32, mm' latency='5' throughput='1'/>
+		<family base='0F_02' parameters='r32, mm' latency='5' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='MOVQ'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='6' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='6' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKSSDW'>	
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKSSWB'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PACKUSWB'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDB'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDD'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDSB'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDSW'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDUSB'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDUSW'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PADDW'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PAND'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PANDN'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQB'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQD'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPEQW'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTB'>	
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTD'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PCMPGTW'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMADDWD'>	
+		<family base='06_17' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='9' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='8' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULHW'>
+		<family base='06_17' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='9' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='8' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PMULLW'>
+		<family base='06_17' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='3' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='9' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='8' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='POR'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLD'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLQ'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSLLW'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRAD'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRAW'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLD'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLQ'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSRLW'>
+		<family base='06_17' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm/imm8' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm/imm8' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBB'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBD'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBSB'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBSW'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBUSB'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBUSW'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PSUBW'>
+		<family base='06_17' parameters='mm, mm' latency='0.5' throughput='0.5'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKHBW'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKHDQ'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKHWD'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLBW'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLDQ'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PUNPCKLWD'>
+		<family base='06_17' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='1'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	<mnemonicLT base='PXOR'>
+		<family base='06_17' parameters='mm, mm' latency='0.33' throughput='0.33'/>
+		<family base='06_0F' parameters='mm, mm' latency='1' throughput='0.33'/>
+		<family base='06_0E' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='06_0D' parameters='mm, mm' latency='1' throughput='0.5'/>
+		<family base='0F_03' parameters='mm, mm' latency='2' throughput='1'/>
+		<family base='0F_02' parameters='mm, mm' latency='2' throughput='1'/>
+	</mnemonicLT>
+	
+	
+	
+	<!-- others -->
+	<mnemonicLT base='BSWAP'>
+		<family base='06_17' parameters='' latency='4' throughput='1'/>
+		<family base='06_0F' parameters='' latency='2' throughput='0.5'/>
+		<family base='06_0E' parameters='' latency='2' throughput='1'/>
+		<family base='06_0D' parameters='' latency='2' throughput='1'/>
+		<family base='0F_03' parameters='' latency='1' throughput='0.5'/>
+		<family base='0F_02' parameters='' latency='7' throughput='1'/>
+	</mnemonicLT>
+	
+</mnemonicLTList>

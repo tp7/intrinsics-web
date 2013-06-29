@@ -1,0 +1,4596 @@
+
+<intrinsic_list>
+
+
+<!-- _mm_aesenc_si128 / aesenc -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_aesenc_si128'>
+	<CPUID>AES</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='RoundKey' type='__m128i'/>
+	<description>Perform one round of an AES encryption flow on data (state) in "a" using the round key in "RoundKey", and store the result in "dst"."</description>
+	<description code='true'>state := a
+a[127:0] := ShiftRows(a[127:0])
+a[127:0] := SubBytes(a[127:0])
+a[127:0] := MixColumns(a[127:0])
+dst[127:0] := a[127:0] XOR RoundKey[127:0]
+	</description>
+	<mnemonic base='aesenc'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_aesenclast_si128 / aesenclast -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_aesenclast_si128'>
+	<CPUID>AES</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='RoundKey' type='__m128i'/>
+	<description>Perform the last round of an AES encryption flow on data (state) in "a" using the round key in "RoundKey", and store the result in "dst"."</description>
+	<description code='true'>state := a
+a[127:0] := ShiftRows(a[127:0])
+a[127:0] := SubBytes(a[127:0])
+dst[127:0] := a[127:0] XOR RoundKey[127:0]
+	</description>
+	<mnemonic base='aesenclast'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_aesdec_si128 / aesdec -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_aesdec_si128'>
+	<CPUID>AES</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='RoundKey' type='__m128i'/>
+	<description>Perform one round of an AES decryption flow on data (state) in "a" using the round key in "RoundKey", and store the result in "dst"."</description>
+	<description code='true'>state := a
+a[127:0] := InvShiftRows(a[127:0])
+a[127:0] := InvSubBytes(a[127:0])
+a[127:0] := InvMixColumns(a[127:0])
+dst[127:0] := a[127:0] XOR RoundKey[127:0]
+	</description>
+	<mnemonic base='aesdec'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_aesdeclast_si128 / aesdeclast -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_aesdeclast_si128'>
+	<CPUID>AES</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='RoundKey' type='__m128i'/>
+	<description>Perform the last round of an AES decryption flow on data (state) in "a" using the round key in "RoundKey", and store the result in "dst"."</description>
+	<description code='true'>state := a
+a[127:0] := InvShiftRows(a[127:0])
+a[127:0] := InvSubBytes(a[127:0])
+dst[127:0] := a[127:0] XOR RoundKey[127:0]
+	</description>
+	<mnemonic base='aesdeclast'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_aesimc_si128 / aesimc -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_aesimc_si128'>
+	<CPUID>AES</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<description>Perform the InvMixColumns transformation on "a" and store the result in "dst".</description>
+	<description code='true'>
+dst[127:0] := InvMixColumns(a[127:0])
+	</description>
+	<mnemonic base='aesimc'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_aeskeygenassist_si128 / aeskeygenassist -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_aeskeygenassist_si128'>
+	<CPUID>AES</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='imm' type='const int'/>
+	<description>Assist in expanding the AES cipher key by computing steps towards generating a round key for encryption cipher using data from "a" and an 8-bit round constant specified in "imm", and store the result in "dst"."
+	</description>
+	<description code='true'>
+X3[31:0] := a[127:96]
+X2[31:0] := a[95:64]
+X1[31:0] := a[63:32]
+X0[31:0] := a[31:0]
+RCON[31:0] := ZeroExtend(imm[7:0]);
+dst[31:0] := SubWord(X1)
+dst[63:32] := (RotWord(SubWord(X1)) XOR RCON;
+dst[95:64] := SubWord(X3)
+dst[127:96] := RotWord(SubWord(X3)) XOR RCON;
+	</description>
+	<mnemonic base='aeskeygenassist'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_clmulepi64_si128  / pclmulqdq -->
+<intrinsic tech='Misc' vexEq='TRUE' rettype='__m128i' name='_mm_clmulepi64_si128 '>
+	<CPUID>PCLMULQDQ</CPUID>
+	<category>Application-Targeted</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<parameter varname='imm8' type='const int'/>
+	<description>Perform a carry-less multiplication of two 64-bit integers, selected from "a" and "b" according to "imm8", and store the results in "dst".
+	</description>
+	<description code='true'>
+IF (imm8[0] = 0)
+	TEMP1 := a[63:0];
+ELSE
+	TEMP1 := a[127:64];
+FI 
+IF (imm8[4] = 0)
+	TEMP2 := b[63:0];
+ELSE 
+	TEMP2 := b[127:64];
+FI
+
+FOR i := 0 to 63
+	TEMP[i] := (TEMP1[0] and TEMP2[i]);
+	FOR j := 1 to i
+		TEMP [i] := TEMP [i] XOR (TEMP1[j] AND TEMP2[i-j])
+	ENDFOR 
+	dst[i] := TEMP[i];
+ENDFOR
+FOR i := 64 to 127
+	TEMP [i] := 0;
+	FOR j := (i - 63) to 63
+		TEMP [i] := TEMP [i] XOR (TEMP1[j] AND TEMP2[i-j])
+	ENDFOR
+	dst[i] := TEMP[i];
+ENDFOR
+dst[127] := 0
+	</description>
+	<mnemonic base='pclmulqdq'/>
+	<header>wmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _bextr_u32 / bextr -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_bextr_u32'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<parameter type='unsigned int' varname='start' />
+	<parameter type='unsigned int' varname='len' />
+	<description>Extract contiguous bits from unsigned 32-bit integer "a", and store the result in "dst". Extract the number of bits specified by "len", starting at the bit specified by "start".</description>
+	<description code='true'>
+tmp := ZERO_EXTEND_TO_512(a)
+dst := ZERO_EXTEND(tmp[start+len-1:start])
+	</description>
+	<mnemonic base='bextr'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bextr_u64 / bextr -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_bextr_u64'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<parameter type='unsigned int' varname='start' />
+	<parameter type='unsigned int' varname='len' />
+	<description>Extract contiguous bits from unsigned 64-bit integer "a", and store the result in "dst". Extract the number of bits specified by "len", starting at the bit specified by "start".</description>
+	<description code='true'>
+tmp := ZERO_EXTEND_TO_512(a)
+dst := ZERO_EXTEND(tmp[start+len-1:start])
+	</description>
+	<mnemonic base='bextr'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _blsi_u32 / blsi -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_blsi_u32'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<description>Extract the lowest set bit from unsigned 32-bit integer "a" and set the corresponding bit in "dst". All other bits in "dst" are zeroed, and all bits are zeroed if no bits are set in "a".</description>
+	<description code='true'>
+dst := (-a) BITWISE AND a
+	</description>
+	<mnemonic base='blsi'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _blsi_u64 / blsi -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_blsi_u64'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<description>Extract the lowest set bit from unsigned 64-bit integer "a" and set the corresponding bit in "dst". All other bits in "dst" are zeroed, and all bits are zeroed if no bits are set in "a".</description>
+	<description code='true'>
+dst := (-a) BITWISE AND a
+	</description>
+	<mnemonic base='blsi'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _blsmsk_u32 / blsmsk -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_blsmsk_u32'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<description>Set all the lower bits of "dst" up to and including the lowest set bit in unsigned 32-bit integer "a".</description>
+	<description code='true'>
+dst := (a - 1) XOR a
+	</description>
+	<mnemonic base='blsmsk'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _blsmsk_u64 / blsmsk -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_blsmsk_u64'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<description>Set all the lower bits of "dst" up to and including the lowest set bit in unsigned 64-bit integer "a".</description>
+	<description code='true'>
+dst := (a - 1) XOR a
+	</description>
+	<mnemonic base='blsmsk'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _blsr_u32 / blsr -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_blsr_u32'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<description>Copy all bits from unsigned 32-bit integer "a" to "dst", and reset (set to 0) the bit in "dst" that corresponds to the lowest set bit in "a".</description>
+	<description code='true'>
+dst := (a - 1) BITWISE AND a
+	</description>
+	<mnemonic base='blsr'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _blsr_u64 / blsr -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_blsr_u64'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<description>Copy all bits from unsigned 64-bit integer "a" to "dst", and reset (set to 0) the bit in "dst" that corresponds to the lowest set bit in "a".</description>
+	<description code='true'>
+dst := (a - 1) BITWISE AND a
+	</description>
+	<mnemonic base='blsr'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bzhi_u32 / bzhi -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_bzhi_u32'>
+	<CPUID>BMI2</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<parameter type='unsigned int' varname='index' />
+	<description>Copy all bits from unsigned 32-bit integer "a" to "dst", and reset (set to 0) the high bits in "dst" starting at "index".</description>
+	<description code='true'>
+n := index[7:0]
+dst := a
+IF (n &lt; 32)
+	dst[31:n] := 0
+FI
+	</description>
+	<mnemonic base='bzhi'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bzhi_u64 / bzhi -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_bzhi_u64'>
+	<CPUID>BMI2</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<parameter type='unsigned int' varname='index' />
+	<description>Copy all bits from unsigned 64-bit integer "a" to "dst", and reset (set to 0) the high bits in "dst" starting at "index".</description>
+	<description code='true'>
+n := index[7:0]
+dst := a
+IF (n &lt; 64)
+	dst[63:n] := 0
+FI
+	</description>
+	<mnemonic base='bzhi'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _invpcid / invpcid -->
+<intrinsic tech='OS' rettype='void' name='_invpcid'>
+	<CPUID>INVPCID</CPUID>
+	<category>OS-Targeted</category>
+	<parameter type='unsigned int' varname='type' />
+	<parameter type='void' varname='descriptor' />
+	<description>
+	Invalidate mappings in the Translation Lookaside Buffers (TLBs) and paging-structure caches for the processor context identifier (PCID) specified by "descriptor" based on the invalidation type specified in "type". 
+	The PCID "descriptor" is specified as a 16-byte memory operand (with no alignment restrictions) where bits [11:0] specify the PCID, and bits [127:64] specify the linear address; bits [63:12] are reserved.
+	The types supported are:
+		0) Individual-address invalidation: If "type" is 0, the logical processor invalidates mappings for a single linear address and tagged with the PCID specified in "descriptor", except global translations. The instruction may also invalidate global translations, mappings for other linear addresses, or mappings tagged with other PCIDs.
+		1) Single-context invalidation: If "type" is 1, the logical processor invalidates all mappings tagged with the PCID specified in "descriptor" except global translations. In some cases, it may invalidate mappings for other PCIDs as well.
+		2) All-context invalidation: If "type" is 2, the logical processor invalidates all mappings tagged with any PCID.
+		3) All-context invalidation, retaining global translations: If "type" is 3, the logical processor invalidates all mappings tagged with any PCID except global translations, ignoring "descriptor". The instruction may also invalidate global translations as well.
+	</description>
+	<description code='true'>
+CASE type OF
+	0: // individual-address invalidation retaining global translations
+		OP_PCID := descriptor[11:0]
+		ADDR := descriptor[127:64]
+		BREAK
+	1: // single PCID invalidation retaining globals
+		OP_PCID := descriptor[11:0]
+		// invalidate all mappings tagged with OP_PCID except global translations
+		BREAK
+	2: // all PCID invalidation
+		// invalidate all mappings tagged with any PCID
+		BREAK
+	3: // all PCID invalidation retaining global translations
+		// invalidate all mappings tagged with any PCID except global translations
+		BREAK
+ESAC
+	</description>
+	<mnemonic base='invpcid'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _lzcnt_u32 / lzcnt -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_lzcnt_u32'>
+	<CPUID>LZCNT</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<description>Count the number of leading zero bits in unsigned 32-bit integer "a", and return that count in "dst".</description>
+	<description code='true'>
+tmp := 31
+dst := 0
+DO WHILE (tmp &gt;= 0 AND a[tmp] = 0)
+	tmp := tmp - 1
+	dst := dst + 1
+OD	
+	</description>
+	<mnemonic base='lzcnt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _lzcnt_u64 / lzcnt -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_lzcnt_u64'>
+	<CPUID>LZCNT</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<description>Count the number of leading zero bits in unsigned 64-bit integer "a", and return that count in "dst".</description>
+	<description code='true'>
+tmp := 63
+dst := 0
+DO WHILE (tmp &gt;= 0 AND a[tmp] = 0)
+	tmp := tmp - 1
+	dst := dst + 1
+OD	
+	</description>
+	<mnemonic base='lzcnt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _pdep_u32 / pdep -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_pdep_u32'>
+	<CPUID>BMI2</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<parameter type='unsigned int' varname='mask' />
+	<description>Deposit contiguous low bits from unsigned 32-bit integer "a" to "dst" at the corresponding bit locations specified by "mask"; all other bits in "dst" are set to zero.</description>
+	<description code='true'>
+tmp := a
+dst := 0
+m := 0
+k := 0
+DO WHILE m &lt; 32
+	IF mask[m] = 1
+		dst[m] := tmp[k]
+		k := k + 1
+	FI
+	m := m + 1
+OD
+	</description>
+	<mnemonic base='pdep'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _pdep_u64 / pdep -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_pdep_u64'>
+	<CPUID>BMI2</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<parameter type='unsigned __int64' varname='mask' />
+	<description>Deposit contiguous low bits from unsigned 64-bit integer "a" to "dst" at the corresponding bit locations specified by "mask"; all other bits in "dst" are set to zero.</description>
+	<description code='true'>
+tmp := a
+dst := 0
+m := 0
+k := 0
+DO WHILE m &lt; 64
+	IF mask[m] = 1
+		dst[m] := tmp[k]
+		k := k + 1
+	FI
+	m := m + 1
+OD
+	</description>
+	<mnemonic base='pdep'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _pext_u32 / pext -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_pext_u32'>
+	<CPUID>BMI2</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<parameter type='unsigned int' varname='mask' />
+	<description>Extract bits from unsigned 32-bit integer "a" at the corresponding bit locations specified by "mask" to contiguous low bits in "dst"; the remaining upper bits in "dst" are set to zero.</description>
+	<description code='true'>
+tmp := a
+dst := 0
+m := 0
+k := 0
+DO WHILE m &lt; 32
+	IF mask[m] = 1
+		dst[k] := tmp[m]
+		k := k + 1
+	FI
+	m := m + 1
+OD
+	</description>
+	<mnemonic base='pext'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _pext_u64 / pext -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_pext_u64'>
+	<CPUID>BMI2</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<parameter type='unsigned __int64' varname='mask' />
+	<description>Extract bits from unsigned 64-bit integer "a" at the corresponding bit locations specified by "mask" to contiguous low bits in "dst"; the remaining upper bits in "dst" are set to zero.</description>
+	<description code='true'>
+tmp := a
+dst := 0
+m := 0
+k := 0
+DO WHILE m &lt; 64
+	IF mask[m] = 1
+		dst[k] := tmp[m]
+		k := k + 1
+	FI
+	m := m + 1
+OD
+	</description>
+	<mnemonic base='pext'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _tzcnt_u32 / tzcnt -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned int' name='_tzcnt_u32'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned int' varname='a' />
+	<description>Count the number of trailing zero bits in unsigned 32-bit integer "a", and return that count in "dst".</description>
+	<description code='true'>
+tmp := 0
+dst := 0
+DO WHILE ((tmp &lt; 32) AND a[tmp] = 0)
+	tmp := tmp + 1
+	dst := dst + 1
+OD	
+	</description>
+	<mnemonic base='tzcnt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _tzcnt_u64 / tzcnt -->
+<intrinsic tech='Bit Manipulation' rettype='unsigned __int64' name='_tzcnt_u64'>
+	<CPUID>BMI1</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter type='unsigned __int64' varname='a' />
+	<description>Count the number of trailing zero bits in unsigned 64-bit integer "a", and return that count in "dst".</description>
+	<description code='true'>
+tmp := 0
+dst := 0
+DO WHILE ((tmp &lt; 64) AND a[tmp] = 0)
+	tmp := tmp + 1
+	dst := dst + 1
+OD	
+	</description>
+	<mnemonic base='tzcnt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xabort / xabort -->
+<intrinsic tech='Misc' rettype='void' name='_xabort'>
+	<CPUID>RTM</CPUID>
+	<category>General Support</category>
+	<parameter type='const unsigned int' varname='imm' />
+	<description>
+	Force an RTM abort. The EAX register is updated to reflect an XABORT instruction caused the abort, and the "imm" parameter will be provided in bits [31:24] of EAX.
+	Following an RTM abort, the logical processor resumes execution at the fallback address computed through the outermost XBEGIN instruction. 
+	</description>
+	<description code='true'>
+IF RTM_ACTIVE = 0
+	// nop
+ELSE
+	// restore architectural register state
+	// discard memory updates performed in transaction
+	// update EAX with status and imm value
+	RTM_NEST_COUNT := 0
+	RTM_ACTIVE := 0
+	IF 64-bit Mode
+		RIP := fallbackRIP
+	ELSE
+		EIP := fallbackEIP
+	FI
+FI
+	</description>
+	<mnemonic base='xabort'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xbegin / xbegin -->
+<intrinsic tech='Misc' rettype='unsigned int' name='_xbegin'>
+	<CPUID>RTM</CPUID>
+	<category>General Support</category>
+	<description>
+	Specify the start of an RTM code region. 
+	If the logical processor was not already in transactional execution, then this call causes the logical processor to transition into transactional execution. 
+	On an RTM abort, the logical processor discards all architectural register and memory updates performed during the RTM execution, restores architectural state, and starts execution beginning at the fallback address computed from the outermost XBEGIN instruction.
+	</description>
+	<description code='true'>
+IF RTM_NEST_COUNT &lt; MAX_RTM_NEST_COUNT
+	RTM_NEST_COUNT := RTM_NEST_COUNT + 1
+	IF RTM_NEST_COUNT = 1
+		IF 64-bit Mode
+			fallbackRIP := RIP + SignExtend(IMM)
+		ELSE IF 32-bit Mode
+			fallbackEIP := EIP + SignExtend(IMM)
+		ELSE // 16-bit Mode
+			fallbackEIP := (EIP + SignExtend(IMM)) AND 0x0000FFFF
+		FI
+		
+		RTM_ACTIVE := 1
+		// enter RTM execution, record register state, start tracking memory state
+	FI
+ELSE
+	// RTM abort (see _xabort)
+FI			
+	</description>
+	<mnemonic base='xbegin'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xend / xend -->
+<intrinsic tech='Misc' rettype='void' name='_xend'>
+	<CPUID>RTM</CPUID>
+	<category>General Support</category>
+	<description>
+	Specify the end of an RTM code region.
+	If this corresponds to the outermost scope, the logical processor will attempt to commit the logical processor state atomically. 
+	If the commit fails, the logical processor will perform an RTM abort.
+	</description>
+	<description code='true'>
+IF RTM_ACTIVE = 1
+	RTM_NEST_COUNT := RTM_NEST_COUNT - 1
+	IF RTM_NEST_COUNT = 0
+		// try to commit transaction
+		IF fail to commit transaction
+			// RTM abort (see _xabort)
+		ELSE
+			RTM_ACTIVE = 0
+		FI
+	FI
+FI
+	</description>
+	<mnemonic base='xend'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xtest / xtest -->
+<intrinsic tech='Misc' rettype='unsigned char' name='_xtest'>
+	<CPUID>RTM</CPUID>
+	<category>General Support</category>
+	<description>Query the transactional execution status, return 0 if inside a transactionally executing RTM or HLE region, and return 1 otherwise.</description>
+	<description code='true'>
+IF (RTM_ACTIVE = 1 OR HLE_ACTIVE = 1)
+	dst := 0
+ELSE
+	dst := 1
+FI
+	</description>
+	<mnemonic base='xtest'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- __rdtscp / rdtscp -->
+<intrinsic tech='Misc' rettype='unsigned __int64' name='__rdtscp'>
+	<CPUID>RDTSCP</CPUID>
+	<category>General Support</category>
+	<parameter varname='mem_addr' type='unsigned int *'/>
+	<description>Copy the current 64-bit value of the processor's time-stamp counter into "dst", and store the IA32_TSC_AUX MSR (signature value) into memory at "mem_addr".</description>
+	<description code='true'>
+dst[63:0] := TimeStampCounter
+MEM[mem_addr+31:mem_addr] := IA32_TSC_AUX[31:0]
+	</description>
+	<mnemonic base='rdtscp'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bit_scan_forward / bsf -->
+<intrinsic tech='Other' rettype='int' name='_bit_scan_forward'>
+	<type>Integer</type>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='int'/>
+	<description>Set "dst" to the index of the lowest set bit in 32-bit integer "a". If no bits are set in "a" then "dst" is undefined.</description>
+	<description code='true'>
+tmp := 0
+IF a = 0
+	dst := undefined
+ELSE
+	DO WHILE ((tmp &lt; 32) AND a[tmp] = 0)
+		tmp := tmp + 1
+		dst := tmp
+	OD
+FI
+	</description>
+	<mnemonic base='bsf'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bit_scan_reverse / bsr -->
+<intrinsic tech='Other' rettype='int' name='_bit_scan_reverse'>
+	<type>Integer</type>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='int'/>
+	<description>Set "dst" to the index of the highest set bit in 32-bit integer "a". If no bits are set in "a" then "dst" is undefined.</description>
+	<description code='true'>
+tmp := 31
+IF a = 0
+	dst := undefined
+ELSE
+	DO WHILE ((tmp &gt; 0) AND a[tmp] = 0)
+		tmp := tmp - 1
+		dst := tmp
+	OD
+FI
+	</description>
+	<mnemonic base='bsr'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bswap / bswap -->
+<intrinsic tech='Other' rettype='int' name='_bswap'>
+	<type>Integer</type>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='int'/>
+	<description>Reverse the byte order of 32-bit integer "a", and store the result in "dst". This intrinsic is provided for conversion between little and big endian values.</description>
+	<description code='true'>
+dst[7:0] := a[31:24]
+dst[15:8] := a[23:16]
+dst[23:16] := a[15:8]
+dst[31:24] := a[7:0]
+	</description>
+	<mnemonic base='bswap'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _bswap64 / bswap -->
+<intrinsic tech='Other' rettype='__int64' name='_bswap64'>
+	<type>Integer</type>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='__int64'/>
+	<description>Reverse the byte order of 64-bit integer "a", and store the result in "dst". This intrinsic is provided for conversion between little and big endian values.</description>
+	<description code='true'>
+dst[7:0] := a[63:56]
+dst[15:8] := a[55:48]
+dst[23:16] := a[47:40]
+dst[31:24] := a[39:32]
+dst[39:32] := a[31:24]
+dst[47:40] := a[23:16]
+dst[55:48] := a[15:8]
+dst[63:56] := a[7:0]
+	</description>
+	<mnemonic base='bswap'/>
+	<header>immintrin.h</header>
+</intrinsic>	
+
+
+<!-- _castf32_u32 -->
+<intrinsic tech='Other' rettype='unsigned __int32' name='_castf32_u32'>
+	<category>Cast</category>
+	<parameter varname='a' type='float'/>
+	<description>Cast from type float to type unsigned __int32 without conversion.
+	This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _castf64_u64 -->
+<intrinsic tech='Other' rettype='unsigned __int64' name='_castf64_u64'>
+	<category>Cast</category>
+	<parameter varname='a' type='double'/>
+	<description>Cast from type double to type unsigned __int64 without conversion.
+	This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _castu32_f32 -->
+<intrinsic tech='Other' rettype='float' name='_castu32_f32'>
+	<category>Cast</category>
+	<parameter varname='a' type='unsigned __int32'/>
+	<description>Cast from type unsigned __int32 to type float without conversion.
+	This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _castu64_f64 -->
+<intrinsic tech='Other' rettype='double' name='_castu64_f64'>
+	<category>Cast</category>
+	<parameter varname='a' type='unsigned __int64'/>
+	<description>Cast from type unsigned __int64 to type double without conversion.
+	This intrinsic is only used for compilation and does not generate any instructions, thus it has zero latency.</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _cvtsh_ss -->
+<intrinsic tech='Other' sequence='true' rettype='float' name='_cvtsh_ss'>
+	<category>Convert</category>
+	<parameter varname='a' type='unsigned short'/>
+	<description>Convert the half-precision (16-bit) floating-point value "a" to a single-precision (32-bit) floating-point value, and store the result in "dst".</description>
+	<description code='true'>
+dst[31:0] := Convert_FP16_To_FP32(a[15:0])
+	</description>
+	<mnemonic base=''/>
+	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _cvtss_sh -->
+<intrinsic tech='Other' sequence='true' rettype='unsigned short' name='_cvtss_sh'>
+	<category>Convert</category>
+	<parameter varname='a' type='float'/>
+	<parameter varname='imm' type='int'/>
+	<description>Convert the single-precision (32-bit) floating-point value "a" to a half-precision (16-bit) floating-point value, and store the result in "dst".</description>
+	<description code='true'>
+dst[15:0] := Convert_FP32_To_FP16(a[31:0])
+	</description>
+	<mnemonic base=''/>
+	<header>emmintrin.h</header>
+</intrinsic>
+
+
+<!-- _fxrstor / fxrstor -->
+<intrinsic tech='OS' rettype='void' name='_fxrstor'>
+	<CPUID>FXSR</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<description>Reload the x87 FPU, MMX technology, XMM, and MXCSR registers from the 512-byte memory image at "mem_addr". This data should have been written to memory previously using the FXSAVE instruction, and in the same format as required by the operating mode. "mem_addr" must be aligned on a 16-byte boundary.</description>
+	<description code='true'>
+(x87 FPU, MMX, XMM7-XMM0, MXCSR) := Load(MEM[mem_addr])
+	</description>
+	<mnemonic base='fxrstor'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _fxrstor64 / fxrstor64 -->
+<intrinsic tech='OS' rettype='void' name='_fxrstor64'>
+	<CPUID>FXSR</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<description>Reload the x87 FPU, MMX technology, XMM, and MXCSR registers from the 512-byte memory image at "mem_addr". This data should have been written to memory previously using the FXSAVE64 instruction, and in the same format as required by the operating mode. "mem_addr" must be aligned on a 16-byte boundary.</description>
+	<description code='true'>
+(x87 FPU, MMX, XMM7-XMM0, MXCSR) := Load(MEM[mem_addr])
+	</description>
+	<mnemonic base='fxrstor64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _fxsave / fxsave -->
+<intrinsic tech='OS' rettype='void' name='_fxsave'>
+	<CPUID>FXSR</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<description>Save the current state of the x87 FPU, MMX technology, XMM, and MXCSR registers to a 512-byte memory location at "mem_addr". The clayout of the 512-byte region depends on the operating mode. Bytes [511:464] are available for software use and will not be overwritten by the processor.</description>
+	<description code='true'>
+MEM[mem_addr+511*8:mem_addr] := Fxsave(x87 FPU, MMX, XMM7-XMM0, MXCSR)
+	</description>
+	<mnemonic base='fxsave'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _fxsave64 / fxsave64 -->
+<intrinsic tech='OS' rettype='void' name='_fxsave64'>
+	<CPUID>FXSR</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<description>Save the current state of the x87 FPU, MMX technology, XMM, and MXCSR registers to a 512-byte memory location at "mem_addr". The layout of the 512-byte region depends on the operating mode. Bytes [511:464] are available for software use and will not be overwritten by the processor.</description>
+	<description code='true'>
+MEM[mem_addr+511*8:mem_addr] := Fxsave64(x87 FPU, MMX, XMM7-XMM0, MXCSR)
+	</description>
+	<mnemonic base='fxsave64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _lrotl / rol -->
+<intrinsic tech='Other' rettype='unsigned long' name='_lrotl'>
+	<type>Integer</type>
+	<category>Shift</category>
+	<parameter varname='a' type='unsigned long'/>
+	<parameter varname='shift' type='int'/>
+	<description>Shift the bits of unsigned 64-bit integer "a" left by the number of bits specified in "shift", rotating the most-significant bit to the least-significant bit location, and store the unsigned result in "dst".</description>
+	<description code='true'>
+dst := a
+count := shift BITWISE AND 63
+DO WHILE (count &gt; 0)
+	tmp[0] := dst[63]
+	dst := (dst &lt;&lt; 1) OR tmp[0]
+	count := count - 1
+OD
+	</description>
+	<mnemonic base='rol'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _lrotr / ror -->
+<intrinsic tech='Other' rettype='unsigned long' name='_lrotr'>
+	<type>Integer</type>
+	<category>Shift</category>
+	<parameter varname='a' type='unsigned long'/>
+	<parameter varname='shift' type='int'/>
+	<description>Shift the bits of unsigned 64-bit integer "a" right by the number of bits specified in "shift", rotating the least-significant bit to the most-significant bit location, and store the unsigned result in "dst".</description>
+	<description code='true'>
+dst := a
+count := shift BITWISE AND 63
+DO WHILE (count &gt; 0)
+	tmp[63] := dst[0]
+	dst := (dst &gt;&gt; 1) OR tmp[63]
+	count := count - 1
+OD
+	</description>
+	<mnemonic base='ror'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _may_i_use_cpu_feature -->
+<intrinsic tech='Other' sequence='true' rettype='int' name='_may_i_use_cpu_feature'>
+	<category>General Support</category>
+	<parameter varname='a' type='unsigned __int64'/>
+	<description>Dynamically query the processor to determine if the processor-specific feature(s) specified in "a" are available, and return true or false (1 or 0) if the set of features is available. Multiple features may be OR'd together. This intrinsic does not check the processor vendor. See the valid feature flags below:</description>
+	<description code='true'>
+_FEATURE_GENERIC_IA32
+_FEATURE_FPU
+_FEATURE_CMOV
+_FEATURE_MMX
+_FEATURE_FXSAVE
+_FEATURE_SSE
+_FEATURE_SSE2
+_FEATURE_SSE3
+_FEATURE_SSSE3
+_FEATURE_SSE4_1
+_FEATURE_SSE4_2
+_FEATURE_POPCNT
+_FEATURE_MOVBE
+_FEATURE_PCLMULQDQ
+_FEATURE_AES
+_FEATURE_F16C
+_FEATURE_AVX
+_FEATURE_RDRND
+_FEATURE_FMA
+_FEATURE_BMI
+_FEATURE_LZCNT
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_acos_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_acos_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ACOS(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_acos_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_acos_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ACOS(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_acosh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_acosh_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse hyperbolic cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ACOSH(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_acosh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_acosh_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse hyperbolic cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ACOSH(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_asin_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_asin_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ASIN(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_asin_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_asin_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ASIN(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_asinh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_asinh_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse hyperbolic sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ASINH(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_asinh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_asinh_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse hyperbolic sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ASINH(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_atan_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_atan_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ATAN(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_atan_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_atan_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ATAN(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_atan2_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_atan2_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the inverse tangent of packed double-precision (64-bit) floating-point elements in "a" divided by packed elements in "b", and store the results in "dst" expressed in radians.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ATAN(a[i+63:i] / b[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_atan2_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_atan2_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Compute the inverse tangent of packed single-precision (32-bit) floating-point elements in "a" divided by packed elements in "b", and store the results in "dst" expressed in radians.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ATAN(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_atanh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_atanh_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse hyperbolic tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ATANH(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_atanh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_atanh_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse hyperbolic tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ATANH(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cbrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_cbrt_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the cube root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := CubeRoot(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cbrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_cbrt_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the cube root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := CubeRoot(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cdfnorminv_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_cdfnorminv_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse cumulative distribution function of packed double-precision (64-bit) floating-point elements in "a" using the normal distribution, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := InverseCDFNormal(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cdfnorminv_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_cdfnorminv_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse cumulative distribution function of packed single-precision (32-bit) floating-point elements in "a" using the normal distribution, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := InverseCDFNormal(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cexp_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_cexp_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the exponential value of "e" raised to the power of packed complex single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := e^(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_clog_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_clog_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the natural logarithm of packed complex single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ln(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cos_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_cos_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := COS(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cos_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_cos_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := COS(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cosd_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_cosd_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := COSD(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cosd_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_cosd_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	dst[i+31:i] := COSD(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cosh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_cosh_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the hyperbolic cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := COSH(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cosh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_cosh_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the hyperbolic cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := COSH(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_csqrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_csqrt_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the square root of packed complex single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_erf_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_erf_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the error function of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ERF(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_erf_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_erf_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the error function of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ERF(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_erfc_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_erfc_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the complementary error function of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := 1.0 - ERF(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_erfc_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_erfc_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the complementary error function of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := 1.0 - ERF(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_erfinv_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_erfinv_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse error function of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := 1.0 / ERF(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_erfinv_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_erfinv_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse error function of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := 1.0 / ERF(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_exp_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_exp_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the exponential value of "e" raised to the power of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := e^(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_exp_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_exp_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the exponential value of "e" raised to the power of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := e^(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_exp10_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_exp10_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the exponential value of 10 raised to the power of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := 10^(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_exp10_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_exp10_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the exponential value of 10 raised to the power of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := 10^(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_exp2_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_exp2_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the exponential value of 2 raised to the power of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := 2^(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_exp2_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_exp2_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the exponential value of 2 raised to the power of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := 2^(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_expm1_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_expm1_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the exponential value of "e" raised to the power of packed double-precision (64-bit) floating-point elements in "a", subtract one from each element, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := e^(a[i+63:i]) - 1.0
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_expm1_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_expm1_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the exponential value of "e" raised to the power of packed single-precision (32-bit) floating-point elements in "a", subtract one from each element, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := e^(a[i+31:i]) - 1.0
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_free -->
+<intrinsic tech='Other' rettype='void' name='_mm_free'>
+	<CPUID>SSE</CPUID>
+	<category>General Support</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<description>Free aligned memory that was allocated with "_mm_malloc".</description>
+	<mnemonic base=''/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hypot_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_hypot_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the length of the hypotenous of a right triangle, with the lengths of the other two sides of the triangle stored as packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SQRT(a[i+63:i]^2 + b[i+63:i]^2)
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_hypot_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_hypot_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Compute the length of the hypotenous of a right triangle, with the lengths of the other two sides of the triangle stored as packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i]^2 + b[i+31:i]^2)
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_idiv_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128i' name='_mm_idiv_epi32'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Divide packed 32-bit integers in "a" by packed elements in "b", and store the truncated results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_idivrem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128i' name='_mm_idivrem_epi32'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m128i *'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Divide packed 32-bit integers in "a" by packed elements in "b", store the truncated results in "dst", and store the remainders as packed 32-bit integers into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+	MEM[mem_addr+i+31:mem_addr+i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_invcbrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_invcbrt_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse cube root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := InvCubeRoot(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_invcbrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_invcbrt_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse cube root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := InvCubeRoot(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_invsqrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_invsqrt_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the inverse square root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := InvSQRT(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_invsqrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_invsqrt_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the inverse square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := InvSQRT(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_irem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128i' name='_mm_irem_epi32'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Divide packed 32-bit integers in "a" by packed elements in "b", and store the remainders as packed 32-bit integers in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_log_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the natural logarithm of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ln(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_log_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the natural logarithm of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ln(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log10_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_log10_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the base-10 logarithm of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := log10(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log10_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_log10_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the base-10 logarithm of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := log10(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log1p_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_log1p_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the natural logarithm of one plus packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ln(1.0 + a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log1p_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_log1p_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the natural logarithm of one plus packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ln(1.0 + a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log2_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_log2_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the base-2 logarithm of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := log2(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_log2_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_log2_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the base-2 logarithm of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := log2(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_logb_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_logb_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Convert the exponent of each packed double-precision (64-bit) floating-point element in "a" to a double-precision floating-point number representing the integer exponent, and store the results in "dst". This intrinsic essentially calculates "floor(log2(x))" for each element.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ConvertExpFP64(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_logb_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_logb_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Convert the exponent of each packed single-precision (32-bit) floating-point element in "a" to a single-precision floating-point number representing the integer exponent, and store the results in "dst". This intrinsic essentially calculates "floor(log2(x))" for each element.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ConvertExpFP32(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_malloc -->
+<intrinsic tech='Other' rettype='void*' name='_mm_malloc'>
+	<CPUID>SSE</CPUID>
+	<category>General Support</category>
+	<parameter varname='size' type='size_t'/>
+	<parameter varname='align' type='size_t'/>
+	<description>Allocate "size" bytes of memory, aligned to the alignment specified in "align", and return a pointer to the allocated memory. "_mm_free" should be used to free memory that is allocated with "_mm_malloc".</description>
+	<mnemonic base=''/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_pow_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_pow_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<parameter varname='b' type='__m128d'/>
+	<description>Compute the exponential value of packed double-precision (64-bit) floating-point elements in "a" raised by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := (a[i+63:i])^(b[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_pow_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_pow_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<parameter varname='b' type='__m128'/>
+	<description>Compute the exponential value of packed single-precision (32-bit) floating-point elements in "a" raised by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := (a[i+31:i])^(b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sin_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_sin_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SIN(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sin_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_sin_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SIN(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sincos_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_sincos_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m128d *'/>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the sine and cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, store the sine in "dst", and store the cosine into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SIN(a[i+63:i])
+	MEM[mem_addr+i+63:mem_addr+i] := COS(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sincos_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_sincos_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m128 *'/>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the sine and cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, store the sine in "dst", and store the cosine into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SIN(a[i+31:i])
+	MEM[mem_addr+i+31:mem_addr+i] := COS(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sind_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_sind_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the sine of packed double-precision (64-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SIND(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sind_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_sind_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the sine of packed single-precision (32-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SIND(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sinh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_sinh_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the hyperbolic sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SINH(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_sinh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_sinh_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the hyperbolic sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SINH(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_ceil_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_svml_ceil_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" up to an integer value, and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := CEIL(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_ceil_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_svml_ceil_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" up to an integer value, and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := CEIL(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_floor_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_svml_floor_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" down to an integer value, and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := FLOOR(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_floor_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_svml_floor_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" down to an integer value, and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := FLOOR(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_round_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_svml_round_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" to the nearest integer value, and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := ROUND(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_round_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_svml_round_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" to the nearest integer value, and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := ROUND(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_sqrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_svml_sqrt_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the square root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst". Note that this intrinsic is less efficient than "_mm_sqrt_pd".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := SQRT(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_svml_sqrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_svml_sqrt_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".  Note that this intrinsic is less efficient than "_mm_sqrt_ps".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_tan_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_tan_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := TAN(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_tan_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_tan_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := TAN(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_tand_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_tand_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := TAND(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_tand_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_tand_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := TAND(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_tanh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_tanh_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Compute the hyperbolic tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := TANH(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_tanh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_tanh_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Compute the hyperbolic tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := TANH(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_trunc_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128d' name='_mm_trunc_pd'>
+	<CPUID>SSE</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128d'/>
+	<description>Truncate the packed double-precision (64-bit) floating-point elements in "a", and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*64
+	dst[i+63:i] := TRUNCATE(a[i+63:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_trunc_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128' name='_mm_trunc_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m128'/>
+	<description>Truncate the packed single-precision (32-bit) floating-point elements in "a", and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := TRUNCATE(a[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_udiv_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128i' name='_mm_udiv_epi32'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Divide packed unsigned 32-bit integers in "a" by packed elements in "b", and store the truncated results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_udivrem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128i' name='_mm_udivrem_epi32'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m128i *'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Divide packed unsigned 32-bit integers in "a" by packed elements in "b", store the truncated results in "dst", and store the remainders as packed unsigned 32-bit integers into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+	MEM[mem_addr+i+31:mem_addr+i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_urem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m128i' name='_mm_urem_epi32'>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
+	<description>Divide packed unsigned 32-bit integers in "a" by packed elements in "b", and store the remainders as packed unsigned 32-bit integers in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := 32*j
+	dst[i+31:i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:128] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_acos_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_acos_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse cosine of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ACOS(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_acos_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_acos_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ACOS(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_acosh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_acosh_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse hyperbolic cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ACOSH(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_acosh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_acosh_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse hyperbolic cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ACOSH(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_asin_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_asin_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ASIN(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_asin_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_asin_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ASIN(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_asinh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_asinh_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse hyperbolic sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ASINH(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_asinh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_asinh_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse hyperbolic sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ASINH(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_atan_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_atan_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ATAN(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_atan_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_atan_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ATAN(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_atan2_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_atan2_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the inverse tangent of packed double-precision (64-bit) floating-point elements in "a" divided by packed elements in "b", and store the results in "dst" expressed in radians.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ATAN(a[i+63:i] / b[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_atan2_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_atan2_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the inverse tangent of packed single-precision (32-bit) floating-point elements in "a" divided by packed elements in "b", and store the results in "dst" expressed in radians.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ATAN(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_atanh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_atanh_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse hyperbolic tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ATANH(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_atanh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_atanh_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse hyperbolic tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ATANH(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cbrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_cbrt_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the cube root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := CubeRoot(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cbrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_cbrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the cube root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := CubeRoot(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cdfnorminv_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_cdfnorminv_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse cumulative distribution function of packed double-precision (64-bit) floating-point elements in "a" using the normal distribution, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := InverseCDFNormal(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cdfnorminv_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_cdfnorminv_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse cumulative distribution function of packed single-precision (32-bit) floating-point elements in "a" using the normal distribution, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := InverseCDFNormal(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cexp_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_cexp_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the exponential value of "e" raised to the power of packed complex single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := e^(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_clog_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_clog_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the natural logarithm of packed complex single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ln(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cos_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_cos_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := COS(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cos_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_cos_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := COS(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cosd_pd -->
+<intrinsic tech='SVML' rettype='__m256d' name='_mm256_cosd_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := COSD(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cosd_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_cosd_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := COSD(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cosh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_cosh_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the hyperbolic cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := COSH(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_cosh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_cosh_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the hyperbolic cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := COSH(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_csqrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_csqrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the square root of packed complex single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_erf_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_erf_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the error function of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ERF(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_erf_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_erf_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the error function of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ERF(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_erfc_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_erfc_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the complementary error function of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := 1.0 - ERF(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_erfc_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_erfc_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the complementary error function of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := 1.0 - ERF(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_erfinv_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_erfinv_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse error function of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := 1.0 / ERF(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_erfinv_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_erfinv_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse error function of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := 1.0 / ERF(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_exp_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_exp_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the exponential value of "e" raised to the power of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := e^(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_exp_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_exp_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the exponential value of "e" raised to the power of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := e^(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_exp10_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_exp10_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the exponential value of 10 raised to the power of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := 10^(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_exp10_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_exp10_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the exponential value of 10 raised to the power of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := 10^(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_exp2_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_exp2_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the exponential value of 2 raised to the power of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := 2^(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_exp2_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_exp2_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the exponential value of 2 raised to the power of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := 2^(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_expm1_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_expm1_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the exponential value of "e" raised to the power of packed double-precision (64-bit) floating-point elements in "a", subtract one from each element, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := e^(a[i+63:i]) - 1.0
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_expm1_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_expm1_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the exponential value of "e" raised to the power of packed single-precision (32-bit) floating-point elements in "a", subtract one from each element, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := e^(a[i+31:i]) - 1.0
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_hypot_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_hypot_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the length of the hypotenous of a right triangle, with the lengths of the other two sides of the triangle stored as packed double-precision (64-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SQRT(a[i+63:i]^2 + b[i+63:i]^2)
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_hypot_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_hypot_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the length of the hypotenous of a right triangle, with the lengths of the other two sides of the triangle stored as packed single-precision (32-bit) floating-point elements in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i]^2 + b[i+31:i]^2)
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_idiv_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256i' name='_mm256_idiv_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Divide packed 32-bit integers in "a" by packed elements in "b", and store the truncated results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_idivrem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256i' name='_mm256_idivrem_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m256i *'/>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Divide packed 32-bit integers in "a" by packed elements in "b", store the truncated results in "dst", and store the remainders as packed 32-bit integers into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+	MEM[mem_addr+i+31:mem_addr+i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_invcbrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_invcbrt_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse cube root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := InvCubeRoot(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_invcbrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_invcbrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse cube root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := InvCubeRoot(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_invsqrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_invsqrt_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the inverse square root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := InvSQRT(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_invsqrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_invsqrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the inverse square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := InvSQRT(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_irem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256i' name='_mm256_irem_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Divide packed 32-bit integers in "a" by packed elements in "b", and store the remainders as packed 32-bit integers in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_log_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the natural logarithm of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ln(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_log_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the natural logarithm of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ln(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log10_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_log10_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the base-10 logarithm of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := log10(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log10_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_log10_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the base-10 logarithm of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := log10(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log1p_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_log1p_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the natural logarithm of one plus packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ln(1.0 + a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log1p_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_log1p_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the natural logarithm of one plus packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ln(1.0 + a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log2_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_log2_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the base-2 logarithm of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := log2(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_log2_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_log2_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the base-2 logarithm of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := log2(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_logb_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_logb_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Convert the exponent of each packed double-precision (64-bit) floating-point element in "a" to a double-precision floating-point number representing the integer exponent, and store the results in "dst". This intrinsic essentially calculates "floor(log2(x))" for each element.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ConvertExpFP64(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_logb_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_logb_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Convert the exponent of each packed single-precision (32-bit) floating-point element in "a" to a single-precision floating-point number representing the integer exponent, and store the results in "dst". This intrinsic essentially calculates "floor(log2(x))" for each element.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ConvertExpFP32(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_pow_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_pow_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<parameter varname='b' type='__m256d'/>
+	<description>Compute the exponential value of packed double-precision (64-bit) floating-point elements in "a" raised by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := (a[i+63:i])^(b[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_pow_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_pow_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<parameter varname='b' type='__m256'/>
+	<description>Compute the exponential value of packed single-precision (32-bit) floating-point elements in "a" raised by packed elements in "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := (a[i+31:i])^(b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sin_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_sin_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SIN(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sin_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_sin_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SIN(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sincos_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_sincos_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m256d *'/>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the sine and cosine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, store the sine in "dst", and store the cosine into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SIN(a[i+63:i])
+	MEM[mem_addr+i+63:mem_addr+i] := COS(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sincos_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_sincos_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m256 *'/>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the sine and cosine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, store the sine in "dst", and store the cosine into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SIN(a[i+31:i])
+	MEM[mem_addr+i+31:mem_addr+i] := COS(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sind_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_sind_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the sine of packed double-precision (64-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SIND(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sind_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_sind_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the sine of packed single-precision (32-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SIND(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sinh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_sinh_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the hyperbolic sine of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SINH(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_sinh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_sinh_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the hyperbolic sine of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SINH(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_ceil_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_svml_ceil_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" up to an integer value, and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := CEIL(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_ceil_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_svml_ceil_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" up to an integer value, and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := CEIL(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_floor_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_svml_floor_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" down to an integer value, and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := FLOOR(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_floor_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_svml_floor_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" down to an integer value, and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := FLOOR(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_round_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_svml_round_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Round the packed double-precision (64-bit) floating-point elements in "a" to the nearest integer value, and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := ROUND(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_round_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_svml_round_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Round the packed single-precision (32-bit) floating-point elements in "a" to the nearest integer value, and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := ROUND(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_sqrt_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_svml_sqrt_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the square root of packed double-precision (64-bit) floating-point elements in "a", and store the results in "dst". Note that this intrinsic is less efficient than "_mm_sqrt_pd".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := SQRT(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_svml_sqrt_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_svml_sqrt_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".  Note that this intrinsic is less efficient than "_mm_sqrt_ps".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := SQRT(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_tan_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_tan_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := TAN(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_tan_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_tan_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := TAN(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_tand_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_tand_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := TAND(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_tand_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_tand_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in degrees, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := TAND(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_tanh_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_tanh_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Compute the hyperbolic tangent of packed double-precision (64-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := TANH(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_tanh_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_tanh_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Compute the hyperbolic tangent of packed single-precision (32-bit) floating-point elements in "a" expressed in radians, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := TANH(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_trunc_pd -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256d' name='_mm256_trunc_pd'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256d'/>
+	<description>Truncate the packed double-precision (64-bit) floating-point elements in "a", and store the results as packed double-precision floating-point elements in "dst". This intrinsic may generate the "roundpd"/"vroundpd" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*64
+	dst[i+63:i] := TRUNCATE(a[i+63:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_trunc_ps -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256' name='_mm256_trunc_ps'>
+	<CPUID>AVX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m256'/>
+	<description>Truncate the packed single-precision (32-bit) floating-point elements in "a", and store the results as packed single-precision floating-point elements in "dst". This intrinsic may generate the "roundps"/"vroundps" instruction.</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*32
+	dst[i+31:i] := TRUNCATE(a[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_udiv_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256i' name='_mm256_udiv_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Divide packed unsigned 32-bit integers in "a" by packed elements in "b", and store the truncated results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_udivrem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256i' name='_mm256_udivrem_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='mem_addr' type='__m256i *'/>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Divide packed unsigned 32-bit integers in "a" by packed elements in "b", store the truncated results in "dst", and store the remainders as packed unsigned 32-bit integers into memory at "mem_addr".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := TRUNCATE(a[i+31:i] / b[i+31:i])
+	MEM[mem_addr+i+31:mem_addr+i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm256_urem_epi32 -->
+<intrinsic tech='SVML' sequence='true' rettype='__m256i' name='_mm256_urem_epi32'>
+	<CPUID>AVX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m256i'/>
+	<parameter varname='b' type='__m256i'/>
+	<description>Divide packed unsigned 32-bit integers in "a" by packed elements in "b", and store the remainders as packed unsigned 32-bit integers in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := 32*j
+	dst[i+31:i] := REMAINDER(a[i+31:i] / b[i+31:i])
+ENDFOR
+dst[MAX:256] := 0
+	</description>
+	<mnemonic base=''/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _popcnt32 / popcnt -->
+<intrinsic tech='Misc' rettype='int' name='_popcnt32'>
+	<type>Integer</type>
+	<CPUID>POPCNT</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='int'/>
+	<description>
+		Count the number of bits set to 1 in 32-bit integer "a", and return that count in "dst". 
+	</description>			
+	<description code='true'>
+dst := 0
+FOR i := 0 to 31
+	IF a[i]
+		dst := dst + 1
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='popcnt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _popcnt64 / popcnt -->
+<intrinsic tech='Misc' rettype='int' name='_popcnt64'>
+	<type>Integer</type>
+	<CPUID>POPCNT</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='__int64'/>
+	<description>
+		Count the number of bits set to 1 in 64-bit integer "a", and return that count in "dst". 
+	</description>			
+	<description code='true'>
+dst := 0
+FOR i := 0 to 63
+	IF a[i]
+		dst := dst + 1
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='popcnt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_popcnt_u32 / popcnt -->
+<intrinsic tech='Misc' rettype='int' name='_mm_popcnt_u32'>
+	<CPUID>POPCNT</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='unsigned int'/>
+	<description>
+		Count the number of bits set to 1 in unsigned 32-bit integer "a", and return that count in "dst". 
+	</description>			
+	<description code='true'>
+dst := 0
+FOR i := 0 to 31
+	IF a[i]
+		dst := dst + 1
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='popcnt'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_popcnt_u64 / popcnt -->
+<intrinsic tech='Misc' rettype='__int64' name='_mm_popcnt_u64'>
+	<CPUID>POPCNT</CPUID>
+	<category>Bit Manipulation</category>
+	<parameter varname='a' type='unsigned __int64'/>
+	<description>
+		Count the number of bits set to 1 in unsigned 64-bit integer "a", and return that count in "dst". 
+	</description>			
+	<description code='true'>
+dst := 0
+FOR i := 0 to 63
+	IF a[i]
+		dst := dst + 1
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='popcnt'/>
+	<header>nmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _rdpmc / rdpmc -->
+<intrinsic tech='Other' rettype='__int64' name='_rdpmc'>
+	<category>General Support</category>
+	<parameter varname='a' type='int'/>
+	<description>Read the Performance Monitor Counter (PMC) specified by "a", and store up to 64-bits in "dst". The width of performance counters is implementation specific.</description>
+	<description code='true'>
+dst[63:0] := ReadPMC(a)
+	</description>
+	<mnemonic base='rdpmc'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rdtsc / rdtsc -->
+<intrinsic tech='TSC' rettype='__int64' name='_rdtsc'>
+	<CPUID>TSC</CPUID>
+	<category>General Support</category>
+	<description>Copy the current 64-bit value of the processor's time-stamp counter into "dst".</description>
+	<description code='true'>
+dst[63:0] := TimeStampCounter
+	</description>
+	<mnemonic base='rdtsc'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rotl / rol -->
+<intrinsic tech='Other' rettype='unsigned int' name='_rotl'>
+	<type>Integer</type>
+	<category>Shift</category>
+	<parameter varname='a' type='unsigned int'/>
+	<parameter varname='shift' type='int'/>
+	<description>Shift the bits of unsigned 32-bit integer "a" left by the number of bits specified in "shift", rotating the most-significant bit to the least-significant bit location, and store the unsigned result in "dst".</description>
+	<description code='true'>
+dst := a
+count := shift BITWISE AND 31
+DO WHILE (count &gt; 0)
+	tmp[0] := dst[31]
+	dst := (dst &lt;&lt; 1) OR tmp[0]
+	count := count - 1
+OD
+	</description>
+	<mnemonic base='rol'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rotr / ror -->
+<intrinsic tech='Other' rettype='unsigned int' name='_rotr'>
+	<type>Integer</type>
+	<category>Shift</category>
+	<parameter varname='a' type='unsigned int'/>
+	<parameter varname='shift' type='int'/>
+	<description>Shift the bits of unsigned 32-bit integer "a" right by the number of bits specified in "shift", rotating the least-significant bit to the most-significant bit location, and store the unsigned result in "dst".</description>
+	<description code='true'>
+dst := a
+count := shift BITWISE AND 31
+DO WHILE (count &gt; 0)
+	tmp[31] := dst[0]
+	dst := (dst &gt;&gt; 1) OR tmp[31]
+	count := count - 1
+OD
+	</description>
+	<mnemonic base='ror'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rotwl / rol -->
+<intrinsic tech='Other' rettype='unsigned short' name='_rotwl'>
+	<type>Integer</type>
+	<category>Shift</category>
+	<parameter varname='a' type='unsigned short'/>
+	<parameter varname='shift' type='int'/>
+	<description>Shift the bits of unsigned 16-bit integer "a" left by the number of bits specified in "shift", rotating the most-significant bit to the least-significant bit location, and store the unsigned result in "dst".</description>
+	<description code='true'>
+dst := a
+count := shift BITWISE AND 15
+DO WHILE (count &gt; 0)
+	tmp[0] := dst[15]
+	dst := (dst &lt;&lt; 1) OR tmp[0]
+	count := count - 1
+OD
+	</description>
+	<mnemonic base='rol'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _rotwr / ror -->
+<intrinsic tech='Other' rettype='unsigned short' name='_rotwr'>
+	<type>Integer</type>
+	<category>Shift</category>
+	<parameter varname='a' type='unsigned short'/>
+	<parameter varname='shift' type='int'/>
+	<description>Shift the bits of unsigned 16-bit integer "a" right by the number of bits specified in "shift", rotating the least-significant bit to the most-significant bit location, and store the unsigned result in "dst".</description>
+	<description code='true'>
+dst := a
+count := shift BITWISE AND 15
+DO WHILE (count &gt; 0)
+	tmp[15] := dst[0]
+	dst := (dst &gt;&gt; 1) OR tmp[15]
+	count := count - 1
+OD
+	</description>
+	<mnemonic base='ror'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xgetbv / xgetbv -->
+<intrinsic tech='OS' rettype='unsigned __int64' name='_xgetbv'>
+	<CPUID>XSAVE</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='a' type='unsigned int'/>
+	<description>Copy up to 64-bits from the value of the extended control register (XCR) specified by "a" into "dst". Currently only XFEATURE_ENABLED_MASK XCR is supported.</description>
+	<description code='true'>
+dst[63:0] := XCR[a]
+	</description>
+	<mnemonic base='xgetbv'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xrstor / xrstor -->
+<intrinsic tech='OS' rettype='void' name='_xrstor'>
+	<CPUID>XSAVE</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<parameter varname='rs_mask' type='unsigned __int64'/>
+	<description>Perform a full or partial restore of the enabled processor states using the state information stored in memory at "mem_addr". State is restored based on bits [62:0] in "rs_mask", "XCR0", and "mem_addr.HEADER.XSTATE_BV". "mem_addr" must be aligned on a 64-byte boundary.</description>
+	<description code='true'>
+st_mask = mem_addr.HEADER.XSTATE_BV[62:0]
+FOR i := 0 to 62
+	IF (rs_mask[i] AND XCR0[i])
+		IF st_mask[i]
+			CASE (i) OF
+				0: ProcessorState[x87 FPU] := mem_addr.FPUSSESave_Area[FPU]
+				1: ProcessorState[SSE] := mem_addr.FPUSSESaveArea[SSE]
+				DEFAULT: ProcessorState[i] := mem_addr.Ext_Save_Area[i]
+			ESAC
+		ELSE
+			// ProcessorExtendedState := Processor Supplied Values
+			CASE (i) OF
+				1: MXCSR := mem_addr.FPUSSESave_Area[SSE]
+			ESAC
+		FI
+	FI
+	i := i + 1
+ENDFOR
+	</description>
+	<mnemonic base='xrstor'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xrstor64 / xrstor64 -->
+<intrinsic tech='OS' rettype='void' name='_xrstor64'>
+	<CPUID>XSAVE</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<parameter varname='rs_mask' type='unsigned __int64'/>
+	<description>Perform a full or partial restore of the enabled processor states using the state information stored in memory at "mem_addr". State is restored based on bits [62:0] in "rs_mask", "XCR0", and "mem_addr.HEADER.XSTATE_BV". "mem_addr" must be aligned on a 64-byte boundary.</description>
+	<description code='true'>
+st_mask = mem_addr.HEADER.XSTATE_BV[62:0]
+FOR i := 0 to 62
+	IF (rs_mask[i] AND XCR0[i])
+		IF st_mask[i]
+			CASE (i) OF
+				0: ProcessorState[x87 FPU] := mem_addr.FPUSSESave_Area[FPU]
+				1: ProcessorState[SSE] := mem_addr.FPUSSESaveArea[SSE]
+				DEFAULT: ProcessorState[i] := mem_addr.Ext_Save_Area[i]
+			ESAC
+		ELSE
+			// ProcessorExtendedState := Processor Supplied Values
+			CASE (i) OF
+				1: MXCSR := mem_addr.FPUSSESave_Area[SSE]
+			ESAC
+		FI
+	FI
+	i := i + 1
+ENDFOR
+	</description>
+	<mnemonic base='xrstor64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xsave / xsave -->
+<intrinsic tech='OS' rettype='void' name='_xsave'>
+	<CPUID>XSAVE</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<parameter varname='save_mask' type='unsigned __int64'/>
+	<description>Perform a full or partial save of the enabled processor states to memory at "mem_addr". State is saved based on bits [62:0] in "save_mask" and "XCR0". "mem_addr" must be aligned on a 64-byte boundary.</description>
+	<description code='true'>
+mask[62:0] := save_mask[62:0] BITWISE AND XCR0[62:0]
+FOR i := 0 to 62
+	IF mask[i]
+		CASE (i) OF
+			0: mem_addr.FPUSSESave_Area[FPU] := ProcessorState[x87 FPU]
+			1: mem_addr.FPUSSESaveArea[SSE] := ProcessorState[SSE]
+			DEFAULT: mem_addr.Ext_Save_Area[i] := ProcessorState[i]
+		ESAC
+		mem_addr.HEADER.XSTATE_BV[i] := INIT_FUNCTION[i]
+	FI
+	i := i + 1
+ENDFOR
+	</description>
+	<mnemonic base='xsave'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xsave64 / xsave64 -->
+<intrinsic tech='OS' rettype='void' name='_xsave64'>
+	<CPUID>XSAVE</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<parameter varname='save_mask' type='unsigned __int64'/>
+	<description>Perform a full or partial save of the enabled processor states to memory at "mem_addr". State is saved based on bits [62:0] in "save_mask" and "XCR0". "mem_addr" must be aligned on a 64-byte boundary.</description>
+	<description code='true'>
+mask[62:0] := save_mask[62:0] BITWISE AND XCR0[62:0]
+FOR i := 0 to 62
+	IF mask[i]
+		CASE (i) OF
+			0: mem_addr.FPUSSESave_Area[FPU] := ProcessorState[x87 FPU]
+			1: mem_addr.FPUSSESaveArea[SSE] := ProcessorState[SSE]
+			DEFAULT: mem_addr.Ext_Save_Area[i] := ProcessorState[i]
+		ESAC
+		mem_addr.HEADER.XSTATE_BV[i] := INIT_FUNCTION[i]
+	FI
+	i := i + 1
+ENDFOR
+	</description>
+	<mnemonic base='xsave64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xsaveopt / xsaveopt -->
+<intrinsic tech='OS' rettype='void' name='_xsaveopt'>
+	<CPUID>XSAVE</CPUID>
+	<CPUID>XSAVEOPT</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<parameter varname='save_mask' type='unsigned __int64'/>
+	<description>Perform a full or partial save of the enabled processor states to memory at "mem_addr". State is saved based on bits [62:0] in "save_mask" and "XCR0". "mem_addr" must be aligned on a 64-byte boundary. The hardware may optimize the manner in which data is saved. The performance of this instruction will be equal to or better than using the XSAVE instruction.</description>
+	<description code='true'>
+mask[62:0] := save_mask[62:0] BITWISE AND XCR0[62:0]
+FOR i := 0 to 62
+	IF mask[i]
+		CASE (i) OF
+			0: mem_addr.FPUSSESave_Area[FPU] := ProcessorState[x87 FPU]
+			1: mem_addr.FPUSSESaveArea[SSE] := ProcessorState[SSE]
+			2: mem_addr.EXT_SAVE_Area2[YMM] := ProcessorState[YMM]
+			DEFAULT: mem_addr.Ext_Save_Area[i] := ProcessorState[i]
+		ESAC
+		mem_addr.HEADER.XSTATE_BV[i] := INIT_FUNCTION[i]
+	FI
+	i := i + 1
+ENDFOR
+	</description>
+	<mnemonic base='xsaveopt'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xsaveopt64 / xsaveopt64 -->
+<intrinsic tech='OS' rettype='void' name='_xsaveopt64'>
+	<CPUID>XSAVE</CPUID>
+	<CPUID>XSAVEOPT</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='mem_addr' type='void *'/>
+	<parameter varname='save_mask' type='unsigned __int64'/>
+	<description>Perform a full or partial save of the enabled processor states to memory at "mem_addr". State is saved based on bits [62:0] in "save_mask" and "XCR0". "mem_addr" must be aligned on a 64-byte boundary. The hardware may optimize the manner in which data is saved. The performance of this instruction will be equal to or better than using the XSAVE64 instruction.</description>
+	<description code='true'>
+mask[62:0] := save_mask[62:0] BITWISE AND XCR0[62:0]
+FOR i := 0 to 62
+	IF mask[i]
+		CASE (i) OF
+			0: mem_addr.FPUSSESave_Area[FPU] := ProcessorState[x87 FPU]
+			1: mem_addr.FPUSSESaveArea[SSE] := ProcessorState[SSE]
+			2: mem_addr.EXT_SAVE_Area2[YMM] := ProcessorState[YMM]
+			DEFAULT: mem_addr.Ext_Save_Area[i] := ProcessorState[i]
+		ESAC
+		mem_addr.HEADER.XSTATE_BV[i] := INIT_FUNCTION[i]
+	FI
+	i := i + 1
+ENDFOR
+	</description>
+	<mnemonic base='xsaveopt64'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+<!-- _xsetbv / xsetbv -->
+<intrinsic tech='OS' rettype='void' name='_xsetbv'>
+	<CPUID>XSAVE</CPUID>
+	<category>OS-Targeted</category>
+	<parameter varname='a' type='unsigned int'/>
+	<parameter varname='val' type='unsigned __int64'/>
+	<description>Copy 64-bits from "val" to the extended control register (XCR) specified by "a". Currently only XFEATURE_ENABLED_MASK XCR is supported.</description>
+	<description code='true'>
+XCR[a] := val[63:0]
+	</description>
+	<mnemonic base='xsetbv'/>
+	<header>immintrin.h</header>
+</intrinsic>
+
+
+</intrinsic_list>

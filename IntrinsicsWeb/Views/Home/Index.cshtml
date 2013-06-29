@@ -1,0 +1,117 @@
+﻿@model string
+
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Intel intrinsic functions</title>
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
+        <link href="~/Content/Site.css" rel="stylesheet" />
+        <script>
+            var FUNCTIONS_DATA = @Html.Raw(Model);
+        </script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+        <script src="~/Scripts/iif.min.js"></script>
+    </head>
+    <body ng-app="iif" ng-controller="IifController">
+        
+        <div class="container">
+            <div class="row">
+                <div class="left-column">
+                    <div>
+                        <input type="text" class="input" ng-model="searchQuery" ng-change="updateFilter()" placeholder="Search..." />
+                        <i class="icon-remove" ng-click="resetSearchQuery()"></i>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn" ng-click="setAllCollapsed(false)">Expand all</button>
+                        <button class="btn" ng-click="setAllCollapsed(true)">Collapse all</button>
+                    </div>
+                
+                    <h3>Technologies</h3>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="allTechsSelected">All
+                    </label>
+                    <div ng-repeat="tech in techs">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="tech.selected" ng-change="updateFilter()">{{tech.name}}
+                        </label>
+                    </div>
+                
+                    <h3>Types</h3>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="allTypesSelected">All
+                    </label>
+                    <div ng-repeat="type in types">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="type.selected" ng-change="updateFilter()">{{type.name}}
+                        </label>
+                    </div>
+                
+                    <h3>Categories</h3>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="allCategoriesSelected">All
+                    </label>
+                    <div ng-repeat="cat in categories">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="cat.selected" ng-change="updateFilter()">{{cat.name}}
+                        </label>
+                    </div>
+                
+                    <h3>Return types</h3>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="allReturnTypesSelected">All
+                    </label>
+                    <div ng-repeat="type in returnTypes">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="type.selected" ng-change="updateFilter()">{{type.name}}
+                        </label>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div ng-repeat="item in items" ng-show="item.isVisible" class="item">
+                        <div ng-click="item.isCollapsed = !item.isCollapsed" class="header" ng-class="{collapsed: item.isCollapsed}">
+                            <span class="type">{{item.returnType}}</span> {{item.name}} <span class="text-gray">(</span><span ng-bind-html-unsafe="item.parameters|formatParameters"></span><span class="text-gray">)</span>
+                            <div class="pull-right instruction">
+                                {{item.instruction}}
+                            </div>
+                        </div>
+                        <div ng-if="!item.isCollapsed" class="body">
+                            <h5>Synopsis</h5>
+                            <p>#include "{{item.header}}"</p>
+                            <p>Instruction: {{item.instruction}}</p>
+                            <p>CPUID Feature Flag: {{item.cpuId}}</p>
+                        
+                            <h5>Description</h5>
+                            <p class="description">{{item.description}}</p>
+                        
+                            <div ng-if="!!item.code">
+                                <h5>Operation</h5>
+                                <div class="code">{{item.code}}</div>
+                            </div>
+                        
+                            <div ng-if="!!item.latencyAndThroughput">
+                                <h5>Latency & Throughput Information</h5>
+                                <table class="table">
+                                    <tr>
+                                        <th>CPUID(s)</th>
+                                        <th>Parameters</th>
+                                        <th>Latency</th>
+                                        <th>Throughput</th>
+                                    </tr>
+                                    <tr ng-repeat="family in item.latencyAndThroughput | orderBy:'base'">
+                                        <td>{{family.base}}</td>
+                                        <td>{{family.parameters}}</td>
+                                        <td>{{family.latency}}</td>
+                                        <td>{{family.throughput}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
