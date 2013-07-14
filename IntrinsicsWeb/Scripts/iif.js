@@ -182,10 +182,11 @@ function IifController($scope, $window) {
         }
 
         if (!!$scope.searchQuery) {
+            var query = $scope.searchQuery.toLowerCase();
             $scope.items.filter(isVisible).forEach(function (item) {
-                if (!(item.name.indexOf($scope.searchQuery) != -1 ||
-                    (!!item.instruction && item.instruction.indexOf($scope.searchQuery) != -1) ||
-                    (!!item.description && item.description.indexOf($scope.searchQuery) != -1))) {
+                if (!(item.name.toLowerCase().indexOf(query) != -1 ||
+                    (!!item.instruction && item.instruction.toLowerCase().indexOf(query) != -1) ||
+                    (!!item.description && item.description.toLowerCase().indexOf(query) != -1))) {
                     item.isVisible = false;
                 }
             });
