@@ -182,11 +182,14 @@ function IifController($scope, $window) {
         }
 
         if (!!$scope.searchQuery) {
-            var query = $scope.searchQuery.toLowerCase();
+            if (!$scope.searchQuery) {
+                return;
+            }
+            var queryRegex = new RegExp($scope.searchQuery.replace(/\s+/g, '.*'), 'i');
             $scope.items.filter(isVisible).forEach(function (item) {
-                if (!(item.name.toLowerCase().indexOf(query) != -1 ||
-                    (!!item.instruction && item.instruction.toLowerCase().indexOf(query) != -1) ||
-                    (!!item.description && item.description.toLowerCase().indexOf(query) != -1))) {
+                if (!(queryRegex.test(item.name) ||
+                    (!!item.instruction && queryRegex.test(item.instruction)) ||
+                    (!!item.description && queryRegex.test(item.description)))) {
                     item.isVisible = false;
                 }
             });
