@@ -5,7 +5,7 @@
 <!-- _MM_TRANSPOSE4_PS -->
 <intrinsic tech='SSE' sequence='true' rettype='' name='_MM_TRANSPOSE4_PS'>
 	<CPUID>SSE</CPUID>
-	<category>General Support</category>
+	<category>Swizzle</category>
 	<parameter varname='row0' type='__m128' />
 	<parameter varname='row1' type='__m128' />
 	<parameter varname='row2' type='__m128' />
@@ -30,6 +30,7 @@ row3 = _mm_movehl_ps(tmp3, tmp1);
 <intrinsic tech='SSE' rettype='unsigned int' name='_mm_getcsr'>
 	<CPUID>SSE</CPUID>
 	<category>General Support</category>
+	<parameter varname='' type='void' />
 	<description>Get the unsigned 32-bit value of the MXCSR control and status register.</description>
 	<description code='true'>
 dst[31:0] := MXCSR
@@ -164,6 +165,7 @@ MXCSR := a[31:0] AND ~_MM_FLUSH_MASK
 	<mnemonic base='prefetcht0' />
 	<mnemonic base='prefetcht1' />
 	<mnemonic base='prefetcht2' />
+	<mnemonic base='prefetchwt1' />
 	<header>xmmintrin.h</header>
 </intrinsic>
 
@@ -172,6 +174,7 @@ MXCSR := a[31:0] AND ~_MM_FLUSH_MASK
 <intrinsic tech='SSE' rettype='void' name='_mm_sfence'>
 	<CPUID>SSE</CPUID>
 	<category>General Support</category>
+	<parameter varname='' type='void' />
 	<description>Perform a serializing operation on all store-to-memory instructions that were issued prior to this instruction. Guarantees that every store instruction that precedes, in program order, is globally visible before any store instruction which follows the fence in program order.</description>
 	<mnemonic base='sfence' />
 	<header>xmmintrin.h</header>
@@ -181,7 +184,30 @@ MXCSR := a[31:0] AND ~_MM_FLUSH_MASK
 <!-- _mm_max_pi16 / pmaxsw -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_max_pi16'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Compare packed 16-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF a[i+15:i] &gt; b[i+15:i]
+		dst[i+15:i] := a[i+15:i]
+	ELSE
+		dst[i+15:i] := b[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pmaxsw' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pmaxsw / pmaxsw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pmaxsw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Compare packed 16-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -203,7 +229,30 @@ ENDFOR
 <!-- _mm_max_pu8 / pmaxub -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_max_pu8'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	IF a[i+7:i] &gt; b[i+7:i]
+		dst[i+7:i] := a[i+7:i]
+	ELSE
+		dst[i+7:i] := b[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pmaxub' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pmaxub / pmaxub -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pmaxub'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -225,7 +274,30 @@ ENDFOR
 <!-- _mm_min_pi16 / pminsw -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_min_pi16'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Compare packed 16-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF a[i+15:i] &lt; b[i+15:i]
+		dst[i+15:i] := a[i+15:i]
+	ELSE
+		dst[i+15:i] := b[i+15:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pminsw'  parameters="mm, mm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pminsw / pminsw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pminsw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Compare packed 16-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
@@ -247,7 +319,30 @@ ENDFOR
 <!-- _mm_min_pu8 / pminub -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_min_pu8'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	IF a[i+7:i] &lt; b[i+7:i]
+		dst[i+7:i] := a[i+7:i]
+	ELSE
+		dst[i+7:i] := b[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pminub'  parameters="mm, mm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pminub / pminub -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pminub'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
@@ -285,10 +380,49 @@ ENDFOR
 </intrinsic>
 
 
+<!-- _m_pmulhuw / pmulhuw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pmulhuw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Multiply the packed unsigned 16-bit integers in "a" and "b", producing intermediate 32-bit integers, and store the high 16 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	tmp[31:0] := a[i+15:i] * b[i+15:i]
+	dst[i+15:i] := tmp[31:16]
+ENDFOR
+	</description>
+	<mnemonic base='pmulhuw'  parameters="mm, mm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_avg_pu8 / pavgb -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_avg_pu8'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Probability/Statistics</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Average packed unsigned 8-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := (a[i+7:i] + b[i+7:i] + 1) &gt;&gt; 1
+ENDFOR
+	</description>
+	<mnemonic base='pavgb'  parameters="mm, mm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pavgb / pavgb -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pavgb'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Probability/Statistics</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Average packed unsigned 8-bit integers in "a" and "b", and store the results in "dst".</description>
@@ -306,7 +440,26 @@ ENDFOR
 <!-- _mm_avg_pu16 / pavgw -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_avg_pu16'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Probability/Statistics</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := (a[i+15:i] + b[i+15:i] + 1) &gt;&gt; 1
+ENDFOR
+	</description>
+	<mnemonic base='pavgw'  parameters="mm, mm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pavgw / pavgw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pavgw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Probability/Statistics</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst".</description>
@@ -325,7 +478,31 @@ ENDFOR
 <intrinsic tech='SSE' rettype='__m64' name='_mm_sad_pu8'>
 	<CPUID>SSE</CPUID>
 	<category>Arithmetic</category>
-	<category>Application-Targeted</category>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='b' type='__m64' />
+	<description>Compute the absolute differences of packed unsigned 8-bit integers in "a" and "b", then horizontally sum each consecutive 8 differences to produce four unsigned 16-bit integers, and pack these unsigned 16-bit integers in the low 16 bits of "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	tmp[i+7:i] := ABS(a[i+7:i] - b[i+7:i])
+ENDFOR
+
+dst[15:0] := tmp[7:0] + tmp[15:8] + tmp[23:16] + tmp[31:24]
+		   + tmp[39:32] + tmp[47:40] + tmp[55:48] + tmp[63:56]
+dst[63:16] := 0
+	</description>
+	<mnemonic base='psadbw' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psadbw / psadbw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_psadbw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Arithmetic</category>
+	<category>Miscellaneous</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='b' type='__m64' />
 	<description>Compute the absolute differences of packed unsigned 8-bit integers in "a" and "b", then horizontally sum each consecutive 8 differences to produce four unsigned 16-bit integers, and pack these unsigned 16-bit integers in the low 16 bits of "dst".</description>
@@ -360,6 +537,22 @@ dst[127:32] := a[127:32]
 </intrinsic>
 
 
+<!-- _mm_cvt_si2ss / cvtsi2ss -->
+<intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_cvt_si2ss'>
+	<CPUID>SSE</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128' />
+	<parameter varname='b' type='int' />
+	<description>Convert the 32-bit integer "b" to a single-precision (32-bit) floating-point element, store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := Convert_Int32_To_FP32(b[31:0])
+dst[127:32] := a[127:32]
+	</description>
+	<mnemonic base='cvtsi2ss' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_cvtsi64_ss / cvtsi2ss -->
 <intrinsic tech='SSE' rettype='__m128' name='_mm_cvtsi64_ss'>
 	<CPUID>SSE</CPUID>
@@ -379,6 +572,24 @@ dst[MAX:128] := 0
 
 <!-- _mm_cvtpi32_ps / cvtpi2ps -->
 <intrinsic tech='SSE' rettype='__m128' name='_mm_cvtpi32_ps'>
+	<CPUID>SSE</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128' />
+	<parameter varname='b' type='__m64' />
+	<description>Convert packed 32-bit integers in "b" to packed single-precision (32-bit) floating-point elements, store the results in the lower 2 elements of "dst", and copy the upper 2 packed elements from "a" to the upper elements of "dst". </description>
+	<description code='true'>
+dst[31:0] := Convert_Int32_To_FP32(b[31:0])
+dst[63:32] := Convert_Int32_To_FP32(b[63:32])
+dst[95:64] := a[95:64]
+dst[127:96] := a[127:96]
+	</description>
+	<mnemonic base='cvtpi2ps' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvt_pi2ps / cvtpi2ps -->
+<intrinsic tech='SSE' rettype='__m128' name='_mm_cvt_pi2ps'>
 	<CPUID>SSE</CPUID>
 	<category>Convert</category>
 	<parameter varname='a' type='__m128' />
@@ -516,10 +727,49 @@ ENDFOR
 </intrinsic>
 
 
+<!-- _m_maskmovq / maskmovq -->
+<intrinsic tech='SSE' rettype='void' name='_m_maskmovq'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Store</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='mask' type='__m64' />
+	<parameter varname='mem_addr' type='char*' />
+	<description>Conditionally store 8-bit integer elements from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element).</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	IF mask[i+7]
+		MEM[mem_addr+i+7:mem_addr+i] := a[i+7:i]
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='maskmovq' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_extract_pi16 / pextrw -->
 <intrinsic tech='SSE' rettype='int' name='_mm_extract_pi16'>
 	<CPUID>SSE</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='imm' type='int' />
+	<description>Extract a 16-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
+	<description code='true'>
+dst[15:0] := (a[63:0] &gt;&gt; (imm[1:0] * 16))[15:0]
+dst[31:16] := 0
+	</description>
+	<mnemonic base='pextrw' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pextrw / pextrw -->
+<intrinsic tech='SSE' rettype='int' name='_m_pextrw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='imm' type='int' />
 	<description>Extract a 16-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
@@ -535,7 +785,26 @@ dst[31:16] := 0
 <!-- _mm_insert_pi16 / pinsrw -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_insert_pi16'>
 	<CPUID>SSE</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='i' type='int' />
+	<parameter varname='imm' type='int' />
+	<description>Copy "a" to "dst", and insert the 16-bit integer "i" into "dst" at the location specified by "imm". </description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+sel := imm[1:0]*16
+dst[sel+15:sel] := i[15:0]
+	</description>
+	<mnemonic base='pinsrw' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pinsrw / pinsrw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pinsrw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='i' type='int' />
 	<parameter varname='imm' type='int' />
@@ -567,10 +836,57 @@ dst[MAX:8] := 0
 </intrinsic>
 
 
+<!-- _m_pmovmskb / pmovmskb -->
+<intrinsic tech='SSE' rettype='int' name='_m_pmovmskb'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64' />
+	<description>Create mask from the most significant bit of each 8-bit element in "a", and store the result in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[j] := a[i+7]
+ENDFOR
+dst[MAX:8] := 0
+	</description>	<mnemonic base='pmovmskb' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_shuffle_pi16 / pshufw -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_shuffle_pi16'>
 	<CPUID>SSE</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64' />
+	<parameter varname='imm' type='int' />
+	<description>Shuffle 16-bit integers in "a" using the control in "imm", and store the results in "dst".</description>
+	<description code='true'>
+SELECT4(src, control){
+	CASE(control[1:0])
+		0:	tmp[15:0] := src[15:0]
+		1:	tmp[15:0] := src[31:16]
+		2:	tmp[15:0] := src[47:32]
+		3:	tmp[15:0] := src[63:48]
+	ESAC
+	RETURN tmp[15:0]
+}
+
+dst[15:0] := SELECT4(a[63:0], imm[1:0])
+dst[31:16] := SELECT4(a[63:0], imm[3:2])
+dst[47:32] := SELECT4(a[63:0], imm[5:4])
+dst[63:48] := SELECT4(a[63:0], imm[7:6])
+	</description>
+	<mnemonic base='pshufw' />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pshufw / pshufw -->
+<intrinsic tech='SSE' rettype='__m64' name='_m_pshufw'>
+	<type>Integer</type>
+	<CPUID>SSE</CPUID>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64' />
 	<parameter varname='imm' type='int' />
 	<description>Shuffle 16-bit integers in "a" using the control in "imm", and store the results in "dst".</description>
@@ -735,7 +1051,7 @@ ENDFOR
 <!-- _mm_sqrt_ss / sqrtss -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_sqrt_ss'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Elementary Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<description>Compute the square root of the lower single-precision (32-bit) floating-point element in "a", store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
 	<description code='true'>
@@ -750,7 +1066,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_sqrt_ps / sqrtps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_sqrt_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Elementary Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<description>Compute the square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst".</description>
 	<description code='true'>
@@ -767,11 +1083,11 @@ ENDFOR
 <!-- _mm_rcp_ss / rcpss -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_rcp_ss'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Elementary Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<description>Compute the approximate reciprocal of the lower single-precision (32-bit) floating-point element in "a", store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst". The maximum relative error for this approximation is less than 1.5*2^-12.</description>
 	<description code='true'>
-dst[31:0] := APPROXIMATE(1.0/b[31:0])
+dst[31:0] := APPROXIMATE(1.0/a[31:0])
 dst[127:32] := a[127:32]
 	</description>	
 	<mnemonic base='rcpss' />
@@ -782,7 +1098,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_rcp_ps / rcpps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_rcp_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Elementary Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<description>Compute the approximate reciprocal of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst". The maximum relative error for this approximation is less than 1.5*2^-12.</description>
 	<description code='true'>
@@ -799,11 +1115,11 @@ ENDFOR
 <!-- _mm_rsqrt_ss / rsqrtss -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_rsqrt_ss'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Elementary Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<description>Compute the approximate reciprocal square root of the lower single-precision (32-bit) floating-point element in "a", store the result in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst". The maximum relative error for this approximation is less than 1.5*2^-12.</description>
 	<description code='true'>
-dst[31:0] := APPROXIMATE(1.0 / SQRT(b[31:0]))
+dst[31:0] := APPROXIMATE(1.0 / SQRT(a[31:0]))
 dst[127:32] := a[127:32]
 	</description>
 	<mnemonic base='rsqrtss' />
@@ -814,7 +1130,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_rsqrt_ps / rsqrtps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_rsqrt_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Elementary Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<description>Compute the approximate reciprocal square root of packed single-precision (32-bit) floating-point elements in "a", and store the results in "dst". The maximum relative error for this approximation is less than 1.5*2^-12.</description>
 	<description code='true'>
@@ -831,7 +1147,7 @@ ENDFOR
 <!-- _mm_min_ss / minss -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_min_ss'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
 	<description>Compare the lower single-precision (32-bit) floating-point elements in "a" and "b", store the minimum value in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
@@ -847,7 +1163,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_min_ps / minps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_min_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
 	<description>Compare packed single-precision (32-bit) floating-point elements in "a" and "b", and store packed minimum values in "dst".
@@ -866,7 +1182,7 @@ ENDFOR
 <!-- _mm_max_ss / maxss -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_max_ss'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
 	<description>Compare the lower single-precision (32-bit) floating-point elements in "a" and "b", store the maximum value in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
@@ -882,7 +1198,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_max_ps / maxps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_max_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
 	<description>Compare packed single-precision (32-bit) floating-point elements in "a" and "b", and store packed maximum values in "dst".</description>
@@ -1573,6 +1889,20 @@ dst[31:0] := Convert_FP32_To_Int32(a[31:0])
 </intrinsic>
 
 
+<!-- _mm_cvt_ss2si / cvtss2si -->
+<intrinsic tech='SSE' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cvt_ss2si'>
+	<CPUID>SSE</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128' />
+	<description>Convert the lower single-precision (32-bit) floating-point element in "a" to a 32-bit integer, and store the result in "dst".</description>
+	<description code='true'>
+dst[31:0] := Convert_FP32_To_Int32(a[31:0])
+	</description>
+	<mnemonic base='cvtss2si' parameters="r32, xmm" />
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_cvtss_si64 / cvtss2si -->
 <intrinsic tech='SSE' rettype='__int64' name='_mm_cvtss_si64'>
 	<CPUID>SSE</CPUID>
@@ -1616,8 +1946,39 @@ ENDFOR
 </intrinsic>
 
 
+<!-- _mm_cvt_ps2pi / cvtps2si -->
+<intrinsic tech='SSE' rettype='__m64' name='_mm_cvt_ps2pi'>
+	<CPUID>SSE</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128' />
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed 32-bit integers, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	dst[i+31:i] := Convert_FP32_To_Int32(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic base='cvtps2si'  parameters="r32, xmm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_cvttss_si32 / cvttss2si -->
 <intrinsic tech='SSE' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cvttss_si32'>
+	<CPUID>SSE</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128' />
+	<description>Convert the lower single-precision (32-bit) floating-point element in "a" to a 32-bit integer with truncation, and store the result in "dst".</description>
+	<description code='true'>
+dst[31:0] := Convert_FP32_To_Int32_Truncate(a[31:0])
+	</description>
+	<mnemonic base='cvttss2si'  parameters="r32, xmm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtt_ss2si / cvttss2si -->
+<intrinsic tech='SSE' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cvtt_ss2si'>
 	<CPUID>SSE</CPUID>
 	<category>Convert</category>
 	<parameter varname='a' type='__m128' />
@@ -1646,6 +2007,23 @@ dst[63:0] := Convert_FP64_To_Int32_Truncate(a[31:0])
 
 <!-- _mm_cvttps_pi32 / cvttps2pi -->
 <intrinsic tech='SSE' rettype='__m64' name='_mm_cvttps_pi32'>
+	<CPUID>SSE</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m128' />
+	<description>Convert packed single-precision (32-bit) floating-point elements in "a" to packed 32-bit integers with truncation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := 32*j
+	dst[i+31:i] := Convert_FP32_To_Int32_Truncate(a[i+31:i])
+ENDFOR
+	</description>
+	<mnemonic base='cvttps2pi'  parameters="mm, xmm"/>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_cvtt_ps2pi / cvttps2pi -->
+<intrinsic tech='SSE' rettype='__m64' name='_mm_cvtt_ps2pi'>
 	<CPUID>SSE</CPUID>
 	<category>Convert</category>
 	<parameter varname='a' type='__m128' />
@@ -1726,6 +2104,22 @@ ENDFOR
 </intrinsic>
 
 
+<!-- _mm_set_ps1 / movss -->
+<intrinsic tech='SSE' sequence='true' rettype='__m128' name='_mm_set_ps1'>
+	<CPUID>SSE</CPUID>
+	<category>Set</category>
+	<parameter varname='a' type='float' />
+	<description>Broadcast single-precision (32-bit) floating-point value "a" to all elements of "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*32
+	dst[i+31:i] := a[31:0]
+ENDFOR
+	</description>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_set_ps / movss -->
 <intrinsic tech='SSE' sequence='true' rettype='__m128' name='_mm_set_ps'>
 	<CPUID>SSE</CPUID>
@@ -1736,10 +2130,10 @@ ENDFOR
 	<parameter varname='e0' type='float'/>
 	<description>Set packed single-precision (32-bit) floating-point elements in "dst" with the supplied values.</description>
 	<description code='true'>
-dst[31:0] := e3
-dst[63:32] := e2
-dst[95:64] := e1
-dst[127:96] := e0
+dst[31:0] := e0
+dst[63:32] := e1
+dst[95:64] := e2
+dst[127:96] := e3
 	</description>
 	<header>xmmintrin.h</header>
 </intrinsic>
@@ -1755,10 +2149,10 @@ dst[127:96] := e0
 	<parameter varname='e0' type='float'/>
 	<description>Set packed single-precision (32-bit) floating-point elements in "dst" with the supplied values in reverse order.</description>
 	<description code='true'>
-dst[31:0] := e0
-dst[63:32] := e1
-dst[95:64] := e2
-dst[127:96] := e3
+dst[31:0] := e3
+dst[63:32] := e2
+dst[95:64] := e1
+dst[127:96] := e0
 	</description>
 	<header>xmmintrin.h</header>
 </intrinsic>
@@ -1768,6 +2162,7 @@ dst[127:96] := e3
 <intrinsic tech='SSE' rettype='__m128' name='_mm_setzero_ps'>
 	<CPUID>SSE</CPUID>
 	<category>Set</category>
+	<parameter varname='' type='void' />
 	<description>Return vector of type __m128 with all elements set to zero.</description>
 	<description code='true'>
 dst[MAX:0] := 0
@@ -1782,7 +2177,7 @@ dst[MAX:0] := 0
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
 	<parameter varname='a' type='__m128' />
-	<parameter varname='mem_addr' type='__m64*' />
+	<parameter varname='mem_addr' type='__m64 const*' />
 	<description>Load 2 single-precision (32-bit) floating-point elements from memory into the upper 2 elements of "dst", and copy the lower 2 elements from "a" to "dst". "mem_addr" does not need to be aligned on any particular boundary.</description>
 	<description code='true'>
 dst[31:0] := a[31:0]
@@ -1800,7 +2195,7 @@ dst[127:96] := MEM[mem_addr+63:mem_addr+32]
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
 	<parameter varname='a' type='__m128' />
-	<parameter varname='mem_addr' type='__m64*' />
+	<parameter varname='mem_addr' type='__m64 const*' />
 	<description>Load 2 single-precision (32-bit) floating-point elements from memory into the lower 2 elements of "dst", and copy the upper 2 elements from "a" to "dst". "mem_addr" does not need to be aligned on any particular boundary.</description>
 	<description code='true'>
 dst[31:0] := MEM[mem_addr+31:mem_addr]
@@ -1817,7 +2212,7 @@ dst[127:96] := a[127:96]
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_load_ss'>
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='float*' />
+	<parameter varname='mem_addr' type='float const*' />
 	<description>Load a single-precision (32-bit) floating-point element from memory into the lower of "dst", and zero the upper 3 elements. "mem_addr" does not need to be aligned on any particular boundary.</description>
 	<description code='true'>
 dst[31:0] := MEM[mem_addr+31:mem_addr]
@@ -1832,7 +2227,23 @@ dst[127:32] := 0
 <intrinsic tech='SSE' sequence='true' rettype='__m128' name='_mm_load1_ps'>
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='float*' />
+	<parameter varname='mem_addr' type='float const*' />
+	<description>Load a single-precision (32-bit) floating-point element from memory into all elements of "dst".</description>
+	<description code='true'>
+dst[31:0] := MEM[mem_addr+31:mem_addr]
+dst[63:32] := MEM[mem_addr+31:mem_addr]
+dst[95:64] := MEM[mem_addr+31:mem_addr]
+dst[127:96] := MEM[mem_addr+31:mem_addr]
+	</description>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_load_ps1 / movss -->
+<intrinsic tech='SSE' sequence='true' rettype='__m128' name='_mm_load_ps1'>
+	<CPUID>SSE</CPUID>
+	<category>Load</category>
+	<parameter varname='mem_addr' type='float const*' />
 	<description>Load a single-precision (32-bit) floating-point element from memory into all elements of "dst".</description>
 	<description code='true'>
 dst[31:0] := MEM[mem_addr+31:mem_addr]
@@ -1848,7 +2259,7 @@ dst[127:96] := MEM[mem_addr+31:mem_addr]
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_load_ps'>
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='float*' />
+	<parameter varname='mem_addr' type='float const*' />
 	<description>Load 128-bits (composed of 4 packed single-precision (32-bit) floating-point elements) from memory into "dst".
 	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
 	<description code='true'>
@@ -1863,7 +2274,7 @@ dst[127:0] := MEM[mem_addr+127:mem_addr]
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_loadu_ps'>
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='float*' />
+	<parameter varname='mem_addr' type='float const*' />
 	<description>Load 128-bits (composed of 4 packed single-precision (32-bit) floating-point elements) from memory into "dst".
 	"mem_addr" does not need to be aligned on any particular boundary.</description>
 	<description code='true'>
@@ -1878,7 +2289,7 @@ dst[127:0] := MEM[mem_addr+127:mem_addr]
 <intrinsic tech='SSE' sequence='true' rettype='__m128' name='_mm_loadr_ps'>
 	<CPUID>SSE</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='float*' />
+	<parameter varname='mem_addr' type='float const*' />
 	<description>Load 4 single-precision (32-bit) floating-point elements from memory into "dst" in reverse order. mem_addr must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
 	<description code='true'>
 dst[31:0] := MEM[mem_addr+127:mem_addr+96]
@@ -1970,6 +2381,23 @@ MEM[mem_addr+127:mem_addr+96] := a[31:0]
 </intrinsic>
 
 
+<!-- _mm_store_ps1 / movss -->
+<intrinsic tech='SSE' sequence='true' rettype='void' name='_mm_store_ps1'>
+	<CPUID>SSE</CPUID>
+	<category>Store</category>
+	<parameter varname='mem_addr' type='float*' />
+	<parameter varname='a' type='__m128' />	
+	<description>Store the lower single-precision (32-bit) floating-point element from "a" into 4 contiguous elements in memory. "mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
+	<description code='true'>
+MEM[mem_addr+31:mem_addr] := a[31:0]
+MEM[mem_addr+63:mem_addr+32] := a[31:0]
+MEM[mem_addr+95:mem_addr+64] := a[31:0]
+MEM[mem_addr+127:mem_addr+96] := a[31:0]
+	</description>
+	<header>xmmintrin.h</header>
+</intrinsic>
+
+
 <!-- _mm_store_ps / movaps -->
 <intrinsic tech='SSE' rettype='void' name='_mm_store_ps'>
 	<CPUID>SSE</CPUID>
@@ -2041,10 +2469,10 @@ dst[127:96] := a[127:96]
 <!-- _mm_shuffle_ps / shufps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_shuffle_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
-	<parameter varname='imm' type='int' />
+	<parameter varname='imm' type='unsigned int' />
 	<description>Shuffle single-precision (32-bit) floating-point elements in "a" using the control in "imm", and store the results in "dst".</description>
 	<description code='true'>
 SELECT4(src, control){
@@ -2070,7 +2498,7 @@ dst[127:96] := SELECT4(b[127:0], imm[7:6])
 <!-- _mm_unpackhi_ps / unpckhps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_unpackhi_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
 	<description>Unpack and interleave single-precision (32-bit) floating-point elements from the high half "a" and "b", and store the results in "dst". </description>
@@ -2093,7 +2521,7 @@ dst[127:0] := INTERLEAVE_HIGH_DWORDS(a[127:0], b[127:0])
 <!-- _mm_unpacklo_ps / unpcklps -->
 <intrinsic tech='SSE' vexEq='TRUE' rettype='__m128' name='_mm_unpacklo_ps'>
 	<CPUID>SSE</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128' />
 	<parameter varname='b' type='__m128' />
 	<description>Unpack and interleave single-precision (32-bit) floating-point elements from the low half of "a" and "b", and store the results in "dst". </description>

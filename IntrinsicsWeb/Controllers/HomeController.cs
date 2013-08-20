@@ -188,6 +188,7 @@ namespace IntrinsicsWeb.Controllers
             ParseIntrinsicsXml("SSE4.2.xml", intrinsics);
             ParseIntrinsicsXml("AVX.xml", intrinsics);
             ParseIntrinsicsXml("AVX2.xml", intrinsics);
+            ParseIntrinsicsXml("AVX512.xml", intrinsics);
             ParseIntrinsicsXml("FMA.xml", intrinsics);
             ParseIntrinsicsXml("Other.xml", intrinsics);
 

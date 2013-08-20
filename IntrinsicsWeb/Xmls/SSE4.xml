@@ -5,7 +5,7 @@
 <!-- _mm_blend_pd / blendpd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_blend_pd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128d'/>
 	<parameter varname='b' type='__m128d'/>
 	<parameter varname='imm' type='const int'/>
@@ -28,7 +28,7 @@ ENDFOR
 <!-- _mm_blend_ps / blendps -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_blend_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='b' type='__m128'/>
 	<parameter varname='imm' type='const int'/>
@@ -51,7 +51,7 @@ ENDFOR
 <!-- _mm_blendv_pd / blendvpd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_blendv_pd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128d'/>
 	<parameter varname='b' type='__m128d'/>
 	<parameter varname='mask' type='__m128d'/>
@@ -74,7 +74,7 @@ ENDFOR
 <!-- _mm_blendv_ps / blendvps -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_blendv_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='b' type='__m128'/>
 	<parameter varname='mask' type='__m128'/>
@@ -97,7 +97,7 @@ ENDFOR
 <!-- _mm_blendv_epi8 / pblendvb -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_blendv_epi8'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<parameter varname='mask' type='__m128i'/>
@@ -120,7 +120,7 @@ ENDFOR
 <!-- _mm_blend_epi16 / pblendw -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_blend_epi16'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
@@ -215,15 +215,14 @@ dst[127:0] := DP(a[127:0], b[127:0], imm[7:0])
 
 
 <!-- _mm_extract_ps / extractps -->
-<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128' name='_mm_extract_ps'>
+<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Extract a single-precision (32-bit) floating-point element from "a", selected with "imm", and store the result in the lower element of "dst".</description>
 	<description code='true'>
 dst[31:0] := (a[127:0] &gt;&gt; (imm[1:0] * 32))[31:0]
-dst[MAX:32] := 0
 	</description>
 	<mnemonic parameters='reg/m32, xmm2, imm8' base='extractps'/>
   	<header>smmintrin.h</header>
@@ -233,7 +232,7 @@ dst[MAX:32] := 0
 <!-- _mm_extract_epi8 / pextrb -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi8'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Extract an 8-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
@@ -249,7 +248,7 @@ dst[31:8] := 0
 <!-- _mm_extract_epi32 / pextrd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi32'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Extract a 32-bit integer from "a", selected with "imm", and store the result in "dst".</description>
@@ -264,7 +263,7 @@ dst[31:0] := (a[127:0] &gt;&gt; (imm[1:0] * 32))[31:0]
 <!-- _mm_extract_epi64 / pextrq -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__int64' name='_mm_extract_epi64'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Extract a 64-bit integer from "a", selected with "imm", and store the result in "dst".</description>
@@ -276,30 +275,14 @@ dst[63:0] := (a[127:0] &gt;&gt; (imm[0] * 64))[63:0]
 </intrinsic>
 
 
-<!-- _mm_extract_epi16 / pextrw -->
-<intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_extract_epi16'>
-	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
-	<parameter varname='a' type='__m128i'/>
-	<parameter varname='imm' type='const int'/>
-	<description>Extract a 16-bit integer from "a", selected with "imm", and store the result in the lower element of "dst".</description>
-	<description code='true'>
-dst[15:0] := (a[127:0] &gt;&gt; (imm[2:0] * 16))[15:0]
-dst[31:16] := 0
-	</description>
-	<mnemonic parameters='reg/m16, xmm2, imm8' base='pextrw'/>
-  	<header>emmintrin.h</header>
-</intrinsic>
-
-
 <!-- _mm_insert_ps / insertps -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_insert_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='b' type='__m128'/>
 	<parameter varname='imm' type='const int'/>	
-	<description>Copy "a" to "tmp", then insert a single-precision (32-bit) floating-point element from "b" into "tmp" using the control in "imm".  Store "tmp" to "dst" using the zeromask in "imm" (elements are zeroed out when the corresponding bit is not set). </description>
+	<description>Copy "a" to "tmp", then insert a single-precision (32-bit) floating-point element from "b" into "tmp" using the control in "imm".  Store "tmp" to "dst" using the mask in "imm" (elements are zeroed out when the corresponding bit is set). </description>
 	<description code='true'>
 tmp2[127:0] := a[127:0]
 CASE (imm[7:6]) of
@@ -317,9 +300,9 @@ ESAC
 FOR j := 0 to 3
 	i := j*32
 	IF imm[j]
-		dst[i+31:i] := tmp[i+31:i]
-	ELSE
 		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := tmp2[i+31:i]
 	FI
 ENDFOR
 	</description>
@@ -331,7 +314,7 @@ ENDFOR
 <!-- _mm_insert_epi8 / pinsrb -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi8'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='i' type='int'/>
 	<parameter varname='imm' type='const int'/>
@@ -349,7 +332,7 @@ dst[sel+7:sel] := i[7:0]
 <!-- _mm_insert_epi32 / pinsrd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi32'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='i' type='int'/>
 	<parameter varname='imm' type='const int'/>
@@ -367,7 +350,7 @@ dst[sel+31:sel] := i[31:0]
 <!-- _mm_insert_epi64 / pinsrq -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_insert_epi64'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='i' type='__int64'/>
 	<parameter varname='imm' type='const int'/>
@@ -385,7 +368,7 @@ dst[sel+63:sel] := i[63:0]
 <!-- _mm_max_epi8 / pmaxsb -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epi8'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed 8-bit integers in "a" and "b", and store packed maximum values in "dst". </description>
@@ -407,7 +390,7 @@ ENDFOR
 <!-- _mm_max_epi32 / pmaxsd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epi32'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed 32-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -429,7 +412,7 @@ ENDFOR
 <!-- _mm_max_epu32 / pmaxud -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epu32'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed unsigned 32-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -451,7 +434,7 @@ ENDFOR
 <!-- _mm_max_epu16 / pmaxuw -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_max_epu16'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed unsigned 16-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -473,7 +456,7 @@ ENDFOR
 <!-- _mm_min_epi8 / pminsb -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epi8'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed 8-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
@@ -495,7 +478,7 @@ ENDFOR
 <!-- _mm_min_epi32 / pminsd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epi32'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed 32-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
@@ -517,7 +500,7 @@ ENDFOR
 <!-- _mm_min_epu32 / pminud -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epu32'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed unsigned 32-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
@@ -539,7 +522,7 @@ ENDFOR
 <!-- _mm_min_epu16 / pminuw -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_min_epu16'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed unsigned 16-bit integers in "a" and "b", and store packed minimum values in "dst".</description>
@@ -933,6 +916,7 @@ FI
 
 <!-- _mm_test_all_zeros / ptest -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_test_all_zeros'>
+	<type>Integer</type>
 	<CPUID>SSE4.1</CPUID>
 	<category>Logical</category>
 	<parameter varname='a' type='__m128i'/>
@@ -953,6 +937,7 @@ RETURN ZF
 
 <!-- _mm_test_mix_ones_zeros / ptest -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_test_mix_ones_zeros'>
+	<type>Integer</type>
 	<CPUID>SSE4.1</CPUID>
 	<category>Logical</category>
 	<parameter varname='a' type='__m128i'/>
@@ -982,6 +967,7 @@ FI
 
 <!-- _mm_test_all_ones / pcmpeqd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' sequence='true' rettype='int' name='_mm_test_all_ones'>
+	<type>Integer</type>
 	<CPUID>SSE4.1</CPUID>
 	<category>Logical</category>
 	<parameter varname='a' type='__m128i'/>
@@ -1003,7 +989,7 @@ RETURN CF
 <!-- _mm_round_pd / roundpd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_round_pd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128d'/>
 	<parameter varname='rounding' type='int'/>
 	<description>Round the packed double-precision (64-bit) floating-point elements in "a" using the "rounding" parameter, and store the results as packed double-precision floating-point elements in "dst".
@@ -1023,7 +1009,7 @@ ENDFOR
 <!-- _mm_floor_pd / roundpd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_floor_pd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128d'/>
 	<description>Round the packed double-precision (64-bit) floating-point elements in "a" down to an integer value, and store the results as packed double-precision floating-point elements in "dst".</description>
 	<description code='true'>
@@ -1040,7 +1026,7 @@ ENDFOR
 <!-- _mm_ceil_pd / roundpd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_ceil_pd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128d'/>
 	<description>Round the packed double-precision (64-bit) floating-point elements in "a" up to an integer value, and store the results as packed double-precision floating-point elements in "dst".</description>
 	<description code='true'>
@@ -1057,7 +1043,7 @@ ENDFOR
 <!-- _mm_round_ps / roundps -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_round_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='rounding' type='int'/>
 	<description>Round the packed single-precision (32-bit) floating-point elements in "a" using the "rounding" parameter, and store the results as packed single-precision floating-point elements in "dst".
@@ -1077,7 +1063,7 @@ ENDFOR
 <!-- _mm_floor_ps / roundps -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_floor_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128'/>
 	<description>Round the packed single-precision (32-bit) floating-point elements in "a" down to an integer value, and store the results as packed single-precision floating-point elements in "dst".</description>
 	<description code='true'>
@@ -1094,7 +1080,7 @@ ENDFOR
 <!-- _mm_ceil_ps / roundps -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_ceil_ps'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128'/>
 	<description>Round the packed single-precision (32-bit) floating-point elements in "a" up to an integer value, and store the results as packed single-precision floating-point elements in "dst".</description>
 	<description code='true'>
@@ -1111,7 +1097,7 @@ ENDFOR
 <!-- _mm_round_sd / roundsd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_round_sd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128d'/>
 	<parameter varname='b' type='__m128d'/>
 	<parameter varname='rounding' type='int'/>
@@ -1130,7 +1116,7 @@ dst[127:64] := a[127:64]
 <!-- _mm_floor_sd / roundsd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_floor_sd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128d'/>
 	<parameter varname='b' type='__m128d'/>
 	<description>Round the lower double-precision (64-bit) floating-point element in "b" down to an integer value, store the result as a double-precision floating-point element in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
@@ -1146,7 +1132,7 @@ dst[127:64] := a[127:64]
 <!-- _mm_ceil_sd / roundsd -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128d' name='_mm_ceil_sd'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128d'/>
 	<parameter varname='b' type='__m128d'/>
 	<description>Round the lower double-precision (64-bit) floating-point element in "b" up to an integer value, store the result as a double-precision floating-point element in the lower element of "dst", and copy the upper element from "a" to the upper element of "dst".</description>
@@ -1162,7 +1148,7 @@ dst[127:64] := a[127:64]
 <!-- _mm_round_ss / roundss -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_round_ss'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='b' type='__m128'/>
 	<parameter varname='rounding' type='int'/>
@@ -1181,7 +1167,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_floor_ss / roundss -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_floor_ss'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='b' type='__m128'/>
 	<description>Round the lower single-precision (32-bit) floating-point element in "b" down to an integer value, store the result as a single-precision floating-point element in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
@@ -1197,7 +1183,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_ceil_ss / roundss -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128' name='_mm_ceil_ss'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128'/>
 	<parameter varname='b' type='__m128'/>
 	<description>Round the lower single-precision (32-bit) floating-point element in "b" up to an integer value, store the result as a single-precision floating-point element in the lower element of "dst", and copy the upper 3 packed elements from "a" to the upper elements of "dst".</description>
@@ -1213,7 +1199,7 @@ dst[127:32] := a[127:32]
 <!-- _mm_minpos_epu16 / phminposuw -->
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_minpos_epu16'>
 	<CPUID>SSE4.1</CPUID>
-	<category>Application-Targeted</category>
+	<category>Miscellaneous</category>
 	<category>Miscellaneous</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Horizontally compute the minimum amongst the packed unsigned 16-bit integers in "a", store the minimum and index in "dst", and zero the remaining bits in "dst".</description>
@@ -1240,7 +1226,7 @@ dst[127:19] := 0
 <intrinsic tech='SSE4.1' vexEq='TRUE' rettype='__m128i' name='_mm_mpsadbw_epu8'>
 	<CPUID>SSE4.1</CPUID>
 	<category>Arithmetic</category>
-	<category>Application-Targeted</category>
+	<category>Miscellaneous</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>

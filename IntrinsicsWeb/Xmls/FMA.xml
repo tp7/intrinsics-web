@@ -354,7 +354,7 @@ dst[MAX:128] := 0
 </intrinsic>
 
 
-<!-- _mm_fmsub_ss / vfmsub231sd -->
+<!-- _mm_fmsub_ss / vfmsub231ss -->
 <intrinsic tech='FMA' rettype='__m128' name='_mm_fmsub_ss'>
 	<CPUID>FMA</CPUID>
 	<category>Arithmetic</category>
@@ -367,9 +367,9 @@ dst[31:0] := (a[31:0] * b[31:0]) - c[31:0]
 dst[127:32] := a[127:32]
 dst[MAX:128] := 0
 	</description>
-	<mnemonic base='vfmsub132sd' parameters='xmm0, xmm1, xmm2/m32' />
-	<mnemonic base='vfmsub213sd' parameters='xmm0, xmm1, xmm2/m32' />
-	<mnemonic base='vfmsub231sd' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmsub132ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmsub213ss' parameters='xmm0, xmm1, xmm2/m32' />
+	<mnemonic base='vfmsub231ss' parameters='xmm0, xmm1, xmm2/m32' />
 	<header>immintrin.h</header>
 </intrinsic>
 

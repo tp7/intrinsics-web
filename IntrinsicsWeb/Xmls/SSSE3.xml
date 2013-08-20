@@ -5,7 +5,7 @@
 <!-- _mm_abs_pi8 / pabsb -->
 <intrinsic tech='SSSE3' rettype='__m64' name='_mm_abs_pi8'>
 	<CPUID>SSSE3</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64'/>
 	<description>Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -22,7 +22,7 @@ ENDFOR
 <!-- _mm_abs_epi8 / pabsb -->
 <intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_abs_epi8'>
 	<CPUID>SSSE3</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -39,7 +39,7 @@ ENDFOR
 <!-- _mm_abs_pi16 / pabsw -->
 <intrinsic tech='SSSE3' rettype='__m64' name='_mm_abs_pi16'>
 	<CPUID>SSSE3</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64'/>
 	<description>Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -56,7 +56,7 @@ ENDFOR
 <!-- _mm_abs_epi16 / pabsw -->
 <intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_abs_epi16'>
 	<CPUID>SSSE3</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -73,7 +73,7 @@ ENDFOR
 <!-- _mm_abs_pi32 / pabsd -->
 <intrinsic tech='SSSE3' rettype='__m64' name='_mm_abs_pi32'>
 	<CPUID>SSSE3</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m64'/>
 	<description>Compute the absolute value of packed 32-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -90,7 +90,7 @@ ENDFOR
 <!-- _mm_abs_epi32 / pabsd -->
 <intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_abs_epi32'>
 	<CPUID>SSSE3</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Compute the absolute value of packed 32-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -107,7 +107,7 @@ ENDFOR
 <!-- _mm_shuffle_epi8 / pabsd -->
 <intrinsic tech='SSSE3' vexEq='TRUE' rettype='__m128i' name='_mm_shuffle_epi8'>
 	<CPUID>SSSE3</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<description>Shuffle packed 8-bit integers in "a" according to shuffle control mask in the corresponding 8-bit element of "b", and store the results in "dst".</description>
@@ -131,7 +131,7 @@ ENDFOR
 <!-- _mm_shuffle_pi8 / pshufb -->
 <intrinsic tech='SSSE3' rettype='__m64' name='_mm_shuffle_pi8'>
 	<CPUID>SSSE3</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Shuffle packed 8-bit integers in "a" according to shuffle control mask in the corresponding 8-bit element of "b", and store the results in "dst".</description>

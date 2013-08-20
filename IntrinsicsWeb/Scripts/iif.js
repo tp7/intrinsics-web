@@ -47,6 +47,7 @@ function IifController($scope, $window) {
         'SSE4.2',
         'AVX',
         'AVX2',
+        'AVX-512',
         'FMA',
         'Misc',
         'Bit Manipulation',
@@ -56,25 +57,6 @@ function IifController($scope, $window) {
     ].map(toSelectItem);
 
     $scope.types = ['Floating point', 'Integer', 'Inter-Type', 'Other'].map(toSelectItem);
-
-    $scope.categories = [
-        'Application-Targeted',
-        'Arithmetic',
-        'Bit Manipulation',
-        'Cast',
-        'Compare',
-        'Convert',
-        'General Support',
-        'Load',
-        'Logical',
-        'Miscellaneous',
-        'Move',
-        'OS-Targeted',
-        'Set',
-        'Shift',
-        'Store',
-        'String Compare'
-    ].map(toSelectItem);
 
     $scope.allCategoriesSelected = true;
     $scope.allTypesSelected = true;
@@ -92,6 +74,12 @@ function IifController($scope, $window) {
     }).filter(function (f) {
         return !!f;
     }).unique().sort().reverse().map(toSelectItem);
+
+    $scope.categories = buffer.map(function (i) {
+        return i.category;
+    }).filter(function (f) {
+        return !!f;
+    }).unique().sort().map(toSelectItem);
 
     $scope.items = buffer;
 

@@ -82,6 +82,9 @@
     </Content>
     <Content Include="Xmls\AVX.xml" />
     <Content Include="Xmls\AVX2.xml" />
+    <Content Include="Xmls\AVX512.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Xmls\FMA.xml" />
     <Content Include="Xmls\LatencyThroughput.xml">
       <SubType>Designer</SubType>

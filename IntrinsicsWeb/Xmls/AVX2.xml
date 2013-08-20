@@ -5,7 +5,7 @@
 <!-- _mm256_abs_epi8 / vpabsb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_abs_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<description>Compute the absolute value of packed 8-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -23,7 +23,7 @@ dst[MAX:256] := 0
 <!-- _mm256_abs_epi16 / vpabsw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_abs_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<description>Compute the absolute value of packed 16-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -41,7 +41,7 @@ dst[MAX:256] := 0
 <!-- _mm256_abs_epi32 / vpabsd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_abs_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<description>Compute the absolute value of packed 32-bit integers in "a", and store the unsigned results in "dst". </description>
 	<description code='true'>
@@ -263,7 +263,7 @@ dst[MAX:256] := 0
 <!-- _mm256_avg_epu8 / vpavgb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_avg_epu8'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Probability/Statistics</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Average packed unsigned 8-bit integers in "a" and "b", and store the results in "dst".</description>
@@ -282,7 +282,7 @@ dst[MAX:256] := 0
 <!-- _mm256_avg_epu16 / vpavgw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_avg_epu16'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Probability/Statistics</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Average packed unsigned 16-bit integers in "a" and "b", and store the results in "dst".</description>
@@ -301,7 +301,7 @@ dst[MAX:256] := 0
 <!-- _mm256_blend_epi16 / vpblendw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_blend_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<parameter varname='imm' type='const int'/>
@@ -325,7 +325,7 @@ dst[MAX:256] := 0
 <!-- _mm_blend_epi32 / vpblendd -->
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_blend_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
@@ -349,7 +349,7 @@ dst[MAX:128] := 0
 <!-- _mm256_blend_epi32 / vpblendd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_blend_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<parameter varname='imm' type='const int'/>
@@ -373,7 +373,7 @@ dst[MAX:256] := 0
 <!-- _mm256_blendv_epi8 / vpblendvb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_blendv_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<parameter varname='mask' type='__m256i'/>
@@ -397,7 +397,7 @@ dst[MAX:256] := 0
 <!-- _mm_broadcastb_epi8 / vpbroadcastb -->
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_broadcastb_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast the low packed 8-bit integer from "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -415,8 +415,8 @@ dst[MAX:128] := 0
 <!-- _mm256_broadcastb_epi8 / vpbroadcastb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_broadcastb_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
-	<parameter varname='a' type='__m256i'/>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast the low packed 8-bit integer from "a" to all elements of "dst".</description>
 	<description code='true'>
 FOR j := 0 to 31
@@ -433,7 +433,7 @@ dst[MAX:256] := 0
 <!-- _mm_broadcastd_epi32 / vpbroadcastd -->
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_broadcastd_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast the low packed 32-bit integer from "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -451,8 +451,8 @@ dst[MAX:128] := 0
 <!-- _mm256_broadcastd_epi32 / vpbroadcastd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_broadcastd_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
-	<parameter varname='a' type='__m256i'/>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast the low packed 32-bit integer from "a" to all elements of "dst".</description>
 	<description code='true'>
 FOR j := 0 to 7
@@ -469,7 +469,7 @@ dst[MAX:256] := 0
 <!-- _mm_broadcastq_epi64 / vpbroadcastq -->
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_broadcastq_epi64'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast the low packed 64-bit integer from "a" to all elements of "dst". </description>
 	<description code='true'>
@@ -487,8 +487,8 @@ dst[MAX:128] := 0
 <!-- _mm256_broadcastq_epi64 / vpbroadcastq -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_broadcastq_epi64'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
-	<parameter varname='a' type='__m256i'/>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast the low packed 64-bit integer from "a" to all elements of "dst". </description>
 	<description code='true'>
 FOR j := 0 to 3
@@ -505,7 +505,7 @@ dst[MAX:256] := 0
 <!-- _mm_broadcastsd_pd / movddup -->
 <intrinsic tech='AVX2' vexEq='TRUE' rettype='__m128d' name='_mm_broadcastsd_pd'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128d'/>
 	<description>Broadcast the low double-precision (64-bit) floating-point element from "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -523,7 +523,7 @@ dst[MAX:128] := 0
 <!-- _mm256_broadcastsd_pd / vbroadcastsd -->
 <intrinsic tech='AVX2' rettype='__m256d' name='_mm256_broadcastsd_pd'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128d'/>
 	<description>Broadcast the low double-precision (64-bit) floating-point element from "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -541,7 +541,7 @@ dst[MAX:256] := 0
 <!-- _mm256_broadcastsi128_si256 / vbroadcasti128 -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_broadcastsi128_si256'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast 128 bits of integer data from "a" to all 128-bit lanes in "dst".
 	</description>
@@ -558,7 +558,7 @@ dst[MAX:256] := 0
 <!-- _mm_broadcastss_ps / vbroadcastss -->
 <intrinsic tech='AVX2' rettype='__m128' name='_mm_broadcastss_ps'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128'/>
 	<description>Broadcast the low single-precision (32-bit) floating-point element from "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -576,7 +576,7 @@ dst[MAX:128] := 0
 <!-- _mm256_broadcastss_ps / vbroadcastss -->
 <intrinsic tech='AVX2' rettype='__m256' name='_mm256_broadcastss_ps'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128'/>
 	<description>Broadcast the low single-precision (32-bit) floating-point element from "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -594,7 +594,7 @@ dst[MAX:256] := 0
 <!-- _mm_broadcastw_epi16 / vpbroadcastw -->
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_broadcastw_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast 16-bit integer "a" to all elements of "dst".</description>
 	<description code='true'>
@@ -612,8 +612,8 @@ dst[MAX:128] := 0
 <!-- _mm256_broadcastw_epi16 / vpbroadcastw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_broadcastw_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
-	<parameter varname='a' type='__m256i'/>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m128i'/>
 	<description>Broadcast 16-bit integer "a" to all elements of "dst".</description>
 	<description code='true'>
 FOR j := 0 to 15
@@ -1010,9 +1010,9 @@ dst[MAX:256] := 0
 <!-- _mm256_extracti128_si256 / vextracti128 -->
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm256_extracti128_si256'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Extract 128 bits (composed of integer data) from "a", selected with "imm", and store the result in "dst".</description>
 	<description code='true'>
 CASE imm of
@@ -1248,7 +1248,7 @@ dst[MAX:256] := 0
 	<category>Load</category>
 	<parameter varname='base_addr' type='float const*'/>
 	<parameter varname='vindex' type='__m128i'/>
-	<parameter varname='scale' type='const inst'/>
+	<parameter varname='scale' type='const int'/>
 	<description>Gather single-precision (32-bit) floating-point elements from memory using 32-bit indices. 32-bit elements are loaded from addresses starting at "base_addr" and offset by each 32-bit element in "vindex" (each index is scaled by the factor in "scale"). Gathered elements are merged into "dst". "scale" should be 1, 2, 4 or 8.</description>
 	<description code='true'>
 FOR j := 0 to 3
@@ -1330,7 +1330,7 @@ dst[MAX:256] := 0
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_i32gather_epi64'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='base_addr' type='int const*'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
 	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='scale' type='const int'/>
 	<description>Gather 64-bit integers from memory using 32-bit indices. 64-bit elements are loaded from addresses starting at "base_addr" and offset by each 32-bit element in "vindex" (each index is scaled by the factor in "scale"). Gathered elements are merged into "dst". "scale" should be 1, 2, 4 or 8.
@@ -1352,8 +1352,8 @@ dst[MAX:128] := 0
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_i32gather_epi64'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='base_addr' type='int const*'/>
-	<parameter varname='vindex' type='__m256i'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
+	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='scale' type='const int'/>
 	<description>Gather 64-bit integers from memory using 32-bit indices. 64-bit elements are loaded from addresses starting at "base_addr" and offset by each 32-bit element in "vindex" (each index is scaled by the factor in "scale"). Gathered elements are merged into "dst". "scale" should be 1, 2, 4 or 8.
 	</description>
@@ -1508,7 +1508,7 @@ dst[MAX:128] := 0
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_i64gather_epi64'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='base_addr' type='int const*'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
 	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='scale' type='const int'/>
 	<description>Gather 64-bit integers from memory using 64-bit indices. 64-bit elements are loaded from addresses starting at "base_addr" and offset by each 64-bit element in "vindex" (each index is scaled by the factor in "scale"). Gathered elements are merged into "dst". "scale" should be 1, 2, 4 or 8.
@@ -1529,7 +1529,7 @@ dst[MAX:128] := 0
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_i64gather_epi64'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='base_addr' type='int const*'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
 	<parameter varname='vindex' type='__m256i'/>
 	<parameter varname='scale' type='const int'/>
 	<description>Gather 64-bit integers from memory using 64-bit indices. 64-bit elements are loaded from addresses starting at "base_addr" and offset by each 64-bit element in "vindex" (each index is scaled by the factor in "scale"). Gathered elements are merged into "dst". "scale" should be 1, 2, 4 or 8.
@@ -1549,10 +1549,10 @@ dst[MAX:256] := 0
 <!-- _mm256_inserti128_si256 / vinserti128 -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_inserti128_si256'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m128i'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Copy "a" to "dst", then insert 128 bits (composed of integer data) from "b" into "dst" at the location specified by "imm".</description>
 	<description code='true'>
 dst[255:0] := a[255:0]
@@ -1644,7 +1644,7 @@ dst[MAX:128] := 0
 	<category>Load</category>
 	<parameter varname='src' type='__m256d'/>
 	<parameter varname='base_addr' type='double const*'/>
-	<parameter varname='vindex' type='__m256i'/>
+	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='mask' type='__m256d'/>
 	<parameter varname='scale' type='const int'/>	
 	<description>
@@ -1794,7 +1794,7 @@ dst[MAX:256] := 0
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
 	<parameter varname='src' type='__m128i'/>
-	<parameter varname='base_addr' type='int const*'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
 	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='mask' type='__m128i'/>
 	<parameter varname='scale' type='const int'/>
@@ -1825,8 +1825,8 @@ dst[MAX:128] := 0
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
 	<parameter varname='src' type='__m256i'/>
-	<parameter varname='base_addr' type='int const*'/>
-	<parameter varname='vindex' type='__m256i'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
+	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='mask' type='__m256i'/>
 	<parameter varname='scale' type='const int'/>
 	<description>
@@ -2040,7 +2040,7 @@ dst[MAX:128] := 0
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
 	<parameter varname='src' type='__m128i'/>
-	<parameter varname='base_addr' type='int const*'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
 	<parameter varname='vindex' type='__m128i'/>
 	<parameter varname='mask' type='__m128i'/>
 	<parameter varname='scale' type='const int'/>
@@ -2070,7 +2070,7 @@ dst[MAX:128] := 0
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
 	<parameter varname='src' type='__m256i'/>
-	<parameter varname='base_addr' type='int const*'/>
+	<parameter varname='base_addr' type='__int64 const*'/>
 	<parameter varname='vindex' type='__m256i'/>
 	<parameter varname='mask' type='__m256i'/>
 	<parameter varname='scale' type='const int'/>
@@ -2123,7 +2123,7 @@ dst[MAX:128] := 0
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_maskload_epi32'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='const int*'/>
+	<parameter varname='mem_addr' type='int const*'/>
 	<parameter varname='mask' type='__m256i'/>		
 	<description>Load packed 32-bit integers from memory into "dst" using "mask" (elements are zeroed out when the highest bit is not set in the corresponding element).
 	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
@@ -2147,7 +2147,7 @@ dst[MAX:256] := 0
 <intrinsic tech='AVX2' rettype='__m128i' name='_mm_maskload_epi64'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='int const*'/>
+	<parameter varname='mem_addr' type='__int64 const*'/>
 	<parameter varname='mask' type='__m128i'/>
 	<description>Load packed 64-bit integers from memory into "dst" using "mask" (elements are zeroed out when the highest bit is not set in the corresponding element).
 	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.</description>
@@ -2197,7 +2197,7 @@ dst[MAX:256] := 0
 	<category>Store</category>
 	<parameter varname='mem_addr' type='int*'/>
 	<parameter varname='mask' type='__m128i'/>
-	<parameter varname='a' type='__m128'/>
+	<parameter varname='a' type='__m128i'/>
 	<description>Store packed 32-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element).
 	"mem_addr" must be aligned on a 16-byte boundary or a general-protection exception will be generated.
 	</description>
@@ -2266,7 +2266,7 @@ ENDFOR
 	<category>Store</category>
 	<parameter varname='mem_addr' type='__int64*'/>
 	<parameter varname='mask' type='__m256i'/>
-	<parameter varname='a' type='__m256d'/>
+	<parameter varname='a' type='__m256i'/>
 	<description>Store packed 64-bit integers from "a" into memory using "mask" (elements are not stored when the highest bit is not set in the corresponding element).
 	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.
 	</description>
@@ -2286,7 +2286,7 @@ ENDFOR
 <!-- _mm256_max_epi8 / vpmaxsb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_max_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed 8-bit integers in "a" and "b", and store packed maximum values in "dst". </description>
@@ -2309,7 +2309,7 @@ dst[MAX:256] := 0
 <!-- _mm256_max_epi16 / vpmaxsw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_max_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed 16-bit integers in "a" and "b", and store packed maximum values in "dst".
@@ -2333,7 +2333,7 @@ dst[MAX:256] := 0
 <!-- _mm256_max_epi32 / vpmaxsd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_max_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed 32-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -2356,7 +2356,7 @@ dst[MAX:256] := 0
 <!-- _mm256_max_epu8 / vpmaxub -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_max_epu8'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed maximum values in "dst".
@@ -2380,7 +2380,7 @@ dst[MAX:256] := 0
 <!-- _mm256_max_epu16 / vpmaxuw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_max_epu16'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed unsigned 16-bit integers in "a" and "b", and store packed maximum values in "dst".
@@ -2404,7 +2404,7 @@ dst[MAX:256] := 0
 <!-- _mm256_max_epu32 / vpmaxud -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_max_epu32'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed unsigned 32-bit integers in "a" and "b", and store packed maximum values in "dst".</description>
@@ -2427,7 +2427,7 @@ dst[MAX:256] := 0
 <!-- _mm256_min_epi8 / vpminsb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_min_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed 8-bit integers in "a" and "b", and store packed minimum values in "dst".
@@ -2451,7 +2451,7 @@ dst[MAX:256] := 0
 <!-- _mm256_min_epi16 / vpminsw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_min_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed 16-bit integers in "a" and "b", and store packed minimum values in "dst".
@@ -2475,7 +2475,7 @@ dst[MAX:256] := 0
 <!-- _mm256_min_epi32 / vpminsd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_min_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed 32-bit integers in "a" and "b", and store packed minimum values in "dst".
@@ -2499,7 +2499,7 @@ dst[MAX:256] := 0
 <!-- _mm256_min_epu8 / vpminub -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_min_epu8'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed unsigned 8-bit integers in "a" and "b", and store packed minimum values in "dst".
@@ -2523,7 +2523,7 @@ dst[MAX:256] := 0
 <!-- _mm256_min_epu16 / vpminuw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_min_epu16'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed unsigned 16-bit integers in "a" and "b", and store packed minimum values in "dst".
@@ -2547,7 +2547,7 @@ dst[MAX:256] := 0
 <!-- _mm256_min_epu32 / vpminud -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_min_epu32'>
 	<CPUID>AVX2</CPUID>
-	<category>Arithmetic</category>
+	<category>Special Math Functions</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compare packed unsigned 32-bit integers in "a" and "b", and store packed minimum values in "dst".
@@ -2589,7 +2589,8 @@ ENDFOR
 
 <!-- _mm256_mpsadbw_epu8 / vmpsadbw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_mpsadbw_epu8'>
-	<CPUID>AVX2</CPUID>	<category>Application-Targeted</category>
+	<CPUID>AVX2</CPUID>
+	<category>Miscellaneous</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<parameter varname='imm' type='const int'/>
@@ -2934,10 +2935,10 @@ dst[MAX:256] := 0
 <!-- _mm256_permute2x128_si256 / vperm2i128 -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_permute2x128_si256'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Shuffle 128-bits (composed of integer data) selected by "imm" from "a" and "b", and store the results in "dst". </description>
 	<description code='true'>
 SELECT4(src1, src2, control){
@@ -2965,9 +2966,9 @@ dst[MAX:256] := 0
 <!-- _mm256_permute4x64_epi64 / vpermq -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_permute4x64_epi64'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Shuffle 64-bit integers in "a" across lanes using the control in "imm", and store the results in "dst".</description>
 	<description code='true'>
 SELECT4(src, control){
@@ -2994,9 +2995,9 @@ dst[MAX:256] := 0
 <!-- _mm256_permute4x64_pd / vpermpd -->
 <intrinsic tech='AVX2' rettype='__m256d' name='_mm256_permute4x64_pd'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256d'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Shuffle double-precision (64-bit) floating-point elements in "a" across lanes using the control in "imm", and store the results in "dst".</description>
 	<description code='true'>
 SELECT4(src, control){
@@ -3023,7 +3024,7 @@ dst[MAX:256] := 0
 <!-- _mm256_permutevar8x32_epi32 / vpermd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_permutevar8x32_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='idx' type='__m256i'/>
 	<description>Shuffle 32-bit integers in "a" across lanes using the corresponding index in "idx", and store the results in "dst".
@@ -3044,9 +3045,9 @@ dst[MAX:256] := 0
 <!-- _mm256_permutevar8x32_ps / vpermps -->
 <intrinsic tech='AVX2' rettype='__m256' name='_mm256_permutevar8x32_ps'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256'/>
-	<parameter varname='idx' type='__m256'/>
+	<parameter varname='idx' type='__m256i'/>
 	<description>Shuffle single-precision (32-bit) floating-point elements in "a" across lanes using the corresponding index in "idx".</description>
 	<description code='true'>
 FOR j := 0 to 7
@@ -3064,7 +3065,7 @@ dst[MAX:256] := 0
 <!-- _mm256_sad_epu8 / vpsadbw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_sad_epu8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Arithmetic</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Compute the absolute differences of packed unsigned 8-bit integers in "a" and "b", then horizontally sum each consecutive 8 differences to produce four unsigned 16-bit integers, and pack these unsigned 16-bit integers in the low 16 bits of 64-bit elements in "dst".</description>
@@ -3089,7 +3090,7 @@ dst[MAX:256] := 0
 <!-- _mm256_shuffle_epi32 / vpshufd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_shuffle_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Shuffle 32-bit integers in "a" within 128-bit lanes using the control in "imm", and store the results in "dst".</description>
@@ -3122,18 +3123,24 @@ dst[MAX:256] := 0
 <!-- _mm256_shuffle_epi8 / vpshufb -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_shuffle_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
-	<description>Shuffle packed 8-bit integers in "a" according to shuffle control mask in the corresponding 8-bit element of "b", and store the results in "dst".</description>
+	<description>Shuffle 8-bit integers in "a" within 128-bit lanes according to shuffle control mask in the corresponding 8-bit element of "b", and store the results in "dst".</description>
 	<description code='true'>
-FOR j := 0 to 31
+FOR j := 0 to 15
 	i := j*8
 	IF b[i+7] == 1
 		dst[i+7:i] := 0
 	ELSE
 		index[3:0] := b[i+3:i]
 		dst[i+7:i] := a[index*8+7:index*8]
+	FI
+	IF b[128+i+7] == 1
+		dst[128+i+7:i] := 0
+	ELSE
+		index[3:0] := b[128+i+3:128+i]
+		dst[128+i+7:i] := a[128+index*8+7:128+index*8]
 	FI
 ENDFOR
 dst[MAX:256] := 0
@@ -3146,7 +3153,7 @@ dst[MAX:256] := 0
 <!-- _mm256_shufflehi_epi16 / vpshufhw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_shufflehi_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Shuffle 16-bit integers in the high 64 bits of 128-bit lanes of "a" using the control in "imm". Store the results in the high 64 bits of 128-bit lanes of "dst", with the low 64 bits of 128-bit lanes being copied from from "a" to "dst".</description>
@@ -3171,7 +3178,7 @@ dst[MAX:256] := 0
 <!-- _mm256_shufflelo_epi16 / vpshuflw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_shufflelo_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Shuffle 16-bit integers in the low 64 bits of 128-bit lanes of "a" using the control in "imm". Store the results in the low 64 bits of 128-bit lanes of "dst", with the high 64 bits of 128-bit lanes being copied from from "a" to "dst".</description>
@@ -3273,7 +3280,7 @@ dst[MAX:256] := 0
 	<CPUID>AVX2</CPUID>
 	<category>Shift</category>
 	<parameter varname='a' type='__m256i'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Shift 128-bit lanes in "a" left by "imm" bytes while shifting in zeros, and store the results in "dst".</description>
 	<description code='true'>
 dst[127:0] := a[127:0] &lt;&lt; (imm*8)
@@ -3651,7 +3658,7 @@ dst[MAX:256] := 0
 	<CPUID>AVX2</CPUID>
 	<category>Shift</category>
 	<parameter varname='a' type='__m256i'/>
-	<parameter varname='imm' type='int'/>
+	<parameter varname='imm' type='const int'/>
 	<description>Shift 128-bit lanes in "a" right by "imm" bytes while shifting in zeros, and store the results in "dst".</description>
 	<description code='true'>
 dst[127:0] := a[127:0] &gt;&gt; (imm*8)
@@ -3898,7 +3905,7 @@ dst[MAX:256] := 0
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_stream_load_si256'>
 	<CPUID>AVX2</CPUID>
 	<category>Load</category>
-	<parameter varname='mem_addr' type='__m256i*'/>
+	<parameter varname='mem_addr' type='__m256i const*'/>
 	<description>Load 256-bits of integer data from memory into "dst" using a non-temporal memory hint.
 	"mem_addr" must be aligned on a 32-byte boundary or a general-protection exception will be generated.</description>
 	<description code='true'>
@@ -4081,7 +4088,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpackhi_epi8 / vpunpckhbw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpackhi_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 8-bit integers from the high half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4118,7 +4125,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpackhi_epi16 / vpunpckhwd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpackhi_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 16-bit integers from the high half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4147,7 +4154,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpackhi_epi32 / vpunpckhdq -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpackhi_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 32-bit integers from the high half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4172,7 +4179,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpackhi_epi64 / vpunpckhqdq -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpackhi_epi64'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 64-bit integers from the high half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4195,7 +4202,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpacklo_epi8 / vpunpcklbw -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpacklo_epi8'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 8-bit integers from the low half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4232,7 +4239,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpacklo_epi16 / vpunpcklwd -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpacklo_epi16'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 16-bit integers from the low half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4261,7 +4268,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpacklo_epi32 / vpunpckldq -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpacklo_epi32'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 32-bit integers from the low half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>
@@ -4286,7 +4293,7 @@ dst[MAX:256] := 0
 <!-- _mm256_unpacklo_epi64 / vpunpcklqdq -->
 <intrinsic tech='AVX2' rettype='__m256i' name='_mm256_unpacklo_epi64'>
 	<CPUID>AVX2</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m256i'/>
 	<parameter varname='b' type='__m256i'/>
 	<description>Unpack and interleave 64-bit integers from the low half of each 128-bit lane in "a" and "b", and store the results in "dst". </description>

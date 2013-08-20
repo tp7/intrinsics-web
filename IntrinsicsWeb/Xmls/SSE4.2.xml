@@ -6,8 +6,8 @@
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128i' name='_mm_cmpistrm'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and store the generated mask in "dst".
 	[strcmp_note]
@@ -148,8 +148,8 @@ FI
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistri'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and store the generated index in "dst".
 	[strcmp_note]
@@ -292,8 +292,8 @@ FI
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistrz'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if any character in "b" was null, and 0 otherwise.
 	[strcmp_note]
@@ -321,8 +321,8 @@ dst := bInvalid
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistrc'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if the resulting mask was non-zero, and 0 otherwise.
 	[strcmp_note]
@@ -451,8 +451,8 @@ dst := (IntRes2 != 0)
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistrs'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if any character in "a" was null, and 0 otherwise.
 	[strcmp_note]
@@ -480,8 +480,8 @@ dst := aInvalid
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistro'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns bit 0 of the resulting bit mask.
 	[strcmp_note]
@@ -610,8 +610,8 @@ dst := IntRes2[0]
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpistra'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings with implicit lengths in "a" and "b" using the control in "imm", and returns 1 if "b" did not contain a null character and the resulting mask was zero, and 0 otherwise.
 	[strcmp_note]
@@ -740,9 +740,9 @@ dst := (IntRes2 == 0) AND bInvalid
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='__m128i' name='_mm_cmpestrm'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and store the generated mask in "dst".
@@ -880,9 +880,9 @@ FI
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestri'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and store the generated index in "dst".
@@ -1022,9 +1022,9 @@ FI
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestrz'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>	
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if any character in "b" was null, and 0 otherwise.
@@ -1045,9 +1045,9 @@ dst := (lb &lt;= UpperBound)
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestrc'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if the resulting mask was non-zero, and 0 otherwise.
@@ -1173,9 +1173,9 @@ dst := (IntRes2 != 0)
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestrs'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if any character in "a" was null, and 0 otherwise.
@@ -1196,9 +1196,9 @@ dst := (la &lt;= UpperBound)
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestro'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns bit 0 of the resulting bit mask.
@@ -1324,9 +1324,9 @@ dst := IntRes2[0
 <intrinsic tech='SSE4.2' vexEq='TRUE' dontShowZeroUnmodMsg='TRUE' rettype='int' name='_mm_cmpestra'>
 	<CPUID>SSE4.2</CPUID>
 	<category>String Compare</category>
-	<parameter varname='a' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
 	<parameter varname='la' type='int'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='b' type='__m128i'/>
 	<parameter varname='lb' type='int'/>
 	<parameter varname='imm' type='const int'/>
 	<description>Compare packed strings in "a" and "b" with lengths "la" and "lb" using the control in "imm", and returns 1 if "b" did not contain a null character and the resulting mask was zero, and 0 otherwise.
@@ -1452,8 +1452,8 @@ dst := (IntRes2 == 0) AND (lb &gt; UpperBound)
 <intrinsic tech='SSE4.2' vexEq='TRUE' rettype='__m128i' name='_mm_cmpgt_epi64'>
 	<CPUID>SSE4.2</CPUID>
 	<category>Compare</category>
-	<parameter varname='a' type='__m128d'/>
-	<parameter varname='b' type='__m128d'/>
+	<parameter varname='a' type='__m128i'/>
+	<parameter varname='b' type='__m128i'/>
 	<description>Compare packed 64-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
 	<description code='true'>
 FOR j := 0 to 1
@@ -1469,7 +1469,7 @@ ENDFOR
 <!-- _mm_crc32_u8 / crc32 -->
 <intrinsic tech='SSE4.2' rettype='unsigned int' name='_mm_crc32_u8'>
 	<CPUID>SSE4.2</CPUID>
-	<category>Application-Targeted</category>
+	<category>Cryptography</category>
 	<parameter varname='crc' type='unsigned int'/>
 	<parameter varname='v' type='unsigned char'/>
 	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 8-bit integer "v", and stores the result in "dst".</description>			
@@ -1490,9 +1490,9 @@ dst[31:0] := tmp6[0:31] // bit reflection
 <!-- _mm_crc32_u16 / crc32 -->
 <intrinsic tech='SSE4.2' rettype='unsigned int' name='_mm_crc32_u16'>
 	<CPUID>SSE4.2</CPUID>
-	<category>Application-Targeted</category>
+	<category>Cryptography</category>
 	<parameter varname='crc' type='unsigned int'/>
-	<parameter varname='v' type='unsigned short v'/>
+	<parameter varname='v' type='unsigned short'/>
 	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 16-bit integer "v", and stores the result in "dst".</description>
 	<description code='true'>
 tmp1[15:0] := v[0:15] // bit reflection
@@ -1511,9 +1511,9 @@ dst[31:0] := tmp6[0:31] // bit reflection
 <!-- _mm_crc32_u32 / crc32 -->
 <intrinsic tech='SSE4.2' rettype='unsigned int' name='_mm_crc32_u32'>
 	<CPUID>SSE4.2</CPUID>
-	<category>Application-Targeted</category>
+	<category>Cryptography</category>
 	<parameter varname='crc' type='unsigned int'/>
-	<parameter varname='v' type='unsigned int v'/>
+	<parameter varname='v' type='unsigned int'/>
 	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 32-bit integer "v", and stores the result in "dst".</description>
 	<description code='true'>
 tmp1[31:0] := v[0:31] // bit reflection
@@ -1532,7 +1532,7 @@ dst[31:0] := tmp6[0:31] // bit reflection
 <!-- _mm_crc32_u64 / crc32 -->
 <intrinsic tech='SSE4.2' rettype='unsigned __int64' name='_mm_crc32_u64'>
 	<CPUID>SSE4.2</CPUID>
-	<category>Application-Targeted</category>
+	<category>Cryptography</category>
 	<parameter varname='crc' type='unsigned __int64'/>
 	<parameter varname='v' type='unsigned __int64'/>
 	<description>Starting with the initial value in "crc", accumulates a CRC32 value for unsigned 64-bit integer "v", and stores the result in "dst".</description>

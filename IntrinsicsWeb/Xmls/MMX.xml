@@ -2,10 +2,1147 @@
 <intrinsic_list>
 
 
-!-- _mm_empty / emms -->
-<intrinsic tech='MMX' rettype='__m64' name='_mm_empty'>
+<!-- _m_from_int64 / movq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_from_int64'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__int64'/>
+	<description>Copy 64-bit integer "a" to "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+	</description>
+	<mnemonic base='movq' parameters="mm, r64"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_to_int64 / movq -->
+<intrinsic tech='MMX' rettype='__int64' name='_m_to_int64'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Copy 64-bit integer "a" to "dst".</description>
+	<description code='true'>
+dst[63:0] := a[63:0]
+	</description>
+	<mnemonic base='movq' parameters="r64, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_empty / emms -->
+<intrinsic tech='MMX' rettype='void' name='_m_empty'>
 	<CPUID>MMX</CPUID>
 	<category>General Support</category>
+	<parameter varname='' type='void'/>
+	<description>Empty the MMX state, which marks the x87 FPU registers as available for use by x87 instructions. This instruction must be used at the end of all MMX technology procedures.</description>
+	<mnemonic base='emms'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_from_int / movd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_from_int'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='int'/>
+	<description>Copy 32-bit integer "a" to the lower elements of "dst", and zero the upper element of "dst".</description>
+	<description code='true'>
+dst[31:0] := a[31:0]
+dst[63:32] := 0
+	</description>
+	<mnemonic base='movd' parameters="mm, r32"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_to_int / movd -->
+<intrinsic tech='MMX' rettype='int' name='_m_to_int'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Convert</category>
+	<parameter varname='a' type='__m64'/>
+	<description>Copy the lower 32-bit integer in "a" to "dst".</description>
+	<description code='true'>
+dst[31:0] := a[31:0]
+	</description>
+	<mnemonic base='movd' parameters="r32, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_packsswb / packsswb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_packsswb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Convert packed 16-bit integers from "a" and "b" to packed 8-bit integers using signed saturation, and store the results in "dst".
+	</description>
+	<description code='true'>
+dst[7:0] := Saturate_Int16_To_Int8 (a[15:0])
+dst[15:8] := Saturate_Int16_To_Int8 (a[31:16])
+dst[23:16] := Saturate_Int16_To_Int8 (a[47:32])
+dst[31:24] := Saturate_Int16_To_Int8 (a[63:48])
+dst[39:32] := Saturate_Int16_To_Int8 (b[15:0])
+dst[47:40] := Saturate_Int16_To_Int8 (b[31:16])
+dst[55:48] := Saturate_Int16_To_Int8 (b[47:32])
+dst[63:56] := Saturate_Int16_To_Int8 (b[63:48])
+	</description>
+	<mnemonic base='packsswb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_packssdw / packssdw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_packssdw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Convert packed 32-bit integers from "a" and "b" to packed 16-bit integers using signed saturation, and store the results in "dst".</description>
+	<description code='true'>
+dst[15:0] := Saturate_Int32_To_Int16 (a[31:0])
+dst[31:16] := Saturate_Int32_To_Int16 (a[63:32])
+dst[47:32] := Saturate_Int32_To_Int16 (b[31:0])
+dst[63:48] := Saturate_Int32_To_Int16 (b[63:32])
+	</description>
+	<mnemonic base='packssdw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_packuswb / packuswb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_packuswb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Miscellaneous</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>	
+	<description>Convert packed 16-bit integers from "a" and "b" to packed 8-bit integers using unsigned saturation, and store the results in "dst".</description>
+	<description code='true'>
+dst[7:0] := Saturate_Int16_To_UnsignedInt8 (a[15:0])
+dst[15:8] := Saturate_Int16_To_UnsignedInt8 (a[31:16])
+dst[23:16] := Saturate_Int16_To_UnsignedInt8 (a[47:32])
+dst[31:24] := Saturate_Int16_To_UnsignedInt8 (a[63:48])
+dst[39:32] := Saturate_Int16_To_UnsignedInt8 (b[15:0])
+dst[47:40] := Saturate_Int16_To_UnsignedInt8 (b[31:16])
+dst[55:48] := Saturate_Int16_To_UnsignedInt8 (b[47:32])
+dst[63:56] := Saturate_Int16_To_UnsignedInt8 (b[63:48])
+	</description>
+	<mnemonic base='packuswb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_punpckhbw / punpckhbw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_punpckhbw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Unpack and interleave 8-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_BYTES(src1[63:0], src2[63:0]){
+	dst[7:0] := src1[39:32]
+	dst[15:8] := src2[39:32] 
+	dst[23:16] := src1[47:40]
+	dst[31:24] := src2[47:40]
+	dst[39:32] := src1[55:48]
+	dst[47:40] := src2[55:48]
+	dst[55:48] := src1[63:56]
+	dst[63:56] := src2[63:56]
+	RETURN dst[63:0]
+}	
+	
+dst[63:0] := INTERLEAVE_HIGH_BYTES(a[63:0], b[63:0])
+	</description>
+	<mnemonic base='punpckhbw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_punpckhwd / punpcklbw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_punpckhwd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Unpack and interleave 16-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_HIGH_WORDS(src1[63:0], src2[63:0]){
+	dst[15:0] := src1[47:32]
+	dst[31:16] := src2[47:32]
+	dst[47:32] := src1[63:48]
+	dst[63:48] := src2[63:48]
+	RETURN dst[63:0]
+}
+
+dst[63:0] := INTERLEAVE_HIGH_WORDS(a[63:0], b[63:0])
+	</description>
+	<mnemonic base='punpcklbw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_punpckhdq / punpckhdq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_punpckhdq'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Unpack and interleave 32-bit integers from the high half of "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+dst[31:0] := a[63:32]
+dst[63:32] := b[63:32]
+	</description>
+	<mnemonic base='punpckhdq' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_punpcklbw / punpcklbw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_punpcklbw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Unpack and interleave 8-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_BYTES(src1[63:0], src2[63:0]){
+	dst[7:0] := src1[7:0] 
+	dst[15:8] := src2[7:0] 
+	dst[23:16] := src1[15:8] 
+	dst[31:24] := src2[15:8] 
+	dst[39:32] := src1[23:16] 
+	dst[47:40] := src2[23:16] 
+	dst[55:48] := src1[31:24] 
+	dst[63:56] := src2[31:24] 
+	RETURN dst[63:0]
+}	
+
+dst[63:0] := INTERLEAVE_BYTES(a[63:0], b[63:0])
+	</description>
+	<mnemonic base='punpcklbw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_punpcklwd / punpcklwd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_punpcklwd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Unpack and interleave 16-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+INTERLEAVE_WORDS(src1[63:0], src2[63:0]){
+	dst[15:0] := src1[15:0] 
+	dst[31:16] := src2[15:0] 
+	dst[47:32] := src1[31:16] 
+	dst[63:48] := src2[31:16] 
+	RETURN dst[63:0]
+}	
+
+dst[63:0] := INTERLEAVE_WORDS(a[63:0], b[63:0])
+	</description>
+	<mnemonic base='punpcklwd' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_punpckldq / punpckldq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_punpckldq'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Swizzle</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Unpack and interleave 32-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
+	<description code='true'>
+dst[31:0] := a[31:0]
+dst[63:32] := b[31:0]
+	</description>
+	<mnemonic base='punpckldq' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddb / paddb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed 8-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := a[i+7:i] + b[i+7:i]
+ENDFOR
+	</description>
+	<mnemonic base='paddb' parameters="mm, mm" />
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddw / paddw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed 16-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := a[i+15:i] + b[i+15:i]
+ENDFOR
+	</description>
+	<mnemonic base='paddw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddd / paddd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed 32-bit integers in "a" and "b", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	dst[i+31:i] := a[i+31:i] + b[i+31:i]
+ENDFOR
+	</description>
+	<mnemonic base='paddd' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddsb / paddsb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddsb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed 8-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := Saturate_To_Int8( a[i+7:i] + b[i+7:i] )
+ENDFOR
+	</description>
+	<mnemonic base='paddsb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddsw / paddsw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddsw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed 16-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := Saturate_To_Int16( a[i+15:i] + b[i+15:i] )
+ENDFOR
+	</description>
+	<mnemonic base='paddsw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddusb / paddusb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddusb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed unsigned 8-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := Saturate_To_UnsignedInt8( a[i+7:i] + b[i+7:i] )
+ENDFOR
+	</description>
+	<mnemonic base='paddusb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_paddusw / paddusw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_paddusw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Add packed unsigned 16-bit integers in "a" and "b" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := Saturate_To_UnsignedInt16( a[i+15:i] + b[i+15:i] )
+ENDFOR
+	</description>
+	<mnemonic base='paddusw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubb / psubb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := a[i+7:i] - b[i+7:i]
+ENDFOR
+	</description>
+	<mnemonic base='psubb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubw / psubw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := a[i+15:i] - b[i+15:i]
+ENDFOR
+	</description>
+	<mnemonic base='psubw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubd / psubd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed 32-bit integers in "b" from packed 32-bit integers in "a", and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	dst[i+31:i] := a[i+31:i] - b[i+31:i]
+ENDFOR
+	</description>
+	<mnemonic base='psubd' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubsb / psubsb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubsb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed 8-bit integers in "b" from packed 8-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := Saturate_To_Int8(a[i+7:i] - b[i+7:i])	
+ENDFOR
+	</description>
+	<mnemonic base='psubsb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubsw / psubsw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubsw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed 16-bit integers in "b" from packed 16-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := Saturate_To_Int16(a[i+15:i] - b[i+15:i])
+ENDFOR
+	</description>
+	<mnemonic base='psubsw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubusb / psubusb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubusb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed unsigned 8-bit integers in "b" from packed unsigned 8-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+	i := j*8
+	dst[i+7:i] := Saturate_To_UnsignedInt8(a[i+7:i] - b[i+7:i])	
+ENDFOR
+	</description>
+	<mnemonic base='psubusb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psubusw / psubusw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psubusw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Subtract packed unsigned 16-bit integers in "b" from packed unsigned 16-bit integers in "a" using saturation, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	dst[i+15:i] := Saturate_To_UnsignedInt16(a[i+15:i] - b[i+15:i])	
+ENDFOR
+	</description>
+	<mnemonic base='psubusw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pmaddwd / pmaddwd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pmaddwd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Multiply packed 16-bit integers in "a" and "b", producing intermediate 32-bit integers. Horizontally add adjacent pairs of intermediate 32-bit integers, and pack the saturated results in "dst".
+	</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	st[i+31:i] := Saturate_To_Int32( a[i+31:i+16]*b[i+31:i+16] + a[i+15:i]*b[i+15:i] )
+ENDFOR
+	</description>
+	<mnemonic base='pmaddwd' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pmulhw / pmulhw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pmulhw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Multiply the packed 16-bit integers in "a" and "b", producing intermediate 32-bit integers, and store the high 16 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	tmp[31:0] := a[i+15:i] * b[i+15:i]
+	dst[i+15:i] := tmp[31:16]
+ENDFOR
+	</description>
+	<mnemonic base='pmulhw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pmullw / pmullw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pmullw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Arithmetic</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Multiply the packed 16-bit integers in "a" and "b", producing intermediate 32-bit integers, and store the low 16 bits of the intermediate integers in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	tmp[31:0] := a[i+15:i] * b[i+15:i]
+	dst[i+15:i] := tmp[15:0]
+ENDFOR
+	</description>
+	<mnemonic base='pmullw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psllw / psllw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psllw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift packed 16-bit integers in "a" left by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF count[63:0] &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &lt;&lt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psllw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psllwi / psllw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psllwi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 16-bit integers in "a" left by "imm" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF imm &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &lt;&lt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psllw' parameters="mm, mm/imm8"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pslld / pslld -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pslld'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift packed 32-bit integers in "a" left by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF count[63:0] &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &lt;&lt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pslld'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pslldi / pslld -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pslldi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 32-bit integers in "a" left by "imm" while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF imm &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &lt;&lt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='pslld'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psllq / psllq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psllq'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift 64-bit integer "a" left by "count" while shifting in zeros, and store the result in "dst". </description>
+	<description code='true'>
+IF count[63:0] &gt; 63
+	dst[63:0] := 0
+ELSE
+	dst[63:0] := ZeroExtend(a[63:0] &lt;&lt; count[63:0])
+FI
+	</description>
+	<mnemonic base='psllq' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psllqi / psllq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psllqi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift 64-bit integer "a" left by "imm" while shifting in zeros, and store the result in "dst". </description>
+	<description code='true'>
+IF imm &gt; 63
+	dst[63:0] := 0
+ELSE
+	dst[63:0] := ZeroExtend(a[63:0] &lt;&lt; imm)
+FI
+	</description>
+	<mnemonic base='psllq'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psraw / psraw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psraw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift packed 16-bit integers in "a" right by "count" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF count[63:0] &gt; 15
+		dst[i+15:i] := SignBit
+	ELSE
+		dst[i+15:i] := SignExtend(a[i+15:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psraw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrawi / psraw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrawi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 16-bit integers in "a" right by "imm" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF imm &gt; 15
+		dst[i+15:i] := SignBit
+	ELSE
+		dst[i+15:i] := SignExtend(a[i+15:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psraw'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrad / psrad -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrad'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift packed 32-bit integers in "a" right by "count" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF count[63:0] &gt; 31
+		dst[i+31:i] := SignBit
+	ELSE
+		dst[i+31:i] := SignExtend(a[i+31:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psrad' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psradi / psrad -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psradi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 32-bit integers in "a" right by "imm" while shifting in sign bits, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF imm &gt; 31
+		dst[i+31:i] := SignBit
+	ELSE
+		dst[i+31:i] := SignExtend(a[i+31:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psrad' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrlw / psrlw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrlw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift packed 16-bit integers in "a" right by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF count[63:0] &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psrlw' parameters="mm, mm/imm8"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrlwi / psrlw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrlwi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 16-bit integers in "a" right by "imm" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 3
+	i := j*16
+	IF imm &gt; 15
+		dst[i+15:i] := 0
+	ELSE
+		dst[i+15:i] := ZeroExtend(a[i+15:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psrlw'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrld / psrld -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrld'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift packed 32-bit integers in "a" right by "count" while shifting in zeros, and store the results in "dst". </description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF count[63:0] &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &gt;&gt; count[63:0])
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psrld' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrldi / psrld -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrldi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift packed 32-bit integers in "a" right by "imm" while shifting in zeros, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+	i := j*32
+	IF imm &gt; 31
+		dst[i+31:i] := 0
+	ELSE
+		dst[i+31:i] := ZeroExtend(a[i+31:i] &gt;&gt; imm)
+	FI
+ENDFOR
+	</description>
+	<mnemonic base='psrld'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrlq / psrlq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrlq'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='count' type='__m64'/>
+	<description>Shift 64-bit integer "a" right by "count" while shifting in zeros, and store the result in "dst". </description>
+	<description code='true'>
+IF count[63:0] &gt; 63
+	dst[63:0] := 0
+ELSE
+	dst[63:0] := ZeroExtend(a[63:0] &gt;&gt; count[63:0])
+FI
+	</description>
+	<mnemonic base='psrlq'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_psrlqi / psrlq -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_psrlqi'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Shift</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='imm' type='int'/>
+	<description>Shift 64-bit integer "a" right by "imm" while shifting in zeros, and store the result in "dst". </description>
+	<description code='true'>
+IF imm &gt; 63
+	dst[63:0] := 0
+ELSE
+	dst[63:0] := ZeroExtend(a[63:0] &gt;&gt; imm)
+FI
+	</description>
+	<mnemonic base='psrlq'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pand / pand -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pand'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compute the bitwise AND of 64 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] AND b[63:0])
+	</description>
+	<mnemonic base='pand'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pandn / pandn -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pandn'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compute the bitwise AND NOT of 64 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := ((NOT a[63:0]) AND b[63:0])
+	</description>
+	<mnemonic base='pandn'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_por / por -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_por'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compute the bitwise OR of 64 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] OR b[63:0])
+	</description>
+	<mnemonic base='por' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pxor / pxor -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pxor'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Logical</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compute the bitwise OR of 64 bits (representing integer data) in "a" and "b", and store the result in "dst".</description>
+	<description code='true'>
+dst[63:0] := (a[63:0] XOR b[63:0])
+	</description>
+	<mnemonic base='pxor' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pcmpeqb / pcmpeqb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pcmpeqb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compare packed 8-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+  i := j*8
+  dst[i+7:i] := ( a[i+7:i] == b[i+7:i] ) ? 0xFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpeqb' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pcmpeqw / pcmpeqw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pcmpeqw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compare packed 16-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+  i := j*16
+  dst[i+15:i] := ( a[i+15:i] == b[i+15:i] ) ? 0xFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpeqw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pcmpeqd / pcmpeqd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pcmpeqd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compare packed 32-bit integers in "a" and "b" for equality, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*32
+  dst[i+31:i] := ( a[i+31:i] == b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpeqd' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pcmpgtb / pcmpgtb -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pcmpgtb'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compare packed 8-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 7
+  i := j*8
+  dst[i+7:i] := ( a[i+7:i] &gt; b[i+7:i] ) ? 0xFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpgtb'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pcmpgtw / pcmpgtw -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pcmpgtw'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compare packed 16-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 3
+  i := j*16
+  dst[i+15:i] := ( a[i+15:i] &gt; b[i+15:i] ) ? 0xFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpgtw' parameters="mm, mm"/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _m_pcmpgtd / pcmpgtd -->
+<intrinsic tech='MMX' rettype='__m64' name='_m_pcmpgtd'>
+	<type>Integer</type>
+	<CPUID>MMX</CPUID>
+	<category>Compare</category>
+	<parameter varname='a' type='__m64'/>
+	<parameter varname='b' type='__m64'/>
+	<description>Compare packed 32-bit integers in "a" and "b" for greater-than, and store the results in "dst".</description>
+	<description code='true'>
+FOR j := 0 to 1
+  i := j*32
+  dst[i+31:i] := ( a[i+31:i] &gt; b[i+31:i] ) ? 0xFFFFFFFF : 0
+ENDFOR
+	</description>
+	<mnemonic base='pcmpgtd'/>
+	<header>mmintrin.h</header>
+</intrinsic>
+
+
+<!-- _mm_empty / emms -->
+<intrinsic tech='MMX' rettype='void' name='_mm_empty'>
+	<CPUID>MMX</CPUID>
+	<category>General Support</category>
+	<parameter varname='' type='void'/>
 	<description>Empty the MMX state, which marks the x87 FPU registers as available for use by x87 instructions. This instruction must be used at the end of all MMX technology procedures.</description>
 	<mnemonic base='emms'/>
 	<header>mmintrin.h</header>
@@ -890,6 +2027,7 @@ dst[63:0] := a[63:0]
 <intrinsic tech='MMX' rettype='__m64' name='_mm_setzero_si64'>
 	<CPUID>MMX</CPUID>
 	<category>Set</category>
+	<parameter varname='' type='void'/>
 	<description>Return vector of type __m64 with all elements set to zero.</description>
 	<description code='true'>
 dst[MAX:0] := 0
@@ -907,8 +2045,8 @@ dst[MAX:0] := 0
 	<parameter varname='e0' type='int'/>
 	<description>Set packed 32-bit integers in "dst" with the supplied values.</description>
 	<description code='true'>
-dst[31:0] := e1
-dst[63:32] := e0
+dst[31:0] := e0
+dst[63:32] := e1
 	</description>
 	<header>mmintrin.h</header>
 </intrinsic>
@@ -924,10 +2062,10 @@ dst[63:32] := e0
 	<parameter varname='e0' type='short'/>
 	<description>Set packed 16-bit integers in "dst" with the supplied values.</description>
 	<description code='true'>
-dst[15:0] := e3
-dst[31:16] := e2
-dst[47:32] := e1
-dst[63:48] := e0
+dst[15:0] := e0
+dst[31:16] := e1
+dst[47:32] := e2
+dst[63:48] := e3
 	</description>
 	<header>mmintrin.h</header>
 </intrinsic>
@@ -947,14 +2085,14 @@ dst[63:48] := e0
 	<parameter varname='e0' type='char'/>
 	<description>Set packed 8-bit integers in "dst" with the supplied values in reverse order.</description>
 	<description code='true'>
-dst[7:0] := e7
-dst[15:8] := e6
-dst[23:16] := e5
-dst[31:24] := e4
-dst[39:32] := e3
-dst[47:40] := e2
-dst[55:48] := e1
-dst[63:56] := e0
+dst[7:0] := e0
+dst[15:8] := e1
+dst[23:16] := e2
+dst[31:24] := e3
+dst[39:32] := e4
+dst[47:40] := e5
+dst[55:48] := e6
+dst[63:56] := e7
 	</description>
 	<header>mmintrin.h</header>
 </intrinsic>
@@ -1016,8 +2154,8 @@ ENDFOR
 	<parameter varname='e0' type='int'/>
 	<description>Set packed 32-bit integers in "dst" with the supplied values in reverse order.</description>
 	<description code='true'>
-dst[31:0] := e0
-dst[63:32] := e1
+dst[31:0] := e1
+dst[63:32] := e0
 	</description>
 	<header>mmintrin.h</header>
 </intrinsic>
@@ -1033,10 +2171,10 @@ dst[63:32] := e1
 	<parameter varname='e0' type='short'/>
 	<description>Set packed 16-bit integers in "dst" with the supplied values in reverse order.</description>
 	<description code='true'>
-dst[15:0] := e0
-dst[31:16] := e1
-dst[47:32] := e2
-dst[63:48] := e3
+dst[15:0] := e3
+dst[31:16] := e2
+dst[47:32] := e1
+dst[63:48] := e0
 	</description>
 	<header>mmintrin.h</header>
 </intrinsic>
@@ -1056,14 +2194,14 @@ dst[63:48] := e3
 	<parameter varname='e0' type='char'/>
 	<description>Set packed 8-bit integers in "dst" with the supplied values in reverse order.</description>
 	<description code='true'>
-dst[7:0] := e0
-dst[15:8] := e1
-dst[23:16] := e2
-dst[31:24] := e3
-dst[39:32] := e4
-dst[47:40] := e5
-dst[55:48] := e6
-dst[63:56] := e7
+dst[7:0] := e7
+dst[15:8] := e6
+dst[23:16] := e5
+dst[31:24] := e4
+dst[39:32] := e3
+dst[47:40] := e2
+dst[55:48] := e1
+dst[63:56] := e0
 	</description>
 	<header>mmintrin.h</header>
 </intrinsic>
@@ -1135,7 +2273,7 @@ dst[63:56] := Saturate_Int16_To_UnsignedInt8 (b[63:48])
 <!-- _mm_unpackhi_pi8 / punpckhbw -->
 <intrinsic tech='MMX' rettype='__m64' name='_mm_unpackhi_pi8'>
 	<CPUID>MMX</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Unpack and interleave 8-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
@@ -1162,7 +2300,7 @@ dst[63:0] := INTERLEAVE_HIGH_BYTES(a[63:0], b[63:0])
 <!-- _mm_unpackhi_pi16 / punpcklbw -->
 <intrinsic tech='MMX' rettype='__m64' name='_mm_unpackhi_pi16'>
 	<CPUID>MMX</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Unpack and interleave 16-bit integers from the high half of "a" and "b", and store the results in "dst". </description>
@@ -1185,7 +2323,7 @@ dst[63:0] := INTERLEAVE_HIGH_WORDS(a[63:0], b[63:0])
 <!-- _mm_unpackhi_pi32 / punpckhdq -->
 <intrinsic tech='MMX' rettype='__m64' name='_mm_unpackhi_pi32'>
 	<CPUID>MMX</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Unpack and interleave 32-bit integers from the high half of "a" and "b", and store the results in "dst".</description>
@@ -1201,7 +2339,7 @@ dst[63:32] := b[63:32]
 <!-- _mm_unpacklo_pi8 / punpcklbw -->
 <intrinsic tech='MMX' rettype='__m64' name='_mm_unpacklo_pi8'>
 	<CPUID>MMX</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Unpack and interleave 8-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
@@ -1228,7 +2366,7 @@ dst[63:0] := INTERLEAVE_BYTES(a[63:0], b[63:0])
 <!-- _mm_unpacklo_pi16 / punpcklwd -->
 <intrinsic tech='MMX' rettype='__m64' name='_mm_unpacklo_pi16'>
 	<CPUID>MMX</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Unpack and interleave 16-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
@@ -1251,7 +2389,7 @@ dst[63:0] := INTERLEAVE_WORDS(a[63:0], b[63:0])
 <!-- _mm_unpacklo_pi32 / punpckldq -->
 <intrinsic tech='MMX' rettype='__m64' name='_mm_unpacklo_pi32'>
 	<CPUID>MMX</CPUID>
-	<category>Miscellaneous</category>
+	<category>Swizzle</category>
 	<parameter varname='a' type='__m64'/>
 	<parameter varname='b' type='__m64'/>
 	<description>Unpack and interleave 32-bit integers from the low half of "a" and "b", and store the results in "dst". </description>
