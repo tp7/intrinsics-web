@@ -56,7 +56,7 @@ function IifController($scope, $window) {
         'Other'
     ].map(toSelectItem);
 
-    $scope.types = ['Floating point', 'Integer', 'Inter-Type', 'Other'].map(toSelectItem);
+    $scope.types = ['Floating point', 'Integer', 'Inter-Type', 'Mask', 'Other'].map(toSelectItem);
 
     $scope.allCategoriesSelected = true;
     $scope.allTypesSelected = true;
@@ -160,6 +160,10 @@ function IifController($scope, $window) {
                         }
                     } else if (type == 'Inter-Type') {
                         if (item.isFloat && item.isInt) {
+                            item.isVisible = true;
+                        }
+                    } else if (type == 'Mask') {
+                        if (item.isMask) {
                             item.isVisible = true;
                         }
                     } else if (!item.isFloat && !item.isInt) {

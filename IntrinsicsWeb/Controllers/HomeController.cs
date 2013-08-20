@@ -69,6 +69,7 @@ namespace IntrinsicsWeb.Controllers
         public List<Parameter> Parameters { get; set; }
         public bool IsFloat { get; set; }
         public bool IsInt { get; set; }
+        public bool IsMask { get; set; }
 
         public List<MnemonicFamily> LatencyAndThroughput { get; set; }
     }
@@ -168,6 +169,7 @@ namespace IntrinsicsWeb.Controllers
                                     intrinsic.Name.Contains("ps_") || intrinsic.Name.Contains("sd_") ||
                                     (intrinsic.Name.Contains("ss_") && (!intrinsic.Name.Contains("compress_"))) || intrinsic.Name.Contains("f32") ||
                                     intrinsic.Name.Contains("f64");
+                intrinsic.IsMask = intrinsic.Name.Contains("_mm512_k") || intrinsic.Name.EndsWith("_mask");
                 list.Add(intrinsic);
             }
         }
