@@ -113,11 +113,6 @@ function IifController($scope, $window) {
 
 
     $scope.updateFilter = function () {
-
-        function isVisible(item) {
-            return item.isVisible;
-        }
-
         function getName(item) {
             return item.name;
         }
@@ -142,8 +137,8 @@ function IifController($scope, $window) {
 
         if (!$scope.allCategoriesSelected) {
             var cats = $scope.categories.filter(isSelected).map(getName);
-            $scope.items.filter(isVisible).forEach(function (item) {
-                if (cats.indexOf(item.category) == -1) {
+            $scope.items.forEach(function (item) {
+                if (item.isVisible && cats.indexOf(item.category) == -1) {
                     item.isVisible = false;
                 }
             });
@@ -151,8 +146,8 @@ function IifController($scope, $window) {
 
         if (!$scope.allReturnTypesSelected) {
             var returnTypes = $scope.returnTypes.filter(isSelected).map(getName);
-            $scope.items.filter(isVisible).forEach(function (item) {
-                if (returnTypes.indexOf(item.returnType.replace('unsigned ', '')) == -1) {
+            $scope.items.forEach(function (item) {
+                if (item.isVisible && returnTypes.indexOf(item.returnType.replace('unsigned ', '')) == -1) {
                     item.isVisible = false;
                 }
             });
@@ -160,7 +155,10 @@ function IifController($scope, $window) {
 
         if (!$scope.allTypesSelected) {
             var types = $scope.types.filter(isSelected).map(getName);
-            $scope.items.filter(isVisible).forEach(function (item) {
+            $scope.items.forEach(function (item) {
+                if (!item.isVisible) {
+                    return;
+                }
                 item.isVisible = false;
                 types.forEach(function (type) {
                     if (type == 'Floating point') {
@@ -187,9 +185,6 @@ function IifController($scope, $window) {
         }
 
         if (!!$scope.searchQuery) {
-            if (!$scope.searchQuery) {
-                return;
-            }
             var queryRegex = new RegExp($scope.searchQuery.replace(/\s+/g, '.*'), 'i');
             $scope.items.filter(isVisible).forEach(function (item) {
                 if (!(queryRegex.test(item.name) ||

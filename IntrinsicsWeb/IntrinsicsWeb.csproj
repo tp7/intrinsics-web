@@ -91,14 +91,18 @@
     </Content>
     <Content Include="Xmls\MMX.xml" />
     <Content Include="Xmls\Other.xml" />
-    <Content Include="Xmls\SSE.xml" />
+    <Content Include="Xmls\SSE.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Xmls\SSE2.xml" />
     <Content Include="Xmls\SSE3.xml" />
     <Content Include="Xmls\SSE4.2.xml" />
     <Content Include="Xmls\SSE4.xml" />
     <Content Include="Xmls\SSSE3.xml" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
