@@ -77,17 +77,13 @@ function IifController($scope, $window) {
     var includedTechs = buffer.map(function (i) { return i.tech; })
         .filter(toBool).unique();
 
-    var elementsToRemove = [];
-
+    var filtered = [];
     $scope.techs.forEach(function (t) {
-        if (includedTechs.indexOf(t.name) == -1) {
-            elementsToRemove.push(t);
+        if (includedTechs.indexOf(t.name) != -1) {
+            filtered.push(t);
         }
     });
-
-    elementsToRemove.forEach(function(f) {
-        $scope.techs.splice($scope.techs.indexOf(f), 1);
-    });
+    $scope.techs = filtered;
 
     //other groups
     $scope.returnTypes = buffer.map(function (i) {
