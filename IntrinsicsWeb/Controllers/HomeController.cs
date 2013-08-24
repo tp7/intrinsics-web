@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -180,19 +181,21 @@ namespace IntrinsicsWeb.Controllers
         [CompressResultAttribute]
         public ActionResult Index()
         {
+            var xmlNames = new[] {"MMX", "SSE", "SSE2", "SSE3", "SSSE3", "SSE4", "SSE4.2", "AVX", "AVX2", "AVX512", "FMA", "Other"};
+            var excludeList = new string[0];
+            var setting = ConfigurationManager.AppSettings["ExcludeInstructions"];
+            if (!string.IsNullOrWhiteSpace(setting))
+            {
+                excludeList = setting.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).Select(f=>f.Trim()).ToArray();
+            }
+            
             var intrinsics = new List<Intrinsic>();
-            ParseIntrinsicsXml("MMX.xml", intrinsics);
-            ParseIntrinsicsXml("SSE.xml", intrinsics);
-            ParseIntrinsicsXml("SSE2.xml", intrinsics);
-            ParseIntrinsicsXml("SSE3.xml", intrinsics);
-            ParseIntrinsicsXml("SSSE3.xml", intrinsics);
-            ParseIntrinsicsXml("SSE4.xml", intrinsics);
-            ParseIntrinsicsXml("SSE4.2.xml", intrinsics);
-            ParseIntrinsicsXml("AVX.xml", intrinsics);
-            ParseIntrinsicsXml("AVX2.xml", intrinsics);
-            ParseIntrinsicsXml("AVX512.xml", intrinsics);
-            ParseIntrinsicsXml("FMA.xml", intrinsics);
-            ParseIntrinsicsXml("Other.xml", intrinsics);
+
+            foreach (var xmlName in xmlNames.Where(f => !excludeList.Contains(f)))
+            {
+                ParseIntrinsicsXml(string.Format("{0}.xml", xmlName), intrinsics);
+            }
+
 
             var latencies = ParseLatencyAndThroughput();
             foreach (var intrinsic in intrinsics.Where(i => i.Instruction != null))

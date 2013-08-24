@@ -37,6 +37,10 @@ function IifController($scope, $window) {
         return new SelectItem(value, false);
     }
     
+    function toBool(value) {
+        return !!value;
+    }
+    
     $scope.techs = [
         'MMX',
         'SSE',
@@ -57,7 +61,7 @@ function IifController($scope, $window) {
     ].map(toSelectItem);
 
     $scope.types = ['Floating point', 'Integer', 'Inter-Type', 'Mask', 'Other'].map(toSelectItem);
-
+    
     $scope.allCategoriesSelected = true;
     $scope.allTypesSelected = true;
     $scope.allTechsSelected = true;
@@ -69,17 +73,30 @@ function IifController($scope, $window) {
         f.isVisible = true;
     });
 
+    //filtering techs
+    var includedTechs = buffer.map(function (i) { return i.tech; })
+        .filter(toBool).unique();
+
+    var elementsToRemove = [];
+
+    $scope.techs.forEach(function (t) {
+        if (includedTechs.indexOf(t.name) == -1) {
+            elementsToRemove.push(t);
+        }
+    });
+
+    elementsToRemove.forEach(function(f) {
+        $scope.techs.splice($scope.techs.indexOf(f), 1);
+    });
+
+    //other groups
     $scope.returnTypes = buffer.map(function (i) {
         return i.returnType.replace('unsigned ', '');
-    }).filter(function (f) {
-        return !!f;
-    }).unique().sort().reverse().map(toSelectItem);
+    }).filter(toBool).unique().sort().reverse().map(toSelectItem);
 
     $scope.categories = buffer.map(function (i) {
         return i.category;
-    }).filter(function (f) {
-        return !!f;
-    }).unique().sort().map(toSelectItem);
+    }).filter(toBool).unique().sort().map(toSelectItem);
 
     $scope.items = buffer;
 
