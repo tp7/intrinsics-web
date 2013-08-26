@@ -186,7 +186,7 @@ function IifController($scope, $window) {
 
         if (!!$scope.searchQuery) {
             var queryRegex = new RegExp($scope.searchQuery.replace(/\s+/g, '.*'), 'i');
-            $scope.items.filter(isVisible).forEach(function (item) {
+            $scope.items.filter(function(f) { return f.isVisible; }).forEach(function (item) {
                 if (!(queryRegex.test(item.name) ||
                     (!!item.instruction && queryRegex.test(item.instruction)) ||
                     (!!item.description && queryRegex.test(item.description)))) {
