@@ -175,23 +175,11 @@ namespace IntrinsicsWeb.Controllers
             }
         }
 
-#if !DEBUG
-        [OutputCache(Duration=60*60*24, Location= System.Web.UI.OutputCacheLocation.ServerAndClient)]
-#endif
-        [CompressResultAttribute]
-        public ActionResult Index()
+        private string PrepareData(IEnumerable<string> names)
         {
-            var xmlNames = new[] {"MMX", "SSE", "SSE2", "SSE3", "SSSE3", "SSE4", "SSE4.2", "AVX", "AVX2", "AVX512", "FMA", "Other"};
-            var excludeList = new string[0];
-            var setting = ConfigurationManager.AppSettings["ExcludeInstructions"];
-            if (!string.IsNullOrWhiteSpace(setting))
-            {
-                excludeList = setting.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).Select(f=>f.Trim()).ToArray();
-            }
-            
             var intrinsics = new List<Intrinsic>();
 
-            foreach (var xmlName in xmlNames.Where(f => !excludeList.Contains(f)))
+            foreach (var xmlName in names)
             {
                 ParseIntrinsicsXml(string.Format("{0}.xml", xmlName), intrinsics);
             }
@@ -208,10 +196,39 @@ namespace IntrinsicsWeb.Controllers
             }
 
             var model = JsonConvert.SerializeObject(intrinsics, new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
+            return model;
+        }
+
+        private readonly string[] _xmlNames = new[] { "MMX", "SSE", "SSE2", "SSE3", "SSSE3", "SSE4", "SSE4.2", "AVX", "AVX2", "AVX512", "FMA", "Other" };
+
+#if !DEBUG
+        [OutputCache(Duration=60*60*24, Location= System.Web.UI.OutputCacheLocation.ServerAndClient)]
+#endif
+        [CompressResultAttribute]
+        public ActionResult Index()
+        {
+            var excludeList = new string[0];
+            var setting = ConfigurationManager.AppSettings["ExcludeInstructions"];
+            if (!string.IsNullOrWhiteSpace(setting))
+            {
+                excludeList = setting.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).Select(f=>f.Trim()).ToArray();
+            }
+            var model = PrepareData(_xmlNames.Where(f => !excludeList.Contains(f)));
+            
             return View((object)model);
+        }
+
+#if !DEBUG
+        [OutputCache(Duration=60*60*24, Location= System.Web.UI.OutputCacheLocation.ServerAndClient)]
+#endif
+        [CompressResultAttribute]
+        public ActionResult All()
+        {
+            var model = PrepareData(_xmlNames);
+            return View("Index", (object)model);
         }
 
     }

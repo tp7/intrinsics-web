@@ -10,6 +10,12 @@ namespace IntrinsicsWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "All",
+                url: "All",
+                defaults: new {controller = "Home", action = "All"}
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{*catchall}",
                 defaults: new { controller = "Home", action = "Index" }
